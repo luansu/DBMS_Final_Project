@@ -209,25 +209,9 @@ VALUES ('DVBD001', 'Bảo dưỡng định kỳ', 'Định kỳ 5.000km', 200000
        ('DVBD010', 'Điều chỉnh đèn', 'Điều chỉnh đèn', 60000);
 
 INSERT INTO PHIEUBAODUONG (maPhieuBaoDuong, maKhachHang, maNhanVienThucHien, tongTien)
-VALUES ('PBD001', 'KH001', 'NV001', 400000),
-       ('PBD002', 'KH002', 'NV002', 500000),
-       ('PBD003', 'KH003', 'NV003', 350000),
-       ('PBD004', 'KH004', 'NV004', 600000),
-       ('PBD005', 'KH005', 'NV005', 450000),
-       ('PBD006', 'KH006', 'NV006', 550000),
-       ('PBD007', 'KH007', 'NV007', 300000),
-       ('PBD008', 'KH008', 'NV008', 700000),
-       ('PBD009', 'KH009', 'NV009', 480000),
-       ('PBD010', 'KH010', 'NV010', 580000);
+VALUES ('PBD001', 'KH001', 'NVHN007', 150000),
+       ('PBD002', 'KH002', 'NVHN007', 150000);
 
 INSERT INTO HOADONBAODUONG (maHoaDonBaoDuong, maBaoDuong, maPhieuBaoDuong, thanhTien)
-VALUES ('HDBD001', 'DVBD001', 'PBD001', 200000),
-       ('HDBD002', 'DVBD002', 'PBD002', 300000),
-       ('HDBD003', 'DVBD003', 'PBD003', 150000),
-       ('HDBD004', 'DVBD004', 'PBD004', 100000),
-       ('HDBD005', 'DVBD005', 'PBD005', 120000),
-       ('HDBD006', 'DVBD006', 'PBD006', 80000),
-       ('HDBD007', 'DVBD007', 'PBD007', 50000),
-       ('HDBD008', 'DVBD008', 'PBD008', 70000),
-       ('HDBD009', 'DVBD009', 'PBD009', 90000),
-       ('HDBD010', 'DVBD010', 'PBD010', 60000);
+VALUES ('HDBD001', 'DVBD003', 'PBD001', 150000),
+       ('HDBD002', 'DVBD003', 'PBD002', 150000);
