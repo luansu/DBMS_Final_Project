@@ -19,7 +19,7 @@ create table NHANVIEN(
 	hoTenNhanVien nvarchar(50) not null,
 	CCCD nvarchar(20) check (len(CCCD) = 12) unique,
 	ngaySinh date check (DateDiff(year, ngaySinh, GetDate()) >= 18),
-	gioiTinh nvarchar(5) check (gioiTinh = N'Nam' or gioiTinh = N'Nu'),
+	gioiTinh nvarchar(5),
 	diaChi nvarchar(255),
 	soDienThoai nvarchar(20) check (len(soDienThoai) = 10 or len(soDienThoai) = 11) unique,
 	chucVu nvarchar(50),
@@ -50,13 +50,13 @@ CREATE TABLE XE(
 	tenXe nvarchar(50), 
 	mauSac nvarchar(20), 
 	giaBan money check (giaBan > 0), 
-	soChoNgoi int check (soChoNgoi >= 2) default 4, 
+	soChoNgoi integer check (soChoNgoi >= 2) default 4, 
 	xuatXu nvarchar(50), 
 	hangXe nvarchar(50), 
 	loaiXe nvarchar(50), 
 	phienBanXe nvarchar(50),
-	tocDoToiDa int check (tocDoToiDa > 0), 
-	trongLuong int check (trongLuong > 0),
+	tocDoToiDa integer check (tocDoToiDa > 0), 
+	trongLuong integer check (trongLuong > 0),
 	canhBaoPhuongTien nvarchar(50), 
 	canhBaoDiemMu nvarchar(50), 
 	tuiKhi nvarchar(50), 
@@ -68,16 +68,16 @@ CREATE TABLE XE(
 	boTruyenLuc nvarchar(50), 
 	boDieuKhien nvarchar(50), 
 	loaiNhienLieu nvarchar(50), 
-	congSuatDongCo int check (congSuatDongCo > 0), 
-	dungTichDongCo int check (dungTichDongCo > 0), 
+	congSuatDongCo integer check (congSuatDongCo > 0), 
+	dungTichDongCo integer check (dungTichDongCo > 0), 
 	loaiDongCo nvarchar(50), 
-	momenXoan int check (momenXoan > 0), 
-	khoanSangGam int check (khoanSangGam > 0), 
-	chieuDaiCoSo int check (chieuDaiCoSo > 0), 
-	chieuDai int check (chieuDai > 0), 
-	chieuRong int check (chieuRong > 0), 
-	chieuCao int check (chieuCao > 0), 
-	banKinhQuayVong int check (banKinhQuayVong > 0)
+	momenXoan integer check (momenXoan > 0), 
+	khoanSangGam integer check (khoanSangGam > 0), 
+	chieuDaiCoSo integer check (chieuDaiCoSo > 0), 
+	chieuDai integer check (chieuDai > 0), 
+	chieuRong integer check (chieuRong > 0), 
+	chieuCao integer check (chieuCao > 0), 
+	banKinhQuayVong integer check (banKinhQuayVong > 0)
 )
 
 -- Tạo bảng PHỤ TÙNG
@@ -85,7 +85,7 @@ CREATE TABLE PHUTUNG(
 	maPhuTung nvarchar(20) primary key, 
 	loaiPhuTung nvarchar(50), 
 	tenPhuTung nvarchar(50), 
-	thuongHieu nvarchar(50), 
+	thuongHieu nvarchar(50),
 	xuatXu nvarchar(50), 
 	giaBan money check (giaBan > 0), 
 	chatLuong nvarchar(50),
@@ -107,6 +107,7 @@ create table CHITIETPHIEUNHAPXE(
 	maXe nvarchar(20),
 	maPhieuNhap nvarchar(20),
 	giaNhap money check (giaNhap > 0),
+	soLuong integer check(soLuong > 0),
 	foreign key (maXe) references XE(maXe),
 	foreign key (maPhieuNhap) references PHIEUNHAP(maPhieuNhap)
 )
@@ -117,6 +118,7 @@ create table CHITIETPHIEUNHAPPHUTUNG(
 	maPhuTung nvarchar(20),
 	maPhieuNhap nvarchar(20),
 	giaNhap money check (giaNhap > 0),
+	soLuong integer check(soLuong > 0),
 	foreign key (maPhuTung) references PHUTUNG(maPhuTung),
 	foreign key (maPhieuNhap) references PHIEUNHAP(maPhieuNhap)
 )
@@ -126,7 +128,7 @@ CREATE TABLE KHACHHANG(
 	maKhachHang nvarchar(20) primary key,
 	hoTenKhachHang nvarchar(50) not null, 
 	ngaySinh date check (DateDiff(year, ngaySinh, GetDate()) >= 18), 
-	gioiTinh nvarchar(5) check (gioiTinh = N'Nam' or gioiTinh = N'Nu'), 
+	gioiTinh nvarchar(5), 
 	CCCD nvarchar(20) check (len(CCCD) = 12) unique, 
 	diaChi nvarchar(255), 
 	soDienThoai nvarchar(20) check (len(soDienThoai) = 10 or len(soDienThoai) = 11) unique,
@@ -213,7 +215,14 @@ create table HOADONBAODUONG(
 	foreign key (maPhieuBaoDuong) references PHIEUBAODUONG(maPhieuBaoDuong)
 )
 
-
+CREATE TABLE THANHTOAN(
+	maThanhToan nvarchar(20) primary key,
+	maDonHang nvarchar(20),
+	maKhachHang nvarchar(20),
+	maNhanVien nvarchar(20),
+	ngayLap date,
+	soTienThanhToan money check(soTienThanhToan > 0),
+)
 
 
 
