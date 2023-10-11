@@ -23,12 +23,30 @@ FROM XE, PHIEUNHAP as pn
 WHERE pn.soLuong > 0
 go
 
+--View xem số xe đã bán theo chi nhánh
+CREATE or ALTER VIEW v_SoXeDaBan as
+SELECT cn.maChiNhanh, cn.maXe, CASE WHEN hd.daBan IS NULL 
+										THEN 0 
+									ELSE hd.daBan END AS daBan
+FROM (SELECT distinct cn.maChiNhanh, x.maXe
+		FROM CHINHANH as cn, PHIEUNHAP as pn, CHITIETPHIEUNHAPXE as pnx, XE as x
+		WHERE cn.maChiNhanh = pn.maChiNhanh and pn.maPhieuNhap = pnx.maPhieuNhap and pnx.maXe = x.maXe) as cn LEFT OUTER JOIN (SELECT cn.maChiNhanh, hdx.maXe, count(*) daBan
+																																FROM NHANVIEN as nv, CHINHANH as cn, HOADON as hd, CHITIETHOADONXE as hdx 
+																																WHERE nv.maChiNhanh = cn.maChiNhanh and hd.maNhanVienThucHien = nv.maNhanVien and hd.maHoaDon = hdx.maHoaDon 
+																																GROUP BY cn.maChiNhanh, hdx.maXe) as hd 
+on hd.maChiNhanh = cn.maChiNhanh and hd.maXe = cn.maXe
+go
+
+select * from v_SoXeDaBan
+
 --Xem danh sach xe theo từng chi nhánh
-CREATE VIEW v_KhoXeTheoChiNhanh as
-SELECT pn.maChiNhanh, ctpn.maXe, sum(ctpn.soLuong) as soLuong 
-FROM PHIEUNHAP as pn, CHITIETPHIEUNHAPXE as ctpn 
+CREATE or AlTER VIEW v_KhoXeTheoChiNhanh as
+SELECT distinct cn.maChiNhanh, cn.maXe, (cn.soLuong - hd.daBan) as Conlai
+FROM (SELECT pn.maChiNhanh, ctpn.maXe, sum(ctpn.soLuong) as soLuong 
+FROM PHIEUNHAP as pn, CHITIETPHIEUNHAPXE as ctpn
 WHERE pn.maPhieuNhap = ctpn.maPhieuNhap
-GROUP BY pn.maChiNhanh, ctpn.maXe
+GROUP BY pn.maChiNhanh, ctpn.maXe) as cn, v_SoXeDaBan as hd
+WHERE cn.maChiNhanh = hd.maChiNhanh and cn.maXe = hd.maXe
 
 select * from v_KhoXeTheoChiNhanh
 
@@ -72,3 +90,57 @@ begin
 	select @tenDangNhap = maNhanVien, @chucVu = chucVu from deleted
 	delete TAIKHOAN where TAIKHOAN.tenDangNhap = @tenDangNhap
 end
+
+-- Tạo TRIGGER khi thêm nhân viên thì tài khoản tự động thêm
+create or alter trigger trg_ThemTaiKhoan
+on NHANVIEN
+for insert
+as
+begin
+	declare @taiKhoan nvarchar(20), @chucVu nvarchar(50)
+	select @taiKhoan = maNhanVien, @chucVu = chucVu from inserted
+	insert into TAIKHOAN values (@taiKhoan, '1', @chucVu)
+end
+go
+
+-- Test
+begin tran
+	INSERT INTO CHINHANH (maChiNhanh, tenChiNhanh, diaChi)
+	VALUES ('CN001', N'Chi nhánh A', N'123 Đường A, Quận 1, TP.HCM')
+	INSERT INTO NHANVIEN (maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh)
+	VALUES ('NV001', N'Nguyễn Văn A', '123456789012', '1990-05-15', N'Nam', N'123 Đường X, Quận Y, TP.HCM', '0123456789', N'Quản lý', 'CN001')
+	select * from TaiKhoan
+rollback
+go
+
+-- Tạo trigger Khi sửa mã nhân viên thì tài khoản cũng sẽ cập nhật theo
+create or alter trigger trg_CapNhatTaiKhoan
+on NHANVIEN
+for update
+as
+begin
+	declare @taiKhoanCu nvarchar(20), @taiKhoanMoi nvarchar(20)
+	set @taiKhoanMoi = (select maNhanVien from inserted)
+	set @taiKhoanCu = (select maNhanVien from deleted)
+	Update TAIKHOAN
+	set tenDangNhap = @taiKhoanMoi
+	where tenDangNhap = @taiKhoanCu
+end
+go
+-- Test
+begin tran
+	INSERT INTO CHINHANH (maChiNhanh, tenChiNhanh, diaChi)
+	VALUES ('CN001', N'Chi nhánh A', N'123 Đường A, Quận 1, TP.HCM')
+	INSERT INTO NHANVIEN (maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh)
+	VALUES ('NV001', N'Nguyễn Văn A', '123456789012', '1990-05-15', N'Nam', N'123 Đường X, Quận Y, TP.HCM', '0123456789', N'Quản lý', 'CN001')
+
+	select * from TaiKhoan
+
+	update NHANVIEN
+	set maNhanVien = 'NV002'
+	where maNhanVien = 'NV001'
+
+	select * from TAIKHOAN
+rollback
+go
+

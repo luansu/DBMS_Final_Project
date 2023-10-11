@@ -1,6 +1,5 @@
 ﻿--drop database DBMS_DOAN_QUANLYCUAHANGXE
 create database DBMS_DOAN_QUANLYCUAHANGXE
-
 go
 use DBMS_DOAN_QUANLYCUAHANGXE
 go
@@ -11,6 +10,7 @@ create table CHINHANH(
 	tenChiNhanh nvarchar(50) not null,
 	diaChi nvarchar(255) not null,
 )
+go
 
 -- Tạo bảng nhân viên 
 -- => Trigger kiểm tra NHÂN VIÊN: CCCD là số, >=18 tuổi
@@ -25,16 +25,22 @@ create table NHANVIEN(
 	chucVu nvarchar(50),
 	tinhTrangLamViec bit default 1,
 	maChiNhanh nvarchar(20),
+	hinhAnh nvarchar(200)
 	foreign key (maChiNhanh) references CHINHANH(maChiNhanh)
 )
+go
 
 -- Tạo bảng Tài khoản
 create table TAIKHOAN(
 	tenDangNhap nvarchar(20) primary key,	
 	matKhau nvarchar(50) not null,
 	chucVu nvarchar(50),
-	foreign key (tenDangNhap) references NHANVIEN(maNhanVien)
+	maNhanVien nvarchar(20),
+	foreign key (maNhanVien) references NHANVIEN(maNhanVien)
+	on delete cascade -- Nhân viên xóa thì tải khoản cũng sẽ xóa
+	on update cascade -- Nhân viên đổi mã thì tài khoản cũng đổi theo
 )
+go
 
 -- Tạo bảng NHÀ CUNG CẤP
 create table NHACUNGCAP(
@@ -43,10 +49,11 @@ create table NHACUNGCAP(
 	diaChi nvarchar(255) not null,
 	soDienThoai nvarchar(20) check (len(soDienThoai) = 10 or len(soDienThoai) = 11),
 )
+go
 
--- Tạo bảng XE
-CREATE TABLE XE(
-	maXe nvarchar(20) primary key, 
+-- Tạo bảng LÔ XE
+create table LOXE(
+	maLoXe nvarchar(20) primary key,
 	tenXe nvarchar(50), 
 	mauSac nvarchar(20), 
 	giaBan money check (giaBan > 0), 
@@ -57,6 +64,7 @@ CREATE TABLE XE(
 	phienBanXe nvarchar(50),
 	tocDoToiDa integer check (tocDoToiDa > 0), 
 	trongLuong integer check (trongLuong > 0),
+	trongTai integer check (trongTai > 0),
 	canhBaoPhuongTien nvarchar(50), 
 	canhBaoDiemMu nvarchar(50), 
 	tuiKhi nvarchar(50), 
@@ -77,8 +85,17 @@ CREATE TABLE XE(
 	chieuDai integer check (chieuDai > 0), 
 	chieuRong integer check (chieuRong > 0), 
 	chieuCao integer check (chieuCao > 0), 
-	banKinhQuayVong integer check (banKinhQuayVong > 0)
+	banKinhQuayVong integer check (banKinhQuayVong > 0),
+	hinhAnh nvarchar(200)
 )
+
+-- Tạo bảng XE
+CREATE TABLE XE(
+	maXe nvarchar(20) primary key, 
+	maLoXe nvarchar(20)
+	foreign key (maLoXe) references LOXE(maLoXe)
+)
+go
 
 -- Tạo bảng PHỤ TÙNG
 CREATE TABLE PHUTUNG(
@@ -89,7 +106,9 @@ CREATE TABLE PHUTUNG(
 	xuatXu nvarchar(50), 
 	giaBan money check (giaBan > 0), 
 	chatLuong nvarchar(50),
+	hinhAnh nvarchar(200)
 )
+go
 
 -- Tạo bảng PHIẾU NHẬP
 create table PHIEUNHAP(
@@ -100,6 +119,7 @@ create table PHIEUNHAP(
 	foreign key (maNhaCungCap) references NHACUNGCAP(maNhaCungCap),
 	foreign key (maChiNhanh) references CHINHANH(maChiNhanh)
 )
+go
 
 -- Tạo bảng CHI TIẾT PHIẾU NHẬP XE
 create table CHITIETPHIEUNHAPXE(
@@ -111,6 +131,7 @@ create table CHITIETPHIEUNHAPXE(
 	foreign key (maXe) references XE(maXe),
 	foreign key (maPhieuNhap) references PHIEUNHAP(maPhieuNhap)
 )
+go
 
 -- Tạo bảng CHI TIẾT PHIẾU NHẬP PHỤ TÙNG
 create table CHITIETPHIEUNHAPPHUTUNG(
@@ -122,6 +143,7 @@ create table CHITIETPHIEUNHAPPHUTUNG(
 	foreign key (maPhuTung) references PHUTUNG(maPhuTung),
 	foreign key (maPhieuNhap) references PHIEUNHAP(maPhieuNhap)
 )
+go
 
 -- Tạo bảng KHÁCH HÀNG
 CREATE TABLE KHACHHANG(
@@ -133,6 +155,7 @@ CREATE TABLE KHACHHANG(
 	diaChi nvarchar(255), 
 	soDienThoai nvarchar(20) check (len(soDienThoai) = 10 or len(soDienThoai) = 11) unique,
 )
+go
 
 -- Tạo bảng hóa đơn
 create table HOADON(
@@ -145,10 +168,13 @@ create table HOADON(
 	foreign key (maKhachHang) references KHACHHANG(maKhachHang),
 	foreign key (maNhanVienThucHien) references NHANVIEN(maNhanVien)
 )
+go
 
 -- Tạo bảng CHI TIẾT HÓA ĐƠN XE
 create table CHITIETHOADONXE(
-	maChiTietHoaDon nvarchar(20) primary key,
+	maChiTietHoaDonXe nvarchar(20) primary key,
+	maHoaDon nvarchar(20), 
+	maXe nvarchar(20),
 	ngayNhanXe nvarchar(50),
 	soTienDaTra money check (soTienDaTra >= 0),
 	phiDangKyBienSo money check (phiDangKyBienSo >= 0),
@@ -156,23 +182,34 @@ create table CHITIETHOADONXE(
 	phiTruocBa money check (phiTruocBa >= 0),
 	phiBaoHiemTrachNhiemDanSu money check (phiBaoHiemTrachNhiemDanSu >= 0),
 	phiSuDungDuongBo money check (phiSuDungDuongBo >= 0),
-	maHoaDon nvarchar(20), 
-	maXe nvarchar(20),
 	foreign key (maHoaDon) references HOADON(maHoaDon),
 	foreign key (maXe) references XE(maXe)
 )
+go
 
 --Tạo bảng CHI TIẾT HÓA ĐƠN PHỤ TÙNG
+create table CHITIETHOADONPHUTUNG(
+	maChiTietHoaDonPhuTung nvarchar(20) primary key,
+	soTienDaTra money check (soTienDaTra >= 0),
+	maHoaDon nvarchar(20), 
+	maPhuTung nvarchar(20),
+	foreign key (maHoaDon) references HOADON(maHoaDon),
+	foreign key (maPhuTung) references PHUTUNG(maPhuTung)
+)
+go
 
 -- Tạo bảng HỢP ĐỒNG BẢO HÀNH
 CREATE TABLE HOPDONGBAOHANH(
 	maHopDongBaoHanh nvarchar(20) primary key, 
 	maXe nvarchar(20),
+	maKhachHang nvarchar(20),
 	ngayKyBaoHanh date, 
 	thoiHanBaoHanh date, 
 	tinhTrang nvarchar(20) check (tinhTrang = N'Còn bảo hành' or tinhTrang = N'Hết hạn'),
-	foreign key (maXe) references XE(maXe)
+	foreign key (maXe) references XE(maXe),
+	foreign key (maKhachHang) references KHACHHANG(maKhachHang)
 )
+go
 
 -- Tạo bảng PHIẾU BẢO HÀNH
 CREATE TABLE PHIEUBAOHANH(
@@ -185,6 +222,7 @@ CREATE TABLE PHIEUBAOHANH(
 	foreign key (maHopDongBaoHanh) references HOPDONGBAOHANH(maHopDongBaoHanh),
 	foreign key (maNhanVienThucHien) references NHANVIEN(maNhanVien)
 )
+go
 
 -- Tạo bảng DỊCH VỤ BẢO DƯỠNG
 CREATE TABLE DICHVUBAODUONG(
@@ -193,6 +231,7 @@ CREATE TABLE DICHVUBAODUONG(
 	loaiBaoDuong nvarchar(50) not null,
 	phiBaoDuong money check (phiBaoDuong >= 0),
 )
+go
 
 -- Tạo bảng PHIẾU BẢO DƯỠNG
 CREATE TABLE PHIEUBAODUONG(
@@ -204,25 +243,18 @@ CREATE TABLE PHIEUBAODUONG(
 	foreign key (maKhachHang) references KHACHHANG(maKhachHang),
 	foreign key (maNhanVienThucHien) references NHANVIEN(maNhanVien)
 )
+go
 
 -- Tạo bảng HÓA ĐƠN BẢO DƯỠNG
-create table HOADONBAODUONG(
-	maHoaDonBaoDuong nvarchar(20) primary key,
+create table CHITIETPHIEUBAODUONG(
+	maChiTietPhieuBaoDuong nvarchar(20) primary key,
 	maBaoDuong nvarchar(20),
 	maPhieuBaoDuong nvarchar(20),
 	thanhTien money check (thanhTien >= 0),
 	foreign key (maBaoDuong) references DICHVUBAODUONG(maBaoDuong),
 	foreign key (maPhieuBaoDuong) references PHIEUBAODUONG(maPhieuBaoDuong)
 )
-
-CREATE TABLE THANHTOAN(
-	maThanhToan nvarchar(20) primary key,
-	maDonHang nvarchar(20),
-	maKhachHang nvarchar(20),
-	maNhanVien nvarchar(20),
-	ngayLap date,
-	soTienThanhToan money check(soTienThanhToan > 0),
-)
+go
 
 
 
