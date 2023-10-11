@@ -23,13 +23,29 @@ FROM XE, PHIEUNHAP as pn
 WHERE pn.soLuong > 0
 go
 
+--View xem số xe đã bán theo chi nhánh
+CREATE or ALTER VIEW v_SoXeDaBan as
+SELECT cn.maChiNhanh, cn.maXe, CASE WHEN hd.daBan IS NULL 
+										THEN 0 
+									ELSE hd.daBan END AS daBan
+FROM (SELECT distinct cn.maChiNhanh, x.maXe
+		FROM CHINHANH as cn, PHIEUNHAP as pn, CHITIETPHIEUNHAPXE as pnx, XE as x
+		WHERE cn.maChiNhanh = pn.maChiNhanh and pn.maPhieuNhap = pnx.maPhieuNhap and pnx.maXe = x.maXe) as cn LEFT OUTER JOIN (SELECT cn.maChiNhanh, hdx.maXe, count(*) daBan
+																																FROM NHANVIEN as nv, CHINHANH as cn, HOADON as hd, CHITIETHOADONXE as hdx 
+																																WHERE nv.maChiNhanh = cn.maChiNhanh and hd.maNhanVienThucHien = nv.maNhanVien and hd.maHoaDon = hdx.maHoaDon 
+																																GROUP BY cn.maChiNhanh, hdx.maXe) as hd 
+on hd.maChiNhanh = cn.maChiNhanh and hd.maXe = cn.maXe
+go
+
+select * from v_SoXeDaBan
+
 --Xem danh sach xe theo từng chi nhánh
-CREATE VIEW v_KhoXeTheoChiNhanh as
-SELECT pn.maChiNhanh, ctpn.maXe, sum(ctpn.soLuong) as soLuong 
-FROM PHIEUNHAP as pn, CHITIETPHIEUNHAPXE as ctpn 
+CREATE or AlTER VIEW v_KhoXeTheoChiNhanh as
+SELECT distinct cn.maChiNhanh, cn.maXe, (cn.soLuong - hd.daBan) as Conlai
+FROM (SELECT pn.maChiNhanh, ctpn.maXe, sum(ctpn.soLuong) as soLuong 
+FROM PHIEUNHAP as pn, CHITIETPHIEUNHAPXE as ctpn
 WHERE pn.maPhieuNhap = ctpn.maPhieuNhap
-GROUP BY pn.maChiNhanh, ctpn.maXe
+GROUP BY pn.maChiNhanh, ctpn.maXe) as cn, v_SoXeDaBan as hd
+WHERE cn.maChiNhanh = hd.maChiNhanh and cn.maXe = hd.maXe
 
 select * from v_KhoXeTheoChiNhanh
---TRIGGER
-
