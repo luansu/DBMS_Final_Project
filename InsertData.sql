@@ -10,6 +10,7 @@ VALUES ('CNHN', N'Chi nhánh Hà Nội', N'Số 25, Đường Lê Lợi, Quận 
        ('CNCT', N'Chi nhánh Cần Thơ', N'222 Đường Trần Phú, Quận Ninh Kiều, Cần Thơ'),
        ('CNDN', N'Chi nhánh Đà Nẵng', N' 789 Đường 2/9, Quận Hải Châu, Đà Nẵng');
 go
+
 -- Thêm dữ liệu cho bảng NHÂN VIÊN
 INSERT INTO NHANVIEN (maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh)
 VALUES ('NVHN001', 'Nguyễn Văn An', '123456289012', '1990-01-15', N'Nam', '123 Đường Lê Lợi, Hà Nội', '0932345678', 'Quản lý', 'CNHN'),
@@ -20,7 +21,7 @@ VALUES ('NVHN001', 'Nguyễn Văn An', '123456289012', '1990-01-15', N'Nam', '12
        ('NVHN006', 'Nguyễn Thị Dung', '678932234567', '1997-11-30', N'Nữ', '333 Đường Nguyễn Du, Hà Nội', '0915432101', 'Nhân viên IT', 'CNHN'),
        ('NVHN007', 'Trần Văn Giang', '789012343278', '1994-02-14', N'Nam', '444 Đường Bà Triệu, Hà Nội', '0921498765', 'Nhân viên cơ khí', 'CNHN'),
 
-	   ('NVHCM001', 'Lê Thị Hương', '123456712012', '1991-04-20', N'Nữ', '123 Đường Lê Lai, Hồ Chí Minh', '09123325678', 'Nhân viên bán hàng', 'CNHCM'),
+	   ('NVHCM001', 'Lê Thị Hương', '123456712012', '1991-04-20', N'Nữ', '123 Đường Lê Lai, Hồ Chí Minh', '09123325678', 'Quản lý', 'CNHCM'),
        ('NVHCM002', 'Phạm Văn Hoàng', '234563490123', '1989-06-15', N'Nam', '456 Đường Nam Kỳ Khởi Nghĩa, Hồ Chí Minh', '0987321321', 'Nhân viên kế toán', 'CNHCM'),
        ('NVHCM003', 'Nguyễn Thị Khanh', '345678910234', '1990-08-10', N'Nữ', '789 Đường Võ Văn Tần, Hồ Chí Minh', '0901233567', 'Nhân viên IT', 'CNHCM'),
        ('NVHCM004', 'Nguyễn Minh Khánh', '456909012345', '1996-10-05', N'Nam', '101 Đường Cách Mạng Tháng Tám, Hồ Chí Minh', '0976543210', 'Nhân viên bán hàng', 'CNHCM'),
@@ -28,7 +29,7 @@ VALUES ('NVHN001', 'Nguyễn Văn An', '123456289012', '1990-01-15', N'Nam', '12
        ('NVHCM006', 'Hoàng Văn Minh', '678972234567', '1992-02-10', N'Nam', '333 Đường Lý Thường Kiệt, Hồ Chí Minh', '0965452101', 'Nhân viên IT', 'CNHCM'),
        ('NVHCM007', 'Trần Thị Ngân', '789012323278', '1993-05-14', N'Nữ', '444 Đường Nguyễn Đình Chính, Hồ Chí Minh', '0921033765', 'Nhân viên bảo vệ', 'CNHCM'),
 
-	   ('NVCT001', 'Nguyễn Thành Sơn', '123451489012', '1991-03-20', N'Nam', '123 Đường Hòa Bình, Cần Thơ', '0912343278', 'Nhân viên bán hàng', 'CNCT'),
+	   ('NVCT001', 'Nguyễn Thành Sơn', '123451489012', '1991-03-20', N'Nam', '123 Đường Hòa Bình, Cần Thơ', '0912343278', 'Quản lý', 'CNCT'),
        ('NVCT002', 'Trần Thị Phương', '234567881123', '1989-05-15', N'Nữ', '456 Đường Lê Lai, Cần Thơ', '0987654231', 'Nhân viên kế toán', 'CNCT'),
        ('NVCT003', 'Lê Văn Quang', '345678011234', '1990-07-10', N'Nam', '789 Đường Võ Văn Kiệt, Cần Thơ', '0901674567', 'Nhân viên IT', 'CNCT'),
        ('NVCT004', 'Phạm Thị Quỳnh', '456229012345', '1996-09-05', N'Nữ', '101 Đường 30/4, Cần Thơ', '0976501210', 'Nhân viên bán hàng', 'CNCT'),
@@ -36,7 +37,7 @@ VALUES ('NVHN001', 'Nguyễn Văn An', '123456289012', '1990-01-15', N'Nam', '12
        ('NVCT006', 'Nguyễn Thị Thu', '676601234567', '1992-01-10', N'Nữ', '333 Đường Nguyễn Văn Linh, Cần Thơ', '0965434501', 'Nhân viên IT', 'CNCT'),
        ('NVCT007', 'Trần Văn Nam', '789099345678', '1994-04-14', N'Nam', '444 Đường 3/2, Cần Thơ', '0921198765', 'Nhân viên bảo vệ', 'CNCT'),
 
-	   ('NVDN001', 'Trần Đinh Xu', '123453089012', '1991-02-15', N'Nam', '123 Đường Bạch Đằng, Đà Nẵng', '0916845678', 'Nhân viên bán hàng', 'CNDN'),
+	   ('NVDN001', 'Trần Đinh Xu', '123453089012', '1991-02-15', N'Nam', '123 Đường Bạch Đằng, Đà Nẵng', '0916845678', 'Quản lý', 'CNDN'),
        ('NVDN002', 'Nguyễn Thị Yến', '234590810123', '1989-04-20', N'Nữ', '456 Đường Lê Duẩn, Đà Nẵng', '0982954321', 'Nhân viên kế toán', 'CNDN'),
        ('NVDN003', 'Phạm Văn Đồng', '345636901234', '1990-06-10', N'Nam', '789 Đường 2/9, Đà Nẵng', '0901294567', 'Nhân viên IT', 'CNDN'),
        ('NVDN004', 'Trần Thị Uyên', '576789012345', '1996-08-05', N'Nữ', '101 Đường Hùng Vương, Đà Nẵng', '0901543210', 'Nhân viên bán hàng', 'CNDN'),
@@ -44,7 +45,7 @@ VALUES ('NVHN001', 'Nguyễn Văn An', '123456289012', '1990-01-15', N'Nam', '12
        ('NVDN006', 'Hoàng Văn Mạnh', '638901234567', '1992-12-10', N'Nam', '333 Đường Hồ Nghinh, Đà Nẵng', '0969132101', 'Nhân viên IT', 'CNDN'),
        ('NVDN007', 'Nguyễn Băng Hà', '789012345678', '1994-03-14', N'Nam', '444 Đường 3/2, Đà Nẵng', '0921092065', 'Nhân viên bảo vệ', 'CNDN'),
 
-	   ('NVHUE001', 'Lê Văn Hưng', '123456789012', '1991-05-20', N'Nam', '123 Đường Nguyễn Huệ, Huế', '0332345678', 'Nhân viên bán hàng', 'CNHUE'),
+	   ('NVHUE001', 'Lê Văn Hưng', '123456789012', '1991-05-20', N'Nam', '123 Đường Nguyễn Huệ, Huế', '0332345678', 'Quản lý', 'CNHUE'),
        ('NVHUE002', 'Trần Thị Kim Thoa', '234567890123', '1989-07-15', N'Nữ', '456 Đường 2/9, Huế', '0987654321', 'Nhân viên kế toán', 'CNHUE'),
        ('NVHUE003', 'Nguyễn Văn Luyện', '345678901234', '1990-09-10', N'Nam', '789 Đường Điện Biên Phủ, Huế', '0976234567', 'Nhân viên IT', 'CNHUE'),
        ('NVHUE004', 'Văn Thị Mười Ngọc', '456789012345', '1996-01-22', N'Nữ', '675 Đường Nguyễn Tất Thành, Huế', '0912346729', 'Nhân viên bán hàng', 'CNHUE'),
@@ -52,6 +53,7 @@ VALUES ('NVHN001', 'Nguyễn Văn An', '123456289012', '1990-01-15', N'Nam', '12
        ('NVHUE006', 'Lê Thị Oanh', '678901234567', '1992-03-10', N'Nữ', '333 Đường Nguyễn Tất Thành, Huế', '0966632101', 'Nhân viên IT', 'CNHUE'),
        ('NVHUE007', 'Nguyễn Văn Phúc', '789021345678', '1994-06-14', N'Nam', '444 Đường Đống Đa, Huế', '0921098265', 'Nhân viên bảo vệ', 'CNHUE');
 go
+
 -- Thêm dữ liệu cho bảng TÀI KHOẢN
 INSERT INTO TAIKHOAN (tenDangNhap, matKhau, chucVu)
 VALUES ('NVHN001', '1', N'Quản lý'),
@@ -227,4 +229,3 @@ go
 INSERT INTO HOADONBAODUONG (maHoaDonBaoDuong, maBaoDuong, maPhieuBaoDuong, thanhTien)
 VALUES ('HDBD001', 'DVBD003', 'PBD001', 150000),
        ('HDBD002', 'DVBD003', 'PBD002', 150000);
-go
