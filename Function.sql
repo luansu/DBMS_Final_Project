@@ -127,6 +127,21 @@ begin
 	where tenDangNhap = @taiKhoanCu
 end
 go
+
+CREATE or ALTER TRIGGER tg_ThayDoiTrangThaiHoaDon on CHITIETHOADONXE 
+AFTER update as
+BEGIN
+	DECLARE @soTienDaTra money, @maHoaDon nvarchar(20), @tongTien money
+	SELECT @soTienDaTra = ins.soTienDaTra, @maHoaDon = ins.maHoaDon FROM inserted as ins
+	SElECT @tongTien = hd.tongTien FROM HOADON as hd WHERE hd.maHoaDon = @maHoaDon
+	IF @tongTien <= @soTienDaTra
+	BEGIN 
+		UPDATE HOADON 
+		SET tinhTrang = N'Đã Thanh Toán'
+		WHERE maHoaDon = @maHoaDon
+	END
+END
+
 -- Test
 begin tran
 	INSERT INTO CHINHANH (maChiNhanh, tenChiNhanh, diaChi)
@@ -143,4 +158,5 @@ begin tran
 	select * from TAIKHOAN
 rollback
 go
+
 
