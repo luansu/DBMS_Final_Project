@@ -31,5 +31,8 @@ WHERE pn.maPhieuNhap = ctpn.maPhieuNhap
 GROUP BY pn.maChiNhanh, ctpn.maXe
 
 select * from v_KhoXeTheoChiNhanh
+
+--Xem danh sach nhan vien co chuc vu la quan ly
+
 --TRIGGER
 
