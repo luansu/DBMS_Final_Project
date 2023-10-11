@@ -69,29 +69,9 @@ from Xe where xuatXu = 'Nhật Bản'
 
 select * from v_XeXuatXuNhatBan
 
---TRIGGER
--- Tự động thêm tài khoản khi thêm nhân viên
-create or alter trigger tg_UpdateTK on NhanVien
-for insert
-as
-begin
-	declare @tenDangNhap nvarchar(20), @chucVu nvarchar(50)
-	select @tenDangNhap = maNhanVien, @chucVu = chucVu from inserted
-	insert into TAIKHOAN (tenDangNhap, matKhau, chucVu) values (@tenDangNhap, '1234', @chucVu)
-end
-
-
--- Tự động xóa tài khoản khi xóa nhân viên
-create or alter trigger tg_DeleteTK on NhanVien
-for delete
-as
-begin
-	declare @tenDangNhap nvarchar(20), @chucVu nvarchar(50)
-	select @tenDangNhap = maNhanVien, @chucVu = chucVu from deleted
-	delete TAIKHOAN where TAIKHOAN.tenDangNhap = @tenDangNhap
-end
-
+go
 -- Tạo TRIGGER khi thêm nhân viên thì tài khoản tự động thêm
+-- Set Tên đăng nhập mặc định là mã nhân viên
 create or alter trigger trg_ThemTaiKhoan
 on NHANVIEN
 for insert
@@ -99,18 +79,8 @@ as
 begin
 	declare @taiKhoan nvarchar(20), @chucVu nvarchar(50)
 	select @taiKhoan = maNhanVien, @chucVu = chucVu from inserted
-	insert into TAIKHOAN values (@taiKhoan, '1', @chucVu)
+	insert into TAIKHOAN values (@taiKhoan, '1', @chucVu, @taiKhoan)
 end
-go
-
--- Test
-begin tran
-	INSERT INTO CHINHANH (maChiNhanh, tenChiNhanh, diaChi)
-	VALUES ('CN001', N'Chi nhánh A', N'123 Đường A, Quận 1, TP.HCM')
-	INSERT INTO NHANVIEN (maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh)
-	VALUES ('NV001', N'Nguyễn Văn A', '123456789012', '1990-05-15', N'Nam', N'123 Đường X, Quận Y, TP.HCM', '0123456789', N'Quản lý', 'CN001')
-	select * from TaiKhoan
-rollback
 go
 
 -- Tạo trigger Khi sửa mã nhân viên thì tài khoản cũng sẽ cập nhật theo
@@ -123,40 +93,8 @@ begin
 	set @taiKhoanMoi = (select maNhanVien from inserted)
 	set @taiKhoanCu = (select maNhanVien from deleted)
 	Update TAIKHOAN
-	set tenDangNhap = @taiKhoanMoi
+	set tenDangNhap = @taiKhoanMoi, maNhanVien = @taiKhoanMoi
 	where tenDangNhap = @taiKhoanCu
 end
 go
-
-CREATE or ALTER TRIGGER tg_ThayDoiTrangThaiHoaDon on CHITIETHOADONXE 
-AFTER update as
-BEGIN
-	DECLARE @soTienDaTra money, @maHoaDon nvarchar(20), @tongTien money
-	SELECT @soTienDaTra = ins.soTienDaTra, @maHoaDon = ins.maHoaDon FROM inserted as ins
-	SElECT @tongTien = hd.tongTien FROM HOADON as hd WHERE hd.maHoaDon = @maHoaDon
-	IF @tongTien <= @soTienDaTra
-	BEGIN 
-		UPDATE HOADON 
-		SET tinhTrang = N'Đã Thanh Toán'
-		WHERE maHoaDon = @maHoaDon
-	END
-END
-
--- Test
-begin tran
-	INSERT INTO CHINHANH (maChiNhanh, tenChiNhanh, diaChi)
-	VALUES ('CN001', N'Chi nhánh A', N'123 Đường A, Quận 1, TP.HCM')
-	INSERT INTO NHANVIEN (maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh)
-	VALUES ('NV001', N'Nguyễn Văn A', '123456789012', '1990-05-15', N'Nam', N'123 Đường X, Quận Y, TP.HCM', '0123456789', N'Quản lý', 'CN001')
-
-	select * from TaiKhoan
-
-	update NHANVIEN
-	set maNhanVien = 'NV002'
-	where maNhanVien = 'NV001'
-
-	select * from TAIKHOAN
-rollback
-go
-
 
