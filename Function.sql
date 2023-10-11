@@ -64,8 +64,8 @@ delete Chinhanh where maChinhanh = 'CNHN'
 select * from v_NhanVienQuanLy
 --Xem danh sach xe co xuat xu Nhat Ban
 create or alter view v_XeXuatXuNhatBan as
-select maXe, tenXe, giaBan, soChoNgoi,loaiXe, loaiDongCo, loaiNhienLieu
-from Xe where xuatXu = 'Nhật Bản'
+select tenXe, giaBan, soChoNgoi,loaiXe, loaiDongCo, loaiNhienLieu
+from LOXE where xuatXu = 'Nhật Bản'
 
 select * from v_XeXuatXuNhatBan
 
