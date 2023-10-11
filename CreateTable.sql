@@ -25,8 +25,8 @@ create table NHANVIEN(
 	chucVu nvarchar(50),
 	tinhTrangLamViec bit default 1,
 	maChiNhanh nvarchar(20),
-	foreign key (maChiNhanh) references CHINHANH(maChiNhanh),
 	hinhAnh nvarchar(200)
+	foreign key (maChiNhanh) references CHINHANH(maChiNhanh)
 )
 go
 
@@ -35,7 +35,8 @@ create table TAIKHOAN(
 	tenDangNhap nvarchar(20) primary key,	
 	matKhau nvarchar(50) not null,
 	chucVu nvarchar(50),
-	foreign key (tenDangNhap) references NHANVIEN(maNhanVien)
+	maNhanVien nvarchar(20),
+	foreign key (maNhanVien) references NHANVIEN(maNhanVien)
 	on delete cascade -- Nhân viên xóa thì tải khoản cũng sẽ xóa
 	on update cascade -- Nhân viên đổi mã thì tài khoản cũng đổi theo
 )
