@@ -1,0 +1,17 @@
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\bin\Debug\DBMS_CodeDoAn.exe.config
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\bin\Debug\DBMS_CodeDoAn.exe
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\bin\Debug\DBMS_CodeDoAn.pdb
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.csproj.AssemblyReference.cache
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.Properties.Resources.resources
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.csproj.GenerateResource.cache
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.csproj.CoreCompileInputs.cache
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.exe
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.pdb
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\bin\Debug\EntityFramework.dll
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\bin\Debug\EntityFramework.SqlServer.dll
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\bin\Debug\EntityFramework.xml
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\bin\Debug\EntityFramework.SqlServer.xml
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.csproj.CopyComplete
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fDangNhap.resources
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fTrangChu.resources
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyOTo.resources
