@@ -25,7 +25,7 @@ create table NHANVIEN(
 	chucVu nvarchar(50),
 	tinhTrangLamViec bit default 1,
 	maChiNhanh nvarchar(20),
-	hinhAnh nvarchar(200)
+	hinhAnh nvarchar(200) default null,
 	foreign key (maChiNhanh) references CHINHANH(maChiNhanh)
 )
 go
@@ -124,11 +124,11 @@ go
 -- Tạo bảng CHI TIẾT PHIẾU NHẬP XE
 create table CHITIETPHIEUNHAPXE(
 	maChiTietPhieuNhapXe nvarchar(20) primary key,
-	maXe nvarchar(20),
+	maLoXe nvarchar(20),
 	maPhieuNhap nvarchar(20),
 	giaNhap money check (giaNhap > 0),
 	soLuong integer check(soLuong > 0),
-	foreign key (maXe) references XE(maXe),
+	foreign key (maLoXe) references LoXE(maLoXe),
 	foreign key (maPhieuNhap) references PHIEUNHAP(maPhieuNhap)
 )
 go
