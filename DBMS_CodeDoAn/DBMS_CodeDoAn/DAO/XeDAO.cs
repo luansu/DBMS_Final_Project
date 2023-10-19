@@ -36,11 +36,28 @@ namespace DBMS_CodeDoAn.DAO
             return listLoXe;
         }
 
+        public List<string> DanhSachMaXe()
+        {
+            List<string> listMaXe = new List<string>();
+
+            string query = "select maXe from XE";
+
+            DataTable data = DataProvider.Instance.ExcuteQuery(query);
+
+            foreach (DataRow row in data.Rows)
+            {
+                string maXe = row["maXe"].ToString();
+                listMaXe.Add(maXe);
+            }
+
+            return listMaXe;
+        }
+
         public List<Xe> DanhSachXeTheoLo(string maLoXe)
         {
             List<Xe> listXe = new List<Xe>();
 
-            string query = "select * from Xe where maLoXe = '" + maLoXe + "'";
+            string query = "exec sp_ThongTinXeTheoLo @maLoXe = '" + maLoXe + "'";
 
             DataTable data = DataProvider.Instance.ExcuteQuery(query);
 

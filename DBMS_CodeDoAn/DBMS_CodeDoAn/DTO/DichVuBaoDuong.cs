@@ -12,15 +12,15 @@ namespace DBMS_CodeDoAn.DTO
         private string maBaoDuong;
         private string tenBaoDuong;
         private string loaiBaoDuong;
-        private int phiBaoDuong;
+        private float phiBaoDuong;
 
         public string MaBaoDuong { get => maBaoDuong; set => maBaoDuong = value; }
         public string TenBaoDuong { get => tenBaoDuong; set => tenBaoDuong = value; }
         public string LoaiBaoDuong { get => loaiBaoDuong; set => loaiBaoDuong = value; }
-        public int PhiBaoDuong { get => phiBaoDuong; set => phiBaoDuong = value; }
+        public float PhiBaoDuong { get => phiBaoDuong; set => phiBaoDuong = value; }
         
         // Constructor
-        public DichVuBaoDuong(string maBaoDuong, string tenBaoDuong, string loaiBaoDuong, int phiBaoDuong)
+        public DichVuBaoDuong(string maBaoDuong, string tenBaoDuong, string loaiBaoDuong, float phiBaoDuong)
         {
             this.maBaoDuong = maBaoDuong;
             this.tenBaoDuong = tenBaoDuong;
@@ -34,7 +34,7 @@ namespace DBMS_CodeDoAn.DTO
             this.maBaoDuong = row["maBaoDuong"].ToString();
             this.tenBaoDuong = row["tenBaoDuong"].ToString();
             this.loaiBaoDuong = row["loaiBaoDuong"].ToString();
-            this.phiBaoDuong = (int)row["phiBaoDuong"];
+            this.phiBaoDuong = (float)Convert.ToDouble(row["phiBaoDuong"].ToString());
         }
     }
 }

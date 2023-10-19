@@ -36,5 +36,32 @@ namespace DBMS_CodeDoAn.DAO
 
             return listBaoDuong;
         }
+
+        public bool ThemDichVuBaoDuong(string tenBaoDuong, string loaiBaoDuong, float phiBaoDuong)
+        {
+            string query = string.Format("insert into DICHVUBAODUONG(tenBaoDuong, loaiBaoDuong, phiBaoDuong) values (N'{0}', N'{1}', {2})", tenBaoDuong, loaiBaoDuong, phiBaoDuong);
+
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+
+            return result > 0;
+        }
+
+        public bool XoaDichVuBaoDuong(string maBaoDuong)
+        {
+            string query = string.Format("delete DICHVUBAODUONG where maBaoDuong = '{0}'", maBaoDuong);
+
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+
+            return result > 0;
+        }
+
+        public bool CapNhatDichVuBaoDuong(string maBaoDuong, string tenBaoDuong, string loaiBaoDuong, float phiBaoDuong)
+        {
+            string query = string.Format("update DICHVUBAODUONG set tenBaoDuong = N'{0}', loaiBaoDuong = N'{1}', phiBaoDuong = {2} where maBaoDuong = '{3}'", tenBaoDuong, loaiBaoDuong, phiBaoDuong, maBaoDuong);
+
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+
+            return result > 0;
+        }
     }
 }

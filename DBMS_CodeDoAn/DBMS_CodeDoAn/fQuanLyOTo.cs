@@ -17,7 +17,7 @@ namespace DBMS_CodeDoAn
         public fQuanLyOTo()
         {
             InitializeComponent();
-            LoadDanhSachLoXe();
+            LoadDanhSachMaLoXe();
         }
 
         #region event
@@ -25,9 +25,6 @@ namespace DBMS_CodeDoAn
         private void cbbMaLoXe_SelectedIndexChanged(object sender, EventArgs e)
         {
             string idLoXe = cbbMaLoXe.Text;
-            //string query = "exec sp_ThongTinXeTheoLo @maLoXe = '" + idLoXe + "'";
-
-            //MessageBox.Show(query);
             LoadDanhSachXeTheoLo(idLoXe);
         }
 
@@ -36,7 +33,7 @@ namespace DBMS_CodeDoAn
 
         #region method
 
-        void LoadDanhSachLoXe()
+        void LoadDanhSachMaLoXe()
         {
             List<string> listLoXe = XeDAO.Instance.DanhSachLoXe();
             cbbMaLoXe.DataSource = listLoXe;

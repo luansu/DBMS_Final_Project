@@ -15,3 +15,17 @@ C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_Cod
 C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fDangNhap.resources
 C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fTrangChu.resources
 C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyOTo.resources
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyNhanVien.resources
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyPhuTung.resources
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyKhachHang.resources
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyChiNhanh.resources
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyNhaCungCap.resources
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyHoaDon.resources
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyChiTietHoaDonXe.resources
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyChiTietHoaDonPhuTung.resources
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyChiTietPhieuNhapXe.resources
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyPhieuNhap.resources
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyChiTietPhieuNhapPhuTung.resources
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyBaoDuong.resources
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyPhieuBaoDuong.resources
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyChiTietPhieuBaoDuong.resources

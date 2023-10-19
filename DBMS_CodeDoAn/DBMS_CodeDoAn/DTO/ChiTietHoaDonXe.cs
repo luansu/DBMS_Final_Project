@@ -13,28 +13,28 @@ namespace DBMS_CodeDoAn.DTO
         private string maHoaDon;
         private string maXe;
         private DateTime ngayNhanXe;
-        private int soTienDaTra;
-        private int phiDangKyBienSo;
-        private int phiDangKiem;
-        private int phiTruocBa;
-        private int phiBaoHiemTrachNhiemDanSu;
-        private int phiSuDungDuongBo;
+        private float soTienDaTra;
+        private float phiDangKyBienSo;
+        private float phiDangKiem;
+        private float phiTruocBa;
+        private float phiBaoHiemTrachNhiemDanSu;
+        private float phiSuDungDuongBo;
 
         public string MaChiTietHoaDonXe { get => maChiTietHoaDonXe; set => maChiTietHoaDonXe = value; }
         public string MaHoaDon { get => maHoaDon; set => maHoaDon = value; }
         public string MaXe { get => maXe; set => maXe = value; }
         public DateTime NgayNhanXe { get => ngayNhanXe; set => ngayNhanXe = value; }
-        public int SoTienDaTra { get => soTienDaTra; set => soTienDaTra = value; }
-        public int PhiDangKyBienSo { get => phiDangKyBienSo; set => phiDangKyBienSo = value; }
-        public int PhiDangKiem { get => phiDangKiem; set => phiDangKiem = value; }
-        public int PhiTruocBa { get => phiTruocBa; set => phiTruocBa = value; }
-        public int PhiBaoHiemTrachNhiemDanSu { get => phiBaoHiemTrachNhiemDanSu; set => phiBaoHiemTrachNhiemDanSu = value; }
-        public int PhiSuDungDuongBo { get => phiSuDungDuongBo; set => phiSuDungDuongBo = value; }
+        public float SoTienDaTra { get => soTienDaTra; set => soTienDaTra = value; }
+        public float PhiDangKyBienSo { get => phiDangKyBienSo; set => phiDangKyBienSo = value; }
+        public float PhiDangKiem { get => phiDangKiem; set => phiDangKiem = value; }
+        public float PhiTruocBa { get => phiTruocBa; set => phiTruocBa = value; }
+        public float PhiBaoHiemTrachNhiemDanSu { get => phiBaoHiemTrachNhiemDanSu; set => phiBaoHiemTrachNhiemDanSu = value; }
+        public float PhiSuDungDuongBo { get => phiSuDungDuongBo; set => phiSuDungDuongBo = value; }
 
         // Constructor
         public ChiTietHoaDonXe(string maChiTietHoaDonXe, string maHoaDon, string maXe, 
-            DateTime ngayNhanXe, int soTienDaTra, int phiDangKyBienSo, int phiDangKiem,
-            int phiTruocBa, int phiBaoHiemTrachNhiemDanSu, int phiSuDungDuongBo)
+            DateTime ngayNhanXe, float soTienDaTra, float phiDangKyBienSo, float phiDangKiem,
+            float phiTruocBa, float phiBaoHiemTrachNhiemDanSu, float phiSuDungDuongBo)
         {
             this.maChiTietHoaDonXe = maChiTietHoaDonXe;
             this.maHoaDon = maHoaDon;
@@ -54,12 +54,12 @@ namespace DBMS_CodeDoAn.DTO
             this.maHoaDon = row["maHoaDon"].ToString();
             this.maXe = row["maXe"].ToString();
             this.ngayNhanXe = (DateTime)row["ngayNhanXe"];
-            this.soTienDaTra = (int)row["soTienDaTra"];
-            this.phiDangKyBienSo = (int)row["phiDangKyBienSo"];
-            this.phiDangKiem = (int)row["phiDangKiem"];
-            this.phiTruocBa = (int)row["phiTruocBa"];
-            this.phiBaoHiemTrachNhiemDanSu = (int)row["phiBaoHiemTrachNhiemDanSu"];
-            this.phiSuDungDuongBo = (int)row["phiSuDungDuongBo"];
+            this.soTienDaTra = (float)Convert.ToDouble(row["soTienDaTra"].ToString());
+            this.phiDangKyBienSo = (float)Convert.ToDouble(row["phiDangKyBienSo"].ToString());
+            this.phiDangKiem = (float)Convert.ToDouble(row["phiDangKiem"].ToString());
+            this.phiTruocBa = (float)Convert.ToDouble(row["phiTruocBa"].ToString());
+            this.phiBaoHiemTrachNhiemDanSu = (float)Convert.ToDouble(row["phiBaoHiemTrachNhiemDanSu"].ToString());
+            this.phiSuDungDuongBo = (float)Convert.ToDouble(row["phiSuDungDuongBo"].ToString());
         }
     }
 }

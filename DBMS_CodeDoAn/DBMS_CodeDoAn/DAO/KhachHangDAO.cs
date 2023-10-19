@@ -36,5 +36,13 @@ namespace DBMS_CodeDoAn.DAO
 
             return listKhachHang;
         }
+
+        public bool ThemKhachHang(string hoTenKH, DateTime ngaySinh, string gioiTinh, string CCCD, string diaChi, string soDienThoai)
+        {
+            string query = string.Format("insert into KHACHHANG(hoTenKhachHang, ngaySinh, diaChi, gioiTinh, CCCD, soDienThoai) values (N'{0}', '{1}', N'{2}', '{3}', N'{4}', '{5}')", 
+                hoTenKH, ngaySinh, gioiTinh, CCCD, diaChi, soDienThoai);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
     }
 }

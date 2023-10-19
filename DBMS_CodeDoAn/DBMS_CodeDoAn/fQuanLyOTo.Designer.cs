@@ -90,9 +90,12 @@
             this.txtMaXe = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvThongTinXe = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label24 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.car_image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinXe)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -158,7 +161,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.groupBox1.Location = new System.Drawing.Point(9, 4);
+            this.groupBox1.Location = new System.Drawing.Point(9, 95);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -867,19 +870,38 @@
             // dgvThongTinXe
             // 
             this.dgvThongTinXe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvThongTinXe.Location = new System.Drawing.Point(9, 580);
+            this.dgvThongTinXe.Location = new System.Drawing.Point(9, 681);
             this.dgvThongTinXe.Name = "dgvThongTinXe";
             this.dgvThongTinXe.RowHeadersWidth = 62;
             this.dgvThongTinXe.RowTemplate.Height = 28;
             this.dgvThongTinXe.Size = new System.Drawing.Size(1653, 208);
             this.dgvThongTinXe.TabIndex = 2;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label24);
+            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1614, 75);
+            this.panel1.TabIndex = 3;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Georgia", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(670, 9);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(391, 56);
+            this.label24.TabIndex = 0;
+            this.label24.Text = "QUẢN LÝ Ô TÔ";
+            // 
             // fQuanLyOTo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1653, 800);
+            this.ClientSize = new System.Drawing.Size(1653, 890);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.dgvThongTinXe);
             this.Controls.Add(this.groupBox1);
             this.Name = "fQuanLyOTo";
@@ -889,6 +911,8 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.car_image)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinXe)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -956,5 +980,7 @@
         private System.Windows.Forms.DataGridView dgvThongTinXe;
         private System.Windows.Forms.ComboBox cbbMaLoXe;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label24;
     }
 }

@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace DBMS_CodeDoAn.DTO
 {
-    public class ChiTieuPhieuNhapXe
+    public class ChiTietPhieuNhapXe
     {
         private string maChiTietPhieuNhapXe;
         private string maXe;
         private string maPhieuNhap;
-        private int giaNhap;
+        private float giaNhap;
         private int soLuong;
         public string MaChiTietPhieuNhapXe { get => maChiTietPhieuNhapXe; set => maChiTietPhieuNhapXe = value; }
         public string MaXe { get => maXe; set => maXe = value; }
         public string MaPhieuNhap { get => maPhieuNhap; set => maPhieuNhap = value; }
-        public int GiaNhap { get => giaNhap; set => giaNhap = value; }
+        public float GiaNhap { get => giaNhap; set => giaNhap = value; }
         public int SoLuong { get => soLuong; set => soLuong = value; }
 
-        public ChiTieuPhieuNhapXe(string maChiTietPhieuNhapXe, string maXe, string maPhieuNhap, int giaNhap, int soLuong)
+        public ChiTietPhieuNhapXe(string maChiTietPhieuNhapXe, string maXe, string maPhieuNhap, float giaNhap, int soLuong)
         {
             this.maChiTietPhieuNhapXe = maChiTietPhieuNhapXe;
             this.maXe = maXe;
@@ -29,12 +29,12 @@ namespace DBMS_CodeDoAn.DTO
             this.soLuong = soLuong;
         }
 
-        public ChiTieuPhieuNhapXe(DataRow row)
+        public ChiTietPhieuNhapXe(DataRow row)
         {
             this.maChiTietPhieuNhapXe = row["maChiTietPhieuNhapXe"].ToString();
             this.maXe = row["maXe"].ToString();
             this.maPhieuNhap = row["maPhieuNhap"].ToString();
-            this.giaNhap = (int)row["giaNhap"];
+            this.giaNhap = (float)Convert.ToDouble(row["giaNhap"].ToString());
             this.soLuong = (int)row["soLuong"];
         }
     }

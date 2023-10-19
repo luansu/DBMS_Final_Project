@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DBMS_CodeDoAn.DAO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +18,7 @@ namespace DBMS_CodeDoAn
             InitializeComponent();
         }
 
+        #region event
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -32,12 +34,33 @@ namespace DBMS_CodeDoAn
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            string tenDangNhap = txtAccount.Text;
+            string matKhau = txtPassword.Text;
+            if (KiemTraDangNhap(tenDangNhap, matKhau))
+            {
+                this.Hide();
 
-            fTrangChu f = new fTrangChu();
-            f.ShowDialog();
+                fTrangChu f = new fTrangChu();
+                f.ShowDialog();
+
+                this.Show();
+            }
+            else
+            {
+                MessageBox.Show("Sai tên tài khoản hoặc mật khẩu, vui lòng kiểm tra lại");
+            }
             
-            this.Show();
         }
+
+        #endregion
+
+        #region method
+
+        private bool KiemTraDangNhap(string taiKhoan, string matKhau)
+        {
+            return TaiKhoanDAO.Instance.KiemTraDangNhap(taiKhoan, matKhau);
+        }
+
+        #endregion
     }
 }

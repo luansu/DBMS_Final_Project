@@ -11,18 +11,18 @@ namespace DBMS_CodeDoAn.DTO
     {
         private string maPhieuBaoDuong;
         private DateTime ngayLapPhieu;
-        private int tongTien;
+        private float tongTien;
         private string maKhachHang;
         private string maNhanVienThucHien;
 
         public string MaPhieuBaoDuong { get => maPhieuBaoDuong; set => maPhieuBaoDuong = value; }
         public DateTime NgayLapPhieu { get => ngayLapPhieu; set => ngayLapPhieu = value; }
-        public int TongTien { get => tongTien; set => tongTien = value; }
+        public float TongTien { get => tongTien; set => tongTien = value; }
         public string MaKhachHang { get => maKhachHang; set => maKhachHang = value; }
         public string MaNhanVienThucHien { get => maNhanVienThucHien; set => maNhanVienThucHien = value; }
 
         // Constructor
-        public PhieuBaoDuong(string maPhieuBaoDuong, DateTime ngayLapPhieu, int tongTien,
+        public PhieuBaoDuong(string maPhieuBaoDuong, DateTime ngayLapPhieu, float tongTien,
             string maKhachHang, string maNhanVienThucHien)
         {
             this.maPhieuBaoDuong = maPhieuBaoDuong;
@@ -36,7 +36,7 @@ namespace DBMS_CodeDoAn.DTO
         {
             this.maPhieuBaoDuong = row["maPhieuBaoDuong"].ToString();
             this.ngayLapPhieu = (DateTime)row["ngayLapPhieu"];
-            this.tongTien = (int)row["tongTien"];
+            this.tongTien = (float)Convert.ToDouble(row["tongTien"].ToString());
             this.maKhachHang = row["maKhachHang"].ToString();
             this.MaNhanVienThucHien = row["MaNhanVienThucHien"].ToString();
         }

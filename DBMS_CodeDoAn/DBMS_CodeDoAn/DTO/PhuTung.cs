@@ -14,7 +14,7 @@ namespace DBMS_CodeDoAn.DTO
         private string tenPhuTung;
         private string thuongHieu;
         private string xuatXu;
-        private int giaBan;
+        private float giaBan;
         private string chatLuong;
         private string hinhAnh;
         public string MaPhuTung { get => maPhuTung; set => maPhuTung = value; }
@@ -22,11 +22,11 @@ namespace DBMS_CodeDoAn.DTO
         public string TenPhuTung { get => tenPhuTung; set => tenPhuTung = value; }
         public string ThuongHieu { get => thuongHieu; set => thuongHieu = value; }
         public string XuatXu { get => xuatXu; set => xuatXu = value; }
-        public int GiaBan { get => giaBan; set => giaBan = value; }
+        public float GiaBan { get => giaBan; set => giaBan = value; }
         public string ChatLuong { get => chatLuong; set => chatLuong = value; }
         public string HinhAnh { get => hinhAnh; set => hinhAnh = value; }
 
-        public PhuTung(string maPhuTung, string loaiPhuTung, string tenPhuTung, string thuongHieu, string xuatXu, int giaBan, string chatLuong, string hinhAnh)
+        public PhuTung(string maPhuTung, string loaiPhuTung, string tenPhuTung, string thuongHieu, string xuatXu, float giaBan, string chatLuong, string hinhAnh)
         {
             MaPhuTung = maPhuTung;
             LoaiPhuTung = loaiPhuTung;
@@ -53,7 +53,7 @@ namespace DBMS_CodeDoAn.DTO
             TenPhuTung = row["tenPhuTung"].ToString();
             ThuongHieu = row["thuongHieu"].ToString();
             XuatXu = row["xuatXu"].ToString();
-            GiaBan = (int)row["giaBan"];
+            GiaBan = (float)Convert.ToDouble(row["giaBan"].ToString());
             ChatLuong = row["chatLuong"].ToString();
             HinhAnh = row["hinhAnh"].ToString();
         }

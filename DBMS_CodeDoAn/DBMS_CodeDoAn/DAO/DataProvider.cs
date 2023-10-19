@@ -86,7 +86,7 @@ namespace DBMS_CodeDoAn.DAO
                     }
                 }
 
-                data = cmd.ExecuteNonQuery();
+                 data = cmd.ExecuteNonQuery();
 
                 sqlCon.Close();
             }

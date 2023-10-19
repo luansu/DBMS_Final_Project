@@ -104,7 +104,8 @@ namespace DBMS_CodeDoAn.DTO
             this.phienBanXe = row["phienBanXe"].ToString();
             this.tocDoToiDa = (int)row["tocDoToiDa"];
             this.trongLuong = (int)row["trongLuong"];
-            this.trongTai = (int)row["trongTai"];this.loaiNhienLieu = row["maLoXe"].ToString();
+            this.trongTai = (int)row["trongTai"];
+            this.loaiNhienLieu = row["maLoXe"].ToString();
             this.congSuatDongCo = (int)row["congSuatDongCo"];
             this.dungTichDongCo = (int)row["dungTichDongCo"];
             this.loaiDongCo = row["loaiDongCo"].ToString();

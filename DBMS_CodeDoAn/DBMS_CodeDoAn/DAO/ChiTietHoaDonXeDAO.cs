@@ -20,7 +20,7 @@ namespace DBMS_CodeDoAn.DAO
 
         private ChiTietHoaDonXeDAO() { }
 
-        public List<ChiTietHoaDonXe> DanhSachHoaDonXe()
+        public List<ChiTietHoaDonXe> DanhSachCTHDXe()
         {
             List<ChiTietHoaDonXe> listHoaDonXe = new List<ChiTietHoaDonXe>();
 

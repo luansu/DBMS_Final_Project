@@ -33,17 +33,19 @@
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
             this.label1 = new System.Windows.Forms.Label();
             this.btnQuanLyOTo = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnQuanLyPhuTung = new System.Windows.Forms.Button();
             this.btnQuanLyNhanVien = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
+            this.btnQuanLyKhachHang = new System.Windows.Forms.Button();
+            this.btnQuanLyHoaDon = new System.Windows.Forms.Button();
+            this.btnQuanLyPhieuNhap = new System.Windows.Forms.Button();
+            this.btnQuanLyKho = new System.Windows.Forms.Button();
+            this.btnQuanLyBaoDuong = new System.Windows.Forms.Button();
+            this.btnQuanLyPhieuBDBH = new System.Windows.Forms.Button();
+            this.btnQuanLyTaiChinh = new System.Windows.Forms.Button();
+            this.btnQuanLyHopDong = new System.Windows.Forms.Button();
+            this.btnBaoCaoThongKe = new System.Windows.Forms.Button();
+            this.btnQuanLyNhaCungCap = new System.Windows.Forms.Button();
+            this.btnQuanLyChiNhanh = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,7 +95,7 @@
             // btnQuanLyOTo
             // 
             this.btnQuanLyOTo.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuanLyOTo.Location = new System.Drawing.Point(150, 181);
+            this.btnQuanLyOTo.Location = new System.Drawing.Point(147, 144);
             this.btnQuanLyOTo.Name = "btnQuanLyOTo";
             this.btnQuanLyOTo.Size = new System.Drawing.Size(223, 64);
             this.btnQuanLyOTo.TabIndex = 2;
@@ -101,20 +103,21 @@
             this.btnQuanLyOTo.UseVisualStyleBackColor = true;
             this.btnQuanLyOTo.Click += new System.EventHandler(this.btnQuanLyOTo_Click);
             // 
-            // button2
+            // btnQuanLyPhuTung
             // 
-            this.button2.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(150, 266);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(223, 64);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "QUẢN LÝ PHỤ TÙNG";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnQuanLyPhuTung.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuanLyPhuTung.Location = new System.Drawing.Point(147, 229);
+            this.btnQuanLyPhuTung.Name = "btnQuanLyPhuTung";
+            this.btnQuanLyPhuTung.Size = new System.Drawing.Size(223, 64);
+            this.btnQuanLyPhuTung.TabIndex = 2;
+            this.btnQuanLyPhuTung.Text = "QUẢN LÝ PHỤ TÙNG";
+            this.btnQuanLyPhuTung.UseVisualStyleBackColor = true;
+            this.btnQuanLyPhuTung.Click += new System.EventHandler(this.btnQuanLyPhuTung_Click);
             // 
             // btnQuanLyNhanVien
             // 
             this.btnQuanLyNhanVien.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuanLyNhanVien.Location = new System.Drawing.Point(150, 348);
+            this.btnQuanLyNhanVien.Location = new System.Drawing.Point(147, 311);
             this.btnQuanLyNhanVien.Name = "btnQuanLyNhanVien";
             this.btnQuanLyNhanVien.Size = new System.Drawing.Size(223, 73);
             this.btnQuanLyNhanVien.TabIndex = 2;
@@ -122,112 +125,141 @@
             this.btnQuanLyNhanVien.UseVisualStyleBackColor = true;
             this.btnQuanLyNhanVien.Click += new System.EventHandler(this.btnQuanLyNhanVien_Click);
             // 
-            // button4
+            // btnQuanLyKhachHang
             // 
-            this.button4.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(150, 446);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(223, 72);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "QUẢN LÝ KHÁCH HÀNG";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnQuanLyKhachHang.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuanLyKhachHang.Location = new System.Drawing.Point(147, 409);
+            this.btnQuanLyKhachHang.Name = "btnQuanLyKhachHang";
+            this.btnQuanLyKhachHang.Size = new System.Drawing.Size(223, 72);
+            this.btnQuanLyKhachHang.TabIndex = 2;
+            this.btnQuanLyKhachHang.Text = "QUẢN LÝ KHÁCH HÀNG";
+            this.btnQuanLyKhachHang.UseVisualStyleBackColor = true;
+            this.btnQuanLyKhachHang.Click += new System.EventHandler(this.btnQuanLyKhachHang_Click);
             // 
-            // button5
+            // btnQuanLyHoaDon
             // 
-            this.button5.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(456, 181);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(199, 64);
-            this.button5.TabIndex = 2;
-            this.button5.Text = "QUẢN LÝ HÓA ĐƠN";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnQuanLyHoaDon.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuanLyHoaDon.Location = new System.Drawing.Point(453, 144);
+            this.btnQuanLyHoaDon.Name = "btnQuanLyHoaDon";
+            this.btnQuanLyHoaDon.Size = new System.Drawing.Size(199, 64);
+            this.btnQuanLyHoaDon.TabIndex = 2;
+            this.btnQuanLyHoaDon.Text = "QUẢN LÝ HÓA ĐƠN";
+            this.btnQuanLyHoaDon.UseVisualStyleBackColor = true;
+            this.btnQuanLyHoaDon.Click += new System.EventHandler(this.btnQuanLyHoaDon_Click);
             // 
-            // button6
+            // btnQuanLyPhieuNhap
             // 
-            this.button6.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(456, 266);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(199, 56);
-            this.button6.TabIndex = 2;
-            this.button6.Text = "QUẢN LÝ BẢO DƯỠNG";
-            this.button6.UseVisualStyleBackColor = true;
+            this.btnQuanLyPhieuNhap.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuanLyPhieuNhap.Location = new System.Drawing.Point(453, 229);
+            this.btnQuanLyPhieuNhap.Name = "btnQuanLyPhieuNhap";
+            this.btnQuanLyPhieuNhap.Size = new System.Drawing.Size(199, 64);
+            this.btnQuanLyPhieuNhap.TabIndex = 2;
+            this.btnQuanLyPhieuNhap.Text = "QUẢN LÝ PHIẾU NHẬP";
+            this.btnQuanLyPhieuNhap.UseVisualStyleBackColor = true;
+            this.btnQuanLyPhieuNhap.Click += new System.EventHandler(this.btnQuanLyPhieuNhap_Click);
             // 
-            // button7
+            // btnQuanLyKho
             // 
-            this.button7.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.Location = new System.Drawing.Point(456, 357);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(199, 56);
-            this.button7.TabIndex = 2;
-            this.button7.Text = "QUẢN LÝ KHO";
-            this.button7.UseVisualStyleBackColor = true;
+            this.btnQuanLyKho.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuanLyKho.Location = new System.Drawing.Point(453, 320);
+            this.btnQuanLyKho.Name = "btnQuanLyKho";
+            this.btnQuanLyKho.Size = new System.Drawing.Size(199, 56);
+            this.btnQuanLyKho.TabIndex = 2;
+            this.btnQuanLyKho.Text = "QUẢN LÝ KHO";
+            this.btnQuanLyKho.UseVisualStyleBackColor = true;
             // 
-            // button8
+            // btnQuanLyBaoDuong
             // 
-            this.button8.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button8.Location = new System.Drawing.Point(456, 446);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(199, 72);
-            this.button8.TabIndex = 2;
-            this.button8.Text = "QUẢN LÝ BẢO DƯỠNG";
-            this.button8.UseVisualStyleBackColor = true;
+            this.btnQuanLyBaoDuong.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuanLyBaoDuong.Location = new System.Drawing.Point(453, 409);
+            this.btnQuanLyBaoDuong.Name = "btnQuanLyBaoDuong";
+            this.btnQuanLyBaoDuong.Size = new System.Drawing.Size(199, 72);
+            this.btnQuanLyBaoDuong.TabIndex = 2;
+            this.btnQuanLyBaoDuong.Text = "QUẢN LÝ BẢO DƯỠNG";
+            this.btnQuanLyBaoDuong.UseVisualStyleBackColor = true;
+            this.btnQuanLyBaoDuong.Click += new System.EventHandler(this.btnQuanLyBaoDuong_Click);
             // 
-            // button9
+            // btnQuanLyPhieuBDBH
             // 
-            this.button9.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button9.Location = new System.Drawing.Point(734, 181);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(180, 64);
-            this.button9.TabIndex = 2;
-            this.button9.Text = "QUẢN LÝ PHIẾU BẢO DƯỠNG, BẢO HÀNH";
-            this.button9.UseVisualStyleBackColor = true;
+            this.btnQuanLyPhieuBDBH.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuanLyPhieuBDBH.Location = new System.Drawing.Point(731, 144);
+            this.btnQuanLyPhieuBDBH.Name = "btnQuanLyPhieuBDBH";
+            this.btnQuanLyPhieuBDBH.Size = new System.Drawing.Size(244, 64);
+            this.btnQuanLyPhieuBDBH.TabIndex = 2;
+            this.btnQuanLyPhieuBDBH.Text = "QUẢN LÝ PHIẾU BẢO DƯỠNG, BẢO HÀNH";
+            this.btnQuanLyPhieuBDBH.UseVisualStyleBackColor = true;
+            this.btnQuanLyPhieuBDBH.Click += new System.EventHandler(this.btnQuanLyPhieuBDBH_Click);
             // 
-            // button10
+            // btnQuanLyTaiChinh
             // 
-            this.button10.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button10.Location = new System.Drawing.Point(734, 442);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(185, 64);
-            this.button10.TabIndex = 2;
-            this.button10.Text = "QUẢN LÝ TÀI CHÍNH";
-            this.button10.UseVisualStyleBackColor = true;
+            this.btnQuanLyTaiChinh.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuanLyTaiChinh.Location = new System.Drawing.Point(731, 405);
+            this.btnQuanLyTaiChinh.Name = "btnQuanLyTaiChinh";
+            this.btnQuanLyTaiChinh.Size = new System.Drawing.Size(244, 64);
+            this.btnQuanLyTaiChinh.TabIndex = 2;
+            this.btnQuanLyTaiChinh.Text = "QUẢN LÝ TÀI CHÍNH";
+            this.btnQuanLyTaiChinh.UseVisualStyleBackColor = true;
             // 
-            // button11
+            // btnQuanLyHopDong
             // 
-            this.button11.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button11.Location = new System.Drawing.Point(734, 357);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(185, 64);
-            this.button11.TabIndex = 2;
-            this.button11.Text = "QUẢN LÝ HỢP ĐỒNG";
-            this.button11.UseVisualStyleBackColor = true;
+            this.btnQuanLyHopDong.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuanLyHopDong.Location = new System.Drawing.Point(731, 320);
+            this.btnQuanLyHopDong.Name = "btnQuanLyHopDong";
+            this.btnQuanLyHopDong.Size = new System.Drawing.Size(244, 64);
+            this.btnQuanLyHopDong.TabIndex = 2;
+            this.btnQuanLyHopDong.Text = "QUẢN LÝ HỢP ĐỒNG";
+            this.btnQuanLyHopDong.UseVisualStyleBackColor = true;
             // 
-            // button12
+            // btnBaoCaoThongKe
             // 
-            this.button12.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button12.Location = new System.Drawing.Point(734, 266);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(185, 64);
-            this.button12.TabIndex = 2;
-            this.button12.Text = "BÁO CÁO - THỐNG KÊ";
-            this.button12.UseVisualStyleBackColor = true;
+            this.btnBaoCaoThongKe.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBaoCaoThongKe.Location = new System.Drawing.Point(731, 229);
+            this.btnBaoCaoThongKe.Name = "btnBaoCaoThongKe";
+            this.btnBaoCaoThongKe.Size = new System.Drawing.Size(244, 64);
+            this.btnBaoCaoThongKe.TabIndex = 2;
+            this.btnBaoCaoThongKe.Text = "BÁO CÁO - THỐNG KÊ";
+            this.btnBaoCaoThongKe.UseVisualStyleBackColor = true;
+            // 
+            // btnQuanLyNhaCungCap
+            // 
+            this.btnQuanLyNhaCungCap.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuanLyNhaCungCap.Location = new System.Drawing.Point(619, 499);
+            this.btnQuanLyNhaCungCap.Name = "btnQuanLyNhaCungCap";
+            this.btnQuanLyNhaCungCap.Size = new System.Drawing.Size(276, 78);
+            this.btnQuanLyNhaCungCap.TabIndex = 2;
+            this.btnQuanLyNhaCungCap.Text = "QUẢN LÝ NHÀ CUNG CẤP";
+            this.btnQuanLyNhaCungCap.UseVisualStyleBackColor = true;
+            this.btnQuanLyNhaCungCap.Click += new System.EventHandler(this.btnQuanLyNhaCungCap_Click);
+            // 
+            // btnQuanLyChiNhanh
+            // 
+            this.btnQuanLyChiNhanh.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuanLyChiNhanh.Location = new System.Drawing.Point(258, 503);
+            this.btnQuanLyChiNhanh.Name = "btnQuanLyChiNhanh";
+            this.btnQuanLyChiNhanh.Size = new System.Drawing.Size(243, 74);
+            this.btnQuanLyChiNhanh.TabIndex = 2;
+            this.btnQuanLyChiNhanh.Text = "QUẢN LÝ CHI NHÁNH";
+            this.btnQuanLyChiNhanh.UseVisualStyleBackColor = true;
+            this.btnQuanLyChiNhanh.Click += new System.EventHandler(this.btnQuanLyChiNhanh_Click);
             // 
             // fTrangChu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1118, 673);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button11);
-            this.Controls.Add(this.button12);
-            this.Controls.Add(this.button10);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.btnQuanLyPhieuBDBH);
+            this.Controls.Add(this.btnQuanLyChiNhanh);
+            this.Controls.Add(this.btnQuanLyBaoDuong);
+            this.Controls.Add(this.btnQuanLyKho);
+            this.Controls.Add(this.btnQuanLyPhieuNhap);
+            this.Controls.Add(this.btnQuanLyHopDong);
+            this.Controls.Add(this.btnQuanLyNhaCungCap);
+            this.Controls.Add(this.btnBaoCaoThongKe);
+            this.Controls.Add(this.btnQuanLyTaiChinh);
+            this.Controls.Add(this.btnQuanLyHoaDon);
+            this.Controls.Add(this.btnQuanLyKhachHang);
             this.Controls.Add(this.btnQuanLyNhanVien);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnQuanLyPhuTung);
             this.Controls.Add(this.btnQuanLyOTo);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -247,16 +279,18 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.HScrollBar hScrollBar1;
         private System.Windows.Forms.Button btnQuanLyOTo;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnQuanLyPhuTung;
         private System.Windows.Forms.Button btnQuanLyNhanVien;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button btnQuanLyKhachHang;
+        private System.Windows.Forms.Button btnQuanLyHoaDon;
+        private System.Windows.Forms.Button btnQuanLyPhieuNhap;
+        private System.Windows.Forms.Button btnQuanLyKho;
+        private System.Windows.Forms.Button btnQuanLyBaoDuong;
+        private System.Windows.Forms.Button btnQuanLyPhieuBDBH;
+        private System.Windows.Forms.Button btnQuanLyTaiChinh;
+        private System.Windows.Forms.Button btnQuanLyHopDong;
+        private System.Windows.Forms.Button btnBaoCaoThongKe;
+        private System.Windows.Forms.Button btnQuanLyNhaCungCap;
+        private System.Windows.Forms.Button btnQuanLyChiNhanh;
     }
 }

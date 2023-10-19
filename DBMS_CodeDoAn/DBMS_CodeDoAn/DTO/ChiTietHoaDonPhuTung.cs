@@ -13,15 +13,15 @@ namespace DBMS_CodeDoAn.DTO
         private string maChiTietHoaDonPhuTung;
         private string maHoaDon;
         private string maPhuTung;
-        private int soTienDaTra;
+        private float soTienDaTra;
 
         public string MaChiTietHoaDonPhuTung { get => maChiTietHoaDonPhuTung; set => maChiTietHoaDonPhuTung = value; }
         public string MaHoaDon { get => maHoaDon; set => maHoaDon = value; }
         public string MaPhuTung { get => maPhuTung; set => maPhuTung = value; }
-        public int SoTienDaTra { get => soTienDaTra; set => soTienDaTra = value; }
+        public float SoTienDaTra { get => soTienDaTra; set => soTienDaTra = value; }
 
         // Constructor
-        public ChiTietHoaDonPhuTung(string maChiTietHoaDonPhuTung, string maHoaDon, string maPhuTung, int soTienDaTra)
+        public ChiTietHoaDonPhuTung(string maChiTietHoaDonPhuTung, string maHoaDon, string maPhuTung, float soTienDaTra)
         {
             this.maChiTietHoaDonPhuTung = maChiTietHoaDonPhuTung;
             this.maHoaDon = maHoaDon;
@@ -34,7 +34,7 @@ namespace DBMS_CodeDoAn.DTO
             this.maChiTietHoaDonPhuTung = row["maChiTietHoaDonPhuTung"].ToString();
             this.maHoaDon = row["maHoaDon"].ToString();
             this.maPhuTung = row["maPhuTung"].ToString();
-            this.soTienDaTra = (int)row["soTienDaTra"];
+            this.soTienDaTra = (float)Convert.ToDouble(row["soTienDaTra"].ToString());
         }
     }
 }

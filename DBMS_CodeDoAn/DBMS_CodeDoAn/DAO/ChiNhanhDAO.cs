@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,25 @@ namespace DBMS_CodeDoAn.DAO
             }
 
             return listChiNhanh;
+        }
+
+        public bool ThemChiNhanh(string maChiNhanh, string tenChiNhanh, string diaChi)
+        {
+            string query = string.Format("Insert into CHINHANH (maChiNhanh, tenChiNhanh, diaChi) values ('{0}', N'{1}', N'{2}')", maChiNhanh, tenChiNhanh, diaChi);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
+        public bool CapNhatChiNhanh(string maChiNhanh, string tenChiNhanh, string diaChi)
+        {
+            string query = string.Format("update CHINHANH set tenChiNhanh = N'{0}', diaChi = N'{1}' where maChiNhanh = '{2}'", tenChiNhanh, diaChi, maChiNhanh);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
+        public bool XoaChiNhanh(string maChiNhanh)
+        {
+            string query = string.Format("delete CHINHANH where maChiNhanh = '{0}'", maChiNhanh);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
         }
     }
 }
