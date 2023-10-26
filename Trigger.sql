@@ -1,0 +1,202 @@
+﻿use DBMS_DOAN_QUANLYCUAHANGXE
+go
+
+--------------------------------------------------------------------------------
+-- Trigger khi nhập xe về thì mã xe tự động tạo theo mã lô xe
+create or alter trigger trg_SinhMaXeKhiNhapXe
+on CHITIETPHIEUNHAPXE
+after insert
+as
+begin
+	declare @maLoXe nvarchar(20), @soLuong nvarchar(20)
+	-- Lấy xe mã Lô xe và số lượng từ inserted (CTPN Xe)
+	select @maLoXe = maLoXe, @soLuong = soLuong from inserted
+		-- Nếu đã nhập mã lô xe này
+	if (@maLoXe in (select maLoXe from XE))
+	begin
+		declare @i int = @soLuong
+		while @i > 0 -- Bắt đầu thực hiện cho tới khi hết số lượng
+		begin
+				-- Khởi tạo giá trị LastID = Mã xe cuối cùng trong LoXe vừa insert
+			declare @NewId nvarchar(20), @LastID nvarchar(20)
+			select @LastID = ISNULL(MAX(CAST(SUBSTRING(maXe, 11, LEN(maXe) - 10) as int)), 0)
+			from XE where maLoXe = @maLoXe
+
+			if (@LastID < 999)
+			begin
+				set @NewId = @maLoXe + '_XE' + RIGHT('000' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar), 3)
+			end
+			else
+			begin
+				set @NewId = @maLoXe + '_XE' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar)
+			end
+
+			insert into XE values (@NewId, @maLoXe)
+			set @i = @i - 1
+		end	
+	end
+
+	else -- Xe có mã này chưa được nhập lần nào
+	begin
+		declare @y int = @soLuong, @ID int = 1
+		while @y > 0 -- Bắt đầu thực hiện cho tới khi hết số lượng
+		begin
+			if (@ID < 999)
+			begin
+				set @NewId = @maLoXe + '_XE' + RIGHT('000' + CAST(@ID as nvarchar), 3)
+			end
+			else
+			begin
+				set @NewId = @maLoXe + '_XE' + CAST(@ID as nvarchar)
+			end
+
+			insert into XE values (@NewId, @maLoXe)
+			set @y = @y - 1
+			set @ID = @ID + 1
+		end
+	end
+end
+go
+-- TEST
+begin tran
+	insert into CHITIETPHIEUNHAPXE(maChiTietPhieuNhapXe, maLoXe, maPhieuNhap, giaNhap, soLuong)
+	values ('CTPNX111', 'LOXE009', 'PN004', 200000000, 20)
+
+	select * from CHITIETPHIEUNHAPXE
+	select * from XE
+rollback
+go
+--------------------------------------------------------------------------------
+--Trigger khi thêm Chi nhánh thì tự động tạo kho
+create or alter trigger trg_ThemKhoTheoChiNhanh
+on CHINHANH
+after insert
+as
+begin
+	declare @maChiNhanh nvarchar(20)
+	set @maChiNhanh = (select maChiNhanh from inserted)
+
+	declare @maKhoXe nvarchar(20), @maKhoPhuTung nvarchar(20)
+	set @maKhoXe = 'KHOXE_' + @maChiNhanh
+	set @maKhoPhuTung = 'KHOPHUTUNG_' + @maChiNhanh
+
+	insert into KHOXE(maKhoXe, maChiNhanh)
+	values(@maKhoXe, @maChiNhanh)
+		
+	insert into KHOPHUTUNG(maKhoPhuTung, maChiNhanh)
+	values(@maKhoPhuTung, @maChiNhanh)
+end
+go
+--TEST
+begin tran
+	insert into CHINHANH(maChiNhanh, tenChiNhanh, diaChi)
+	values ('XUANTHE', 'XuanThe', '')
+
+	select * from KHOXE
+	select * from KHOPHUTUNG
+rollback
+go
+
+--------------------------------------------------------------------------------
+--Trigger khi nhập hàng về chi nhánh thì sẽ cập nhật vào kho
+-- Cập nhật kho xe
+create or alter trigger trg_CapNhatKhoXeKhiNhapHang
+on CHITIETPHIEUNHAPXE
+after insert 
+as
+begin
+	declare @maChiNhanh nvarchar(20), @maLoXe nvarchar(20), @soLuong int
+	select @maChiNhanh = maChiNhanh, @maLoXe = maLoXe, @soLuong = soLuong
+	from PHIEUNHAP PN
+	inner join CHITIETPHIEUNHAPXE CTPNX
+	on PN.maPhieuNhap = CTPNX.maPhieuNhap
+
+	if (@maLoXe in (select maLoXe from KHOXE))
+	begin
+		Update KHOXE
+		set soLuongXeCon = soLuongXeCon + @soLuong
+		where maChiNhanh = @maChiNhanh and maLoXe = @maLoXe
+	end
+	else
+	begin
+		insert into KHOXE(maKhoXe, maChiNhanh, maLoXe, soLuongXeCon)
+		values('KHOXE_' + @maChiNhanh, @maChiNhanh, @maLoXe, @soLuong)
+	end 
+end
+go
+--Test
+begin tran
+	insert into CHINHANH(maChiNhanh, tenChiNhanh, diaChi)
+	values ('XUANTHE', 'XuanThe', '')
+
+	select * from KHOXE
+
+	insert into PHIEUNHAP(maPhieuNhap, maChiNhanh, maNhaCungCap)
+	values ('PN100', 'XUANTHE', 'NCC-XE001')
+	insert into CHITIETPHIEUNHAPXE(maChiTietPhieuNhapXe, maLoXe, maPhieuNhap, giaNhap, soLuong)
+	values ('CTPNXE100','LOXE003','PN100', 100000000, 10)
+
+	select * from KHOXE
+rollback
+
+select PN.maPhieuNhap, maChiNhanh, maLoXe, soLuong from PHIEUNHAP PN
+inner join CHITIETPHIEUNHAPXE CTPNX
+on PN.maPhieuNhap = CTPNX.maPhieuNhap
+
+--------------------------------------------------------------------------------
+-- Tạo TRIGGER khi thêm nhân viên thì tài khoản tự động thêm
+-- Set Tên đăng nhập mặc định là mã nhân viên
+go
+create or alter trigger trg_ThemTaiKhoan
+on NHANVIEN
+for insert
+as
+begin
+	declare @taiKhoan nvarchar(20), @chucVu nvarchar(50)
+	select @taiKhoan = maNhanVien, @chucVu = chucVu from inserted
+	insert into TAIKHOAN values (@taiKhoan, '1', @chucVu, @taiKhoan)
+end
+go
+
+-- Test
+begin tran
+	INSERT INTO CHINHANH (maChiNhanh, tenChiNhanh, diaChi)
+	VALUES ('CN001', N'Chi nhánh A', N'123 Đường A, Quận 1, TP.HCM')
+	INSERT INTO NHANVIEN (maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh)
+	VALUES ('NV001', N'Nguyễn Văn A', '123456789012', '1990-05-15', N'Nam', N'123 Đường X, Quận Y, TP.HCM', '0123456789', N'Quản lý', 'CN001')
+	select * from TaiKhoan
+rollback
+go
+
+-- Tạo trigger Khi sửa mã nhân viên thì tài khoản cũng sẽ cập nhật theo
+create or alter trigger trg_CapNhatTaiKhoan
+on NHANVIEN
+for update
+as
+begin
+	declare @taiKhoanCu nvarchar(20), @taiKhoanMoi nvarchar(20)
+	set @taiKhoanMoi = (select maNhanVien from inserted)
+	set @taiKhoanCu = (select maNhanVien from deleted)
+	Update TAIKHOAN
+	set tenDangNhap = @taiKhoanMoi, maNhanVien = @taiKhoanMoi
+	where tenDangNhap = @taiKhoanCu
+end
+go
+-- Test
+begin tran
+	INSERT INTO CHINHANH (maChiNhanh, tenChiNhanh, diaChi)
+	VALUES ('CN001', N'Chi nhánh A', N'123 Đường A, Quận 1, TP.HCM')
+	INSERT INTO NHANVIEN (maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh)
+	VALUES ('NV001', N'Nguyễn Văn A', '123456789012', '1990-05-15', N'Nam', N'123 Đường X, Quận Y, TP.HCM', '0123456789', N'Quản lý', 'CN001')
+
+	select * from TaiKhoan
+
+	update NHANVIEN
+	set maNhanVien = 'NV002'
+	where maNhanVien = 'NV001'
+
+	select * from TAIKHOAN
+rollback
+go
+
+--

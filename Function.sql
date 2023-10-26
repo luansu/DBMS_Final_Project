@@ -1,195 +1,291 @@
-﻿--Xem danh sách nhan viên còn làm việc
-use DBMS_DOAN_QUANLYCUAHANGXE
-go
-CREATE VIEW v_DSNhanVienConLamViec as
-SELECT hotenNhanVien, CCCD, ngaySinh, gioiTinh, soDienThoai
-FROM NHANVIEN as nv
-WHERE nv.tinhTrangLamViec = 1
-go 
-
-select * from v_DSNhanVienConLamViec
-
---Xem danh sách chi nhánh
-CREATE VIEW v_DSChiNhanh as
-SELECT * 
-FROM CHINHANH
+﻿use DBMS_DOAN_QUANLYCUAHANGXE
 go
 
-select * from v_DSChiNhanh
---Xen danh sách nhà cung cấp
-CREATE VIEW v_DSNhaCungCap as
-SELECT *
-FROM NHACUNGCAP
-go
-
-select * from v_DSNhaCungCap
-
---View xem số xe đã bán theo chi nhánh
-CREATE or ALTER VIEW v_SoXeDaBan as
-SELECT cn.maChiNhanh, cn.maXe, CASE WHEN hd.daBan IS NULL 
-										THEN 0 
-									ELSE hd.daBan END AS daBan
-FROM (SELECT distinct cn.maChiNhanh, x.maXe
-		FROM CHINHANH as cn, PHIEUNHAP as pn, CHITIETPHIEUNHAPXE as pnx, XE as x
-		WHERE cn.maChiNhanh = pn.maChiNhanh and pn.maPhieuNhap = pnx.maPhieuNhap and pnx.maXe = x.maXe) as cn LEFT OUTER JOIN (SELECT cn.maChiNhanh, hdx.maXe, count(*) daBan
-																																FROM NHANVIEN as nv, CHINHANH as cn, HOADON as hd, CHITIETHOADONXE as hdx 
-																																WHERE nv.maChiNhanh = cn.maChiNhanh and hd.maNhanVienThucHien = nv.maNhanVien and hd.maHoaDon = hdx.maHoaDon 
-																																GROUP BY cn.maChiNhanh, hdx.maXe) as hd 
-on hd.maChiNhanh = cn.maChiNhanh and hd.maXe = cn.maXe
-go
-
-select * from v_SoXeDaBan
-
---Xem danh sach xe theo từng chi nhánh
-CREATE or AlTER VIEW v_KhoXeTheoChiNhanh as
-SELECT distinct cn.maChiNhanh, cn.maXe, (cn.soLuong - hd.daBan) as Conlai
-FROM (SELECT pn.maChiNhanh, ctpn.maXe, sum(ctpn.soLuong) as soLuong 
-FROM PHIEUNHAP as pn, CHITIETPHIEUNHAPXE as ctpn
-WHERE pn.maPhieuNhap = ctpn.maPhieuNhap
-GROUP BY pn.maChiNhanh, ctpn.maXe) as cn, v_SoXeDaBan as hd
-WHERE cn.maChiNhanh = hd.maChiNhanh and cn.maXe = hd.maXe
-
-select * from v_KhoXeTheoChiNhanh
-
---Xem danh sach nhan vien co chuc vu la quan ly
-CREATE or alter VIEW v_NhanVienQuanLy as
-select nv.maNhanVien, nv.hoTenNhanVien, nv.soDienThoai, cn.maChiNhanh, cn.tenChiNhanh
-from NHANVIEN as nv, CHINHANH as cn
-where nv.maChiNhanh = cn.maChiNhanh and nv.chucVu = 'Quản lý'
-
-delete NhanVien where maChiNhanh = 'CNHN'
-delete Chinhanh where maChinhanh = 'CNHN'
-
-select * from v_NhanVienQuanLy
---Xem danh sach xe co xuat xu Nhat Ban
-create or alter view v_XeXuatXuNhatBan as
-select maXe, tenXe, giaBan, soChoNgoi,loaiXe, loaiDongCo, loaiNhienLieu
-from Xe where xuatXu = N'Nhật Bản'
-
-select * from v_XeXuatXuNhatBan
-
---TRIGGER
--- Tự động thêm tài khoản khi thêm nhân viên
-create or alter trigger tg_UpdateTK on NhanVien
-for insert
+-- Function tự động sinh mã bảo dưỡng
+create or alter function fn_SinhMaBaoDuong()
+returns nvarchar(20)
 as
 begin
-	declare @tenDangNhap nvarchar(20), @chucVu nvarchar(50)
-	select @tenDangNhap = maNhanVien, @chucVu = chucVu from inserted
-	insert into TAIKHOAN (tenDangNhap, matKhau, chucVu) values (@tenDangNhap, '1234', @chucVu)
-end
+	declare @nextID nvarchar(20), @lastID nvarchar(20)
+	select @lastID = ISNULL(MAX(CAST(SUBSTRING(maBaoDuong, 5, LEN(maBaoDuong) - 4) as int)) , 0) 
+	from DICHVUBAODUONG
 
-INSERT INTO NHANVIEN (maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh, hinhAnh)
-VALUES ('NVHN012', 'Nguyễn Văn An', '123456283012', '1990-01-15', N'Nam', '123 Đường Lê Lợi, Hà Nội', '0932345768', 'Quản lý', 'CNHN', ''),
-
-select * from TAIKHOAN
--- Tự động xóa tài khoản khi xóa nhân viên
-create or alter trigger tg_DeleteTK on NhanVien
-for delete
-as
-begin
-	declare @tenDangNhap nvarchar(20), @chucVu nvarchar(50)
-	select @tenDangNhap = maNhanVien, @chucVu = chucVu from deleted
-	delete TAIKHOAN where TAIKHOAN.tenDangNhap = @tenDangNhap
-end
-
--- Tạo TRIGGER khi thêm nhân viên thì tài khoản tự động thêm
-create or alter trigger trg_ThemTaiKhoan
-on NHANVIEN
-for insert
-as
-begin
-	declare @taiKhoan nvarchar(20), @chucVu nvarchar(50)
-	select @taiKhoan = maNhanVien, @chucVu = chucVu from inserted
-	insert into TAIKHOAN values (@taiKhoan, '1', @chucVu)
+	if (@lastID < 999)
+		set @nextID = 'DVBD' + RIGHT('000' + CAST(ISNULL(@lastID, 0) + 1 as nvarchar), 3)
+	else
+		set @nextID = 'DVBD' + CAST(ISNULL(@lastID, 0) + 1 as nvarchar)
+	return @nextID
 end
 go
-
--- Test
+-- Add Contraint cho mã bảo dưỡng
+alter table DICHVUBAODUONG add constraint constr_MaBaoDuong
+default dbo.fn_SinhMaBaoDuong() for maBaoDuong
+go
+--alter table DICHVUBAODUONG drop constraint constr_MaBaoDuong
 begin tran
-	INSERT INTO CHINHANH (maChiNhanh, tenChiNhanh, diaChi)
-	VALUES ('CN001', N'Chi nhánh A', N'123 Đường A, Quận 1, TP.HCM')
-	INSERT INTO NHANVIEN (maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh)
-	VALUES ('NV001', N'Nguyễn Văn A', '123456789012', '1990-05-15', N'Nam', N'123 Đường X, Quận Y, TP.HCM', '0123456789', N'Quản lý', 'CN001')
-	select * from TaiKhoan
+	insert into DICHVUBAODUONG(tenBaoDuong, loaiBaoDuong, phiBaoDuong)
+	values ('a', 'a', 1)
+	select * from DICHVUBAODUONG
+rollback
+select * from DICHVUBAODUONG
+-------------------------------------------------------------------------------------------------
+-- Function tự động sinh mã khách hàng
+go
+create or alter function fn_SinhMaKhachHang()
+returns nvarchar(20)
+as
+begin
+	declare @NextID nvarchar(20), @LastID nvarchar(20)
+	select @LastID = ISNULL(MAX(CAST(SUBSTRING(maKhachHang, 3, LEN(maKhachHang) - 2) as int)), 0)
+	from KHACHHANG
+
+	if (@LastID < 999)
+		set @NextID = 'KH' + RIGHT('000' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar), 3)
+	else
+		set @NextID = 'KH' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar)
+	return @NextID
+end
+go
+-- Add Constraint cho mã Khách hàng
+alter table KHACHHANG add constraint contr_MaKhachHang
+default dbo.fn_SinhMaKhachHang() for maKhachHang
+--
+begin tran
+	insert into KHACHHANG(hoTenKhachHang, ngaySinh, diaChi, gioiTinh, CCCD, soDienThoai)
+	values ('a', '', 'a', 'Nam', '111111111111', '1111111111')
+	select * from KHACHHANG
 rollback
 go
-
--- Tạo trigger Khi sửa mã nhân viên thì tài khoản cũng sẽ cập nhật theo
-create or alter trigger trg_CapNhatTaiKhoan
-on NHANVIEN
-for update
+--------------------------------------------------------------------------------------------------
+--Function tự động sinh mã phiếu nhập
+create or alter function fn_SinhMaPhieuNhap()
+returns nvarchar(20)
 as
 begin
-	declare @taiKhoanCu nvarchar(20), @taiKhoanMoi nvarchar(20)
-	set @taiKhoanMoi = (select maNhanVien from inserted)
-	set @taiKhoanCu = (select maNhanVien from deleted)
-	Update TAIKHOAN
-	set tenDangNhap = @taiKhoanMoi
-	where tenDangNhap = @taiKhoanCu
+	declare @NewId nvarchar(20), @LastId nvarchar(20)
+	select @LastId = ISNULL(MAX(CAST(SUBSTRING(maPhieuNhap, 3, LEN(maPhieuNhap) - 2) as int)), 0)
+	from PHIEUNHAP
+	if (@LastId < 999)
+	begin
+		set @NewId = 'PN' + RIGHT('000' + CAST(ISNULL(@LastId, 0) + 1 as nvarchar), 3)
+	end
+	else
+	begin
+		set @NewId = 'PN' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar)
+	end
+	return @NewID
+end
+go
+-- Add constraint 
+alter table PHIEUNHAP add constraint contr_SinhMaPhieuNhap
+default dbo.fn_SinhMaPhieuNhap() for maPhieuNhap
+go
+--
+begin tran
+	insert into PHIEUNHAP(ngayNhap, maNhaCungCap, maChiNhanh)
+	values ('2003-08-10', 'NCC-XE001', 'CNHN')
+
+	select * from PHIEUNHAP
+rollback
+go
+--------------------------------------------------------------------------------------------------
+-- Function tự sinh mã chi tiết phiếu nhập xe
+
+
+
+--------------------------------------------------------------------------------------------------
+-- Function tự sinh mã chi tiết phiếu nhập phụ tùng
+go
+create or alter function fn_SinhMaChiTietPhieuNhapPhuTung()
+returns nvarchar(20)
+as
+begin
+	declare @NewID nvarchar(20), @LastID nvarchar(20)
+	select @LastID = ISNULL(MAX(CAST(SUBSTRING(maChiTietPhieuNhapPhuTung, 7, len(maChiTietPhieuNhapPhuTung) - 6) as int)), 0)
+	from CHITIETPHIEUNHAPPHUTUNG
+	if (@LastID < 999)
+	begin
+		set @NewID = 'CTPNPT' + RIGHT('000' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar), 3)
+	end
+	else
+		set @NewID = 'CTPNPT' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar)
+	return @NewID
+end
+go
+-- Add contraint
+alter table CHITIETPHIEUNHAPPHUTUNG add constraint contr_SinhMaChiTietPhieuNhapPhuTung
+default dbo.fn_SinhMaChiTietPhieuNhapPhuTung() for maChiTietPhieuNhapPhuTung
+go
+begin tran
+	insert into CHITIETPHIEUNHAPPHUTUNG(maPhuTung, maPhieuNhap, giaNhap, soLuong)
+	values ('PT001', 'PN001', 20000, 10)
+
+	select * from CHITIETPHIEUNHAPPHUTUNG
+rollback
+go
+--------------------------------------------------------------------------------------------------
+--Function sinh mã hóa đơn
+create or alter function fn_SinhMaHoaDon()
+returns nvarchar(20)
+as
+begin
+	declare @NewID nvarchar(20), @LastID nvarchar(20)
+	select @LastID = ISNULL(MAX(CAST(SUBSTRING(maHoaDon, 3, len(maHoaDon) - 2) as int)), 0)
+	from HOADON
+	if (@LastID < 999)
+	begin
+		set @NewID = 'HD' + RIGHT('000' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar), 3)
+	end
+	else
+		set @NewID = 'HD' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar)
+	return @NewID
+end
+go
+--Add constraint
+alter table HOADON add constraint contr_SinhMaHoaDon
+default dbo.fn_SinhMaHoaDon() for maHoaDon
+go
+begin tran
+	insert into HOADON(ngayLapHoaDon, tongTien, tinhTrang, maKhachHang, maNhanVienThucHien)
+	values('2003-08-10', 111111, N'Chưa thanh toán', 'KH001', 'NVHN001')
+	select * from HOADON
+rollback
+go
+--------------------------------------------------------------------------------------------------
+-- Function tự tạo mã chi tiết hóa đơn phụ tùng
+create or alter function fn_SinhMaChiTietHoaDonPhuTung()
+returns nvarchar(20)
+as
+begin
+	declare @NewID nvarchar(20), @LastID nvarchar(20)
+	select @LastID = ISNULL(MAX(CAST(SUBSTRING(maChiTietHoaDonPhuTung, 7, LEN(maChiTietHoaDonPhuTung) - 6) as int)), 0)
+	from CHITIETHOADONPHUTUNG
+
+	if (@LastID < 999)
+	begin
+		set @NewID = 'CTHDPT' + RIGHT('000' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar), 3)
+	end
+	else
+	begin
+		set @NewID = 'CTHDPT' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar)
+	end 
+	return @NewID
+end
+go
+--Add constraint
+alter table CHITIETHOADONPHUTUNG add constraint contr_SinhMaCTHDPT
+default dbo.fn_SinhMaChiTietHoaDonPhuTung() for maChiTietHoaDonPhuTung
+go
+begin tran
+	insert into CHITIETHOADONPHUTUNG(maHoaDon, maPhuTung, soTienDaTra)
+	values ('HD001', 'PT001', 100000)
+	select * from CHITIETHOADONPHUTUNG
+rollback
+go
+--------------------------------------------------------------------------------------------------
+-- Function sinh mã chi tiết hóa đơn xe
+create or alter function fn_SinhMaCTHDXe()
+returns nvarchar(20)
+as
+begin
+	declare @NewID nvarchar(20), @LastID nvarchar(20)
+	select @LastID = ISNULL(MAX(CAST(SUBSTRING(maChiTietHoaDonXe, 6, LEN(maChiTietHoaDonXe) - 1) as int)), 0)
+	from CHITIETHOADONXE
+	if (@LastID < 999)
+	begin
+		set @NewID = 'CTHDX' + RIGHT('000' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar), 3)
+	end
+	else
+	begin
+		set @NewID = 'CTHDX' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar)
+	end
+	return @NewID
+end
+go
+-- Add Constraint
+alter table CHITIETHOADONXE add constraint contr_SinhMaCTHDXe
+default dbo.fn_SinhMaCTHDXe() for maChiTietHoaDonXe
+begin tran
+	insert into CHITIETHOADONXE(maHoaDon, maXe, ngayNhanXe, soTienDaTra, phiDangKyBienSo, phiDangKiem, phiTruocBa, phiBaoHiemTrachNhiemDanSu, phiSuDungDuongBo)
+	values ('HD001', 'LOXE001_XE001', '2003-08-10', 100000000, 2000000, 1000000, 1000000, 1000000, 1000000)
+	select * from CHITIETHOADONXE
+
+rollback
+go
+--------------------------------------------------------------------------------------------------
+-- Function sinh mã phụ tùng
+create or alter function fn_SinhMaPhuTung()
+returns nvarchar(20)
+as
+begin
+	declare @NewID nvarchar(20), @LastID nvarchar(20)
+	select @LastID = ISNULL(MAX(CAST(SUBSTRING(maPhuTung, 3, LEN(maPhuTung) - 2) as int)), 0)
+	from PHUTUNG
+
+	if (@LastID < 999)
+	begin
+		set @NewID = 'PT' + RIGHT('000' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar), 3)
+	end
+	else
+	begin
+		set @NewID = 'PT' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar)
+	end
+	return @NewID
+end
+go
+--Add constraint
+alter table PHUTUNG add constraint contr_SinhMaPhuTung
+default dbo.fn_SinhMaPhuTung() for maPhuTung
+--Test
+begin tran
+	insert into PHUTUNG(loaiPhuTung, tenPhuTung, thuongHieu, xuatXu, giaBan, chatLuong)
+	values ('', '', '', '', 10000, '')
+	select * from PHUTUNG
+rollback
+go
+--------------------------------------------------------------------------------------------------
+-- Function tính tổng số tiền khách hàng phải trả
+-- khi thanh toán 1 chiếc xe
+go
+create or alter function fn_TongSoTienCanThanhToan
+(@maKhachHang nvarchar(20), @maXe nvarchar(20))
+returns money
+as
+begin
+	declare @TongTien money
+	declare @giaBan money, @phiDangKyBienSo money, @phiDangKiem money,
+			@phiTruocBa money, @phiBaoHiemTrachNhiemDanSu money, @phiSuDungDuongBo money
+
+	select @giaBan = giaBan, @phiDangKyBienSo = phiDangKyBienSo, @phiDangKiem = phiDangKiem, 
+			@phiTruocBa = phiTruocBa, @phiBaoHiemTrachNhiemDanSu = phiBaoHiemTrachNhiemDanSu, 
+			@phiSuDungDuongBo = phiSuDungDuongBo
+	from
+	(select KH.maKhachHang, maXe
+	from KHACHHANG KH
+	inner join HOADON HD on KH.maKhachHang = HD.maKhachHang
+	inner join CHITIETHOADONXE CTHDX on HD.maHoaDon = CTHDX.maHoaDon) Q 
+	-- lấy ra mã khách hàng và mã xe
+	inner join 
+		(select maXe, giaBan
+		from XE inner join LOXE
+		on XE.maLoXe = LOXE.maLoXe) P -- lấy ra mã xe và giá bán
+		on Q.maXe = P.maXe
+	inner join
+		(select maXe, phiDangKyBienSo, phiDangKiem, phiTruocBa, 
+				phiBaoHiemTrachNhiemDanSu, phiSuDungDuongBo 
+		from CHITIETHOADONXE) K -- lấy ra mã xe và các loại phí của xe
+		on P.maXe = K.maXe
+	where maKhachHang = @maKhachHang and Q.maXe = @maXe
+
+	set @TongTien = @giaBan + @phiDangKyBienSo + @phiDangKiem + @phiTruocBa 
+	+ @phiBaoHiemTrachNhiemDanSu + @phiSuDungDuongBo
+	return @TongTien
 end
 go
 
-CREATE or ALTER TRIGGER tg_ThayDoiTrangThaiHoaDon on CHITIETHOADONXE 
-for update, insert as
-BEGIN
-	DECLARE @soTienDaTra money, @maHoaDon nvarchar(20), @tongTien money
-	SELECT @soTienDaTra = ins.soTienDaTra, @maHoaDon = ins.maHoaDon FROM inserted as ins
-	SElECT @tongTien = hd.tongTien FROM HOADON as hd WHERE hd.maHoaDon = @maHoaDon
-	IF @tongTien <= @soTienDaTra
-	BEGIN 
-		UPDATE HOADON 
-		SET tinhTrang = N'Đã Thanh Toán'
-		WHERE maHoaDon = @maHoaDon
-	END
-END
-
-select * from HOADON
-select * from CHITIETHOADONXE
-
---Trigger Kiểm tra chi nhánh không quá 2 người quản lý
-CREATE or ALTER TRIGGER tg_MotQuanLy on NHANVIEN
-AFTER UPDATE, INSERT as
-BEGIN 
-	DECLARE @maChiNhanh nvarchar(20), @chucVu nvarchar(50), @count int, @maNhanVien nvarchar(20)
-	SELECT @maChiNhanh = ins.maChiNhanh, @chucVu = ins.chucVu, @maNhanVien = ins.maNhanVien, @count = nv.soluong FROM inserted as ins, (SELECT nv.maChiNhanh, count(nv.maNhanVien) as soluong
-																						FROM NHANVIEN as nv 
-																						WHERE nv.chucVu = N'Quản lý' 
-																						GROUP BY nv.maChiNhanh) as nv
-																WHERE ins.maChiNhanh = nv.maChiNhanh
-	IF @chucVu = N'Quản lý' and @count > 1
-	BEGIN
-		PRINT N'Không thể thêm quản lý'
-		UPDATE NHANVIEN
-		SET chucVu = null
-		WHERE maNhanVien = @maNhanVien
-	END
-END
-
-select * from NHANVIEN
-
--- Trigger khi nhập lô xe sẽ tự tạo maXe tương ứng
-CREATE or ALTER TRIGGER tg_TaoMaXe on CHITIETPHIEUNHAPXE
-AFTER INSERT as
-BEGIN
-	DECLARE @maLoXe nvarchar(20), @soLuong int, @maChiNhanh nvarchar(20)
-	SELECT @maLoXe = ins.maLoXe, @soLuong = ins.soLuong, @maChiNhanh = pn.maChiNhanh FROM inserted as ins, PHIEUNHAP as pn
-	WHERE pn.maPhieuNhap = ins.maPhieuNhap
-	WHILE @soLuong > 0
-	BEGIN
-		DECLARE @maXe nvarchar(20)
-		SET @maXe = CONCAT(@maLoXe,'_', @maChiNhanh, REPLICATE('0', 4-LEN(@soLuong)),str(@soLuong, LEN(@soLuong))) 
-		INSERT INTO XE(maXe, maLoXe)
-		Values (@maXe, @maLoXe)
-		SET @soLuong = @soLuong - 1
-	END
-END
-
--- Test
-begin tran
-	INSERT INTO CHITIETPHIEUNHAPXE (maChiTietPhieuNhapXe, maLoXe, maPhieuNhap, giaNhap, soLuong)
-	VALUES ('CTX006', 'LOXE001', 'PN001', 1200000, 10)
-	Select * from XE
-rollback
+select dbo.fn_TongSoTienCanThanhToan('KH001', 'LOXE001_XE001') as N'Tổng tiền'
 go
+
+
+
 

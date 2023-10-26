@@ -25,7 +25,7 @@ create table NHANVIEN(
 	chucVu nvarchar(50),
 	tinhTrangLamViec bit default 1,
 	maChiNhanh nvarchar(20),
-	hinhAnh nvarchar(200) default null,
+	hinhAnh image
 	foreign key (maChiNhanh) references CHINHANH(maChiNhanh)
 )
 go
@@ -56,38 +56,28 @@ create table LOXE(
 	maLoXe nvarchar(20) primary key,
 	tenXe nvarchar(50), 
 	mauSac nvarchar(20), 
-	giaBan money check (giaBan > 0), 
-	soChoNgoi integer check (soChoNgoi >= 2) default 4, 
+	giaBan float check (giaBan > 0), 
+	soChoNgoi int check (soChoNgoi >= 2) default 4, 
 	xuatXu nvarchar(50), 
 	hangXe nvarchar(50), 
 	loaiXe nvarchar(50), 
 	phienBanXe nvarchar(50),
-	tocDoToiDa integer check (tocDoToiDa > 0), 
-	trongLuong integer check (trongLuong > 0),
-	trongTai integer check (trongTai > 0),
-	canhBaoPhuongTien nvarchar(50), 
-	canhBaoDiemMu nvarchar(50), 
-	tuiKhi nvarchar(50), 
-	mocGheAnToan nvarchar(50), 
-	camBienLui nvarchar(50), 
-	cameraLui nvarchar(50), 
-	phanhSau nvarchar(50), 
-	phanhTruoc nvarchar(50), 
-	boTruyenLuc nvarchar(50), 
-	boDieuKhien nvarchar(50), 
+	tocDoToiDa int check (tocDoToiDa > 0), 
+	trongLuong int check (trongLuong > 0),
+	trongTai int check (trongTai > 0),
 	loaiNhienLieu nvarchar(50), 
-	congSuatDongCo integer check (congSuatDongCo > 0), 
-	dungTichDongCo integer check (dungTichDongCo > 0), 
+	congSuatDongCo int check (congSuatDongCo > 0), 
+	dungTichDongCo int check (dungTichDongCo >= 0), 
 	loaiDongCo nvarchar(50), 
-	momenXoan integer check (momenXoan > 0), 
-	khoanSangGam integer check (khoanSangGam > 0), 
-	chieuDaiCoSo integer check (chieuDaiCoSo > 0), 
-	chieuDai integer check (chieuDai > 0), 
-	chieuRong integer check (chieuRong > 0), 
-	chieuCao integer check (chieuCao > 0), 
-	banKinhQuayVong integer check (banKinhQuayVong > 0),
-	hinhAnh nvarchar(200)
+	khoangSangGam int check (khoangSangGam > 0), 
+	chieuDaiCoSo int check (chieuDaiCoSo > 0), 
+	chieuDai int check (chieuDai > 0), 
+	chieuRong int check (chieuRong > 0), 
+	chieuCao int check (chieuCao > 0), 
+	banKinhQuayVong int check (banKinhQuayVong >= 0),
+	hinhAnh image
 )
+go
 
 -- Tạo bảng XE
 CREATE TABLE XE(
@@ -104,9 +94,9 @@ CREATE TABLE PHUTUNG(
 	tenPhuTung nvarchar(50), 
 	thuongHieu nvarchar(50),
 	xuatXu nvarchar(50), 
-	giaBan money check (giaBan > 0), 
+	giaBan float check (giaBan > 0), 
 	chatLuong nvarchar(50),
-	hinhAnh nvarchar(200)
+	hinhAnh image
 )
 go
 
@@ -126,9 +116,9 @@ create table CHITIETPHIEUNHAPXE(
 	maChiTietPhieuNhapXe nvarchar(20) primary key,
 	maLoXe nvarchar(20),
 	maPhieuNhap nvarchar(20),
-	giaNhap money check (giaNhap > 0),
-	soLuong integer check(soLuong > 0),
-	foreign key (maLoXe) references LoXE(maLoXe),
+	giaNhap float check (giaNhap > 0),
+	soLuong int check(soLuong > 0),
+	foreign key (maLoXe) references LOXE(maLoXe),
 	foreign key (maPhieuNhap) references PHIEUNHAP(maPhieuNhap)
 )
 go
@@ -138,8 +128,8 @@ create table CHITIETPHIEUNHAPPHUTUNG(
 	maChiTietPhieuNhapPhuTung nvarchar(20) primary key,
 	maPhuTung nvarchar(20),
 	maPhieuNhap nvarchar(20),
-	giaNhap money check (giaNhap > 0),
-	soLuong integer check(soLuong > 0),
+	giaNhap float check (giaNhap > 0),
+	soLuong int check(soLuong > 0),
 	foreign key (maPhuTung) references PHUTUNG(maPhuTung),
 	foreign key (maPhieuNhap) references PHIEUNHAP(maPhieuNhap)
 )
@@ -160,8 +150,8 @@ go
 -- Tạo bảng hóa đơn
 create table HOADON(
 	maHoaDon nvarchar(20) primary key,
-	ngayLapHoaDon nvarchar(50) default GETDATE(),
-	tongTien money check (tongTien > 0),
+	ngayLapHoaDon date default GETDATE(),
+	tongTien float check (tongTien > 0),
 	tinhTrang nvarchar(50) Check (tinhTrang = N'Chưa thanh toán' or tinhTrang = N'Đã thanh toán') default N'Chưa thanh toán',
 	maKhachHang nvarchar(20), 
 	maNhanVienThucHien nvarchar(20)
@@ -175,13 +165,13 @@ create table CHITIETHOADONXE(
 	maChiTietHoaDonXe nvarchar(20) primary key,
 	maHoaDon nvarchar(20), 
 	maXe nvarchar(20),
-	ngayNhanXe nvarchar(50),
-	soTienDaTra money check (soTienDaTra >= 0),
-	phiDangKyBienSo money check (phiDangKyBienSo >= 0),
-	phiDangKiem money check (phiDangKiem >= 0),
-	phiTruocBa money check (phiTruocBa >= 0),
-	phiBaoHiemTrachNhiemDanSu money check (phiBaoHiemTrachNhiemDanSu >= 0),
-	phiSuDungDuongBo money check (phiSuDungDuongBo >= 0),
+	ngayNhanXe date,
+	soTienDaTra float check (soTienDaTra >= 0),
+	phiDangKyBienSo float check (phiDangKyBienSo >= 0),
+	phiDangKiem float check (phiDangKiem >= 0),
+	phiTruocBa float check (phiTruocBa >= 0),
+	phiBaoHiemTrachNhiemDanSu float check (phiBaoHiemTrachNhiemDanSu >= 0),
+	phiSuDungDuongBo float check (phiSuDungDuongBo >= 0),
 	foreign key (maHoaDon) references HOADON(maHoaDon),
 	foreign key (maXe) references XE(maXe)
 )
@@ -190,9 +180,9 @@ go
 --Tạo bảng CHI TIẾT HÓA ĐƠN PHỤ TÙNG
 create table CHITIETHOADONPHUTUNG(
 	maChiTietHoaDonPhuTung nvarchar(20) primary key,
-	soTienDaTra money check (soTienDaTra >= 0),
 	maHoaDon nvarchar(20), 
 	maPhuTung nvarchar(20),
+	soTienDaTra float check (soTienDaTra >= 0),
 	foreign key (maHoaDon) references HOADON(maHoaDon),
 	foreign key (maPhuTung) references PHUTUNG(maPhuTung)
 )
@@ -229,7 +219,7 @@ CREATE TABLE DICHVUBAODUONG(
 	maBaoDuong nvarchar(20) primary key, 
 	tenBaoDuong nvarchar(50) not null, 
 	loaiBaoDuong nvarchar(50) not null,
-	phiBaoDuong money check (phiBaoDuong >= 0),
+	phiBaoDuong float check (phiBaoDuong >= 0),
 )
 go
 
@@ -237,7 +227,7 @@ go
 CREATE TABLE PHIEUBAODUONG(
 	maPhieuBaoDuong nvarchar(20) primary key, 
 	ngayLapPhieu date default GetDate(), 
-	tongTien money check (tongTien >= 0),
+	tongTien float check (tongTien >= 0),
 	maKhachHang nvarchar(20), 
 	maNhanVienThucHien nvarchar(20), 
 	foreign key (maKhachHang) references KHACHHANG(maKhachHang),
@@ -250,11 +240,35 @@ create table CHITIETPHIEUBAODUONG(
 	maChiTietPhieuBaoDuong nvarchar(20) primary key,
 	maBaoDuong nvarchar(20),
 	maPhieuBaoDuong nvarchar(20),
-	thanhTien money check (thanhTien >= 0),
+	thanhTien float check (thanhTien >= 0),
 	foreign key (maBaoDuong) references DICHVUBAODUONG(maBaoDuong),
 	foreign key (maPhieuBaoDuong) references PHIEUBAODUONG(maPhieuBaoDuong)
 )
 go
+
+----
+create table KHOXE
+(
+	maKhoXe nvarchar(20) primary key,
+	maChiNhanh nvarchar(20),
+	maLoXe nvarchar(20),
+	soLuongXeCon int default 0,
+	soLuongXeDaBan int default 0,
+	foreign key (maChiNhanh) references CHINHANH(maChiNhanh),
+	foreign key (maLoXe) references LOXE(maLoXe)
+)
+go
+
+create table KHOPHUTUNG
+(
+	maKhoPhuTung nvarchar(20) primary key,
+	maChiNhanh nvarchar(20),
+	maPhuTung nvarchar(20),
+	soLuongPhuTungCon int default 0,
+	soLuongPhuTungDaBan int default 0
+	foreign key (maChiNhanh) references CHINHANH(maChiNhanh),
+	foreign key (maPhuTung) references PHUTUNG(maPhuTung)
+)
 
 
 
