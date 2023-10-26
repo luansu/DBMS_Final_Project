@@ -37,10 +37,23 @@ namespace DBMS_CodeDoAn.DAO
             return listKhachHang;
         }
 
-        public bool ThemKhachHang(string hoTenKH, DateTime ngaySinh, string gioiTinh, string CCCD, string diaChi, string soDienThoai)
+        public bool ThemKhachHang(string hoTenKH, string ngaySinh, string gioiTinh, string CCCD, string diaChi, string soDienThoai)
         {
-            string query = string.Format("insert into KHACHHANG(hoTenKhachHang, ngaySinh, diaChi, gioiTinh, CCCD, soDienThoai) values (N'{0}', '{1}', N'{2}', '{3}', N'{4}', '{5}')", 
-                hoTenKH, ngaySinh, gioiTinh, CCCD, diaChi, soDienThoai);
+            string query = string.Format("insert into KHACHHANG(hoTenKhachHang, ngaySinh, gioiTinh, CCCD, diaChi, soDienThoai) values (N'{0}', '{1}', N'{2}', '{3}', N'{4}', '{5}')", 
+                hoTenKH, ngaySinh.ToString().Substring(0, 10), gioiTinh, CCCD, diaChi, soDienThoai);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
+        public bool CapNhatKhachHang(string maKhachHang, string hoTenKH, string ngaySinh, string gioiTinh, string CCCD, string diaChi, string soDienThoai)
+        {
+            string query = string.Format("Update KHACHHANG set hoTenKhachHang = N'{0}', ngaySinh = '{1}', gioiTinh = N'{2}', CCCD = '{3}', diaChi = N'{4}', soDienThoai = '{5}' where maKhachHang = '{6}'",
+                hoTenKH, ngaySinh.ToString().Substring(0, 10), gioiTinh, CCCD, diaChi, soDienThoai, maKhachHang);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
+        public bool XoaKhachHang(string maKhachHang)
+        {
+            string query = string.Format("delete KHACHHANG where maKhachHang = '{0}'", maKhachHang);
             int result = DataProvider.Instance.ExcuteNonQuery(query);
             return result > 0;
         }

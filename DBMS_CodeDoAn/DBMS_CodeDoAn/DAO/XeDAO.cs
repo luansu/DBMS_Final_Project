@@ -53,6 +53,23 @@ namespace DBMS_CodeDoAn.DAO
             return listMaXe;
         }
 
+        public List<string> DanhSachMaLoXe()
+        {
+            List<string> listMaLoXe = new List<string>();
+
+            string query = "select maLoXe from LOXE";
+
+            DataTable data = DataProvider.Instance.ExcuteQuery(query);
+
+            foreach (DataRow row in data.Rows)
+            {
+                string maLoXe = row["maLoXe"].ToString();
+                listMaLoXe.Add(maLoXe);
+            }
+
+            return listMaLoXe;
+        }
+
         public List<Xe> DanhSachXeTheoLo(string maLoXe)
         {
             List<Xe> listXe = new List<Xe>();

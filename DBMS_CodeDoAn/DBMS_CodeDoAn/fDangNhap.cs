@@ -40,7 +40,7 @@ namespace DBMS_CodeDoAn
             {
                 this.Hide();
 
-                fTrangChu f = new fTrangChu();
+                fHome f = new fHome();
                 f.ShowDialog();
 
                 this.Show();

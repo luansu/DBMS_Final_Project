@@ -36,5 +36,25 @@ namespace DBMS_CodeDoAn.DAO
 
             return listNhaCungCap;
         }
+
+        public bool ThemNhaCungCap(string maNhaCungCap, string tenNhaCungCap, string diaChi, string soDienThoai)
+        {
+            string query = string.Format("insert into NHACUNGCAP(maNhaCungCap, tenNhaCungCap, diaChi, soDienThoai) values('{0}', N'{1}', N'{2}', N'{3}')", maNhaCungCap, tenNhaCungCap, diaChi, soDienThoai);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
+
+        public bool CapNhatNhaCungCap(string maNhaCungCap, string tenNhaCungCap, string diaChi, string soDienThoai)
+        {
+            string query = string.Format("Update NHACUNGCAP set tenNhaCungCap = N'{0}', diaChi = N'{1}', soDienThoai = N'{2}' where maNhaCungCap = '{3}'", tenNhaCungCap, diaChi, soDienThoai, maNhaCungCap);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
+
+        public bool XoaNhaCungCap(string maNhaCungCap)
+        {
+            string query = string.Format("delete NHACUNGCAP where maNhaCungCap = '{0}'", maNhaCungCap);
+            return DataProvider.Instance.ExcuteNonQuery(query) > 0;
+        }
     }
 }

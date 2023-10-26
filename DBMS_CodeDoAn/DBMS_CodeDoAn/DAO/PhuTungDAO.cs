@@ -36,5 +36,12 @@ namespace DBMS_CodeDoAn.DAO
 
             return listPhuTung;
         }
+
+        public bool ThemPhuTung(string loaiPhuTung, string tenPhuTung, string thuongHieu, string xuatXu, float giaBan, string chatLuong, byte[] hinhAnh)
+        {
+            string query = string.Format("insert into PHUTUNG(loaiPhuTung, tenPhuTung, thuongHieu, xuatXu, giaBan, chatLuong, hinhAnh) values ('{0}', '{1}', '{2}', '{3}', {4}, '{5}', '{6}')", loaiPhuTung, tenPhuTung, thuongHieu, xuatXu, giaBan, chatLuong, hinhAnh);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
     }
 }

@@ -29,8 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fQuanLyPhuTung));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnChooseFile = new System.Windows.Forms.Button();
+            this.grbPhuTung = new System.Windows.Forms.GroupBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
@@ -41,7 +40,7 @@
             this.btnLast = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnFirst = new System.Windows.Forms.Button();
-            this.image_employee = new System.Windows.Forms.PictureBox();
+            this.picPhuTung = new System.Windows.Forms.PictureBox();
             this.status = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtChatLuong = new System.Windows.Forms.TextBox();
@@ -61,68 +60,52 @@
             this.dgvThongTinPhuTung = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label24 = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.image_employee)).BeginInit();
+            this.btnChooseFile = new System.Windows.Forms.Button();
+            this.grbPhuTung.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picPhuTung)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinPhuTung)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // grbPhuTung
             // 
-            this.groupBox1.Controls.Add(this.btnChooseFile);
-            this.groupBox1.Controls.Add(this.btnSave);
-            this.groupBox1.Controls.Add(this.btnDelete);
-            this.groupBox1.Controls.Add(this.btnEdit);
-            this.groupBox1.Controls.Add(this.btnAdd);
-            this.groupBox1.Controls.Add(this.btnReset);
-            this.groupBox1.Controls.Add(this.btnPrevious);
-            this.groupBox1.Controls.Add(this.btnCancel);
-            this.groupBox1.Controls.Add(this.btnLast);
-            this.groupBox1.Controls.Add(this.btnNext);
-            this.groupBox1.Controls.Add(this.btnFirst);
-            this.groupBox1.Controls.Add(this.image_employee);
-            this.groupBox1.Controls.Add(this.status);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.txtChatLuong);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.txtXuatXu);
-            this.groupBox1.Controls.Add(this.txtGiaBan);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.txtThuongHieu);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.txtTenPhuTung);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txtMaPhuTung);
-            this.groupBox1.Controls.Add(this.txtLoaiPhuTung);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.groupBox1.Location = new System.Drawing.Point(13, 100);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Size = new System.Drawing.Size(1339, 574);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            // 
-            // btnChooseFile
-            // 
-            this.btnChooseFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(102)))), ((int)(((byte)(85)))));
-            this.btnChooseFile.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChooseFile.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnChooseFile.Image = ((System.Drawing.Image)(resources.GetObject("btnChooseFile.Image")));
-            this.btnChooseFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnChooseFile.Location = new System.Drawing.Point(564, 306);
-            this.btnChooseFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnChooseFile.Name = "btnChooseFile";
-            this.btnChooseFile.Padding = new System.Windows.Forms.Padding(82, 0, 0, 0);
-            this.btnChooseFile.Size = new System.Drawing.Size(319, 75);
-            this.btnChooseFile.TabIndex = 55;
-            this.btnChooseFile.Text = "         CHỌN ẢNH";
-            this.btnChooseFile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnChooseFile.UseVisualStyleBackColor = false;
+            this.grbPhuTung.Controls.Add(this.btnChooseFile);
+            this.grbPhuTung.Controls.Add(this.btnSave);
+            this.grbPhuTung.Controls.Add(this.btnDelete);
+            this.grbPhuTung.Controls.Add(this.btnEdit);
+            this.grbPhuTung.Controls.Add(this.btnAdd);
+            this.grbPhuTung.Controls.Add(this.btnReset);
+            this.grbPhuTung.Controls.Add(this.btnPrevious);
+            this.grbPhuTung.Controls.Add(this.btnCancel);
+            this.grbPhuTung.Controls.Add(this.btnLast);
+            this.grbPhuTung.Controls.Add(this.btnNext);
+            this.grbPhuTung.Controls.Add(this.btnFirst);
+            this.grbPhuTung.Controls.Add(this.picPhuTung);
+            this.grbPhuTung.Controls.Add(this.status);
+            this.grbPhuTung.Controls.Add(this.label6);
+            this.grbPhuTung.Controls.Add(this.txtChatLuong);
+            this.grbPhuTung.Controls.Add(this.label10);
+            this.grbPhuTung.Controls.Add(this.txtXuatXu);
+            this.grbPhuTung.Controls.Add(this.txtGiaBan);
+            this.grbPhuTung.Controls.Add(this.label4);
+            this.grbPhuTung.Controls.Add(this.txtThuongHieu);
+            this.grbPhuTung.Controls.Add(this.label7);
+            this.grbPhuTung.Controls.Add(this.label5);
+            this.grbPhuTung.Controls.Add(this.txtTenPhuTung);
+            this.grbPhuTung.Controls.Add(this.label3);
+            this.grbPhuTung.Controls.Add(this.label1);
+            this.grbPhuTung.Controls.Add(this.txtMaPhuTung);
+            this.grbPhuTung.Controls.Add(this.txtLoaiPhuTung);
+            this.grbPhuTung.Controls.Add(this.label2);
+            this.grbPhuTung.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.grbPhuTung.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.grbPhuTung.Location = new System.Drawing.Point(13, 100);
+            this.grbPhuTung.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.grbPhuTung.Name = "grbPhuTung";
+            this.grbPhuTung.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.grbPhuTung.Size = new System.Drawing.Size(1339, 574);
+            this.grbPhuTung.TabIndex = 2;
+            this.grbPhuTung.TabStop = false;
             // 
             // btnSave
             // 
@@ -139,6 +122,7 @@
             this.btnSave.Text = "          Lưu Lại";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnDelete
             // 
@@ -156,6 +140,7 @@
             this.btnDelete.Text = "         Xóa";
             this.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -171,6 +156,7 @@
             this.btnEdit.Text = "        Sửa Thông Tin";
             this.btnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
@@ -187,6 +173,7 @@
             this.btnAdd.Text = "         Thêm Mới";
             this.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnReset
             // 
@@ -203,6 +190,7 @@
             this.btnReset.Text = "         Nhập Lại";
             this.btnReset.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // btnPrevious
             // 
@@ -232,6 +220,7 @@
             this.btnCancel.Text = "         Hủy";
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnLast
             // 
@@ -273,16 +262,16 @@
             this.btnFirst.TabIndex = 37;
             this.btnFirst.UseVisualStyleBackColor = false;
             // 
-            // image_employee
+            // picPhuTung
             // 
-            this.image_employee.Image = ((System.Drawing.Image)(resources.GetObject("image_employee.Image")));
-            this.image_employee.Location = new System.Drawing.Point(564, 29);
-            this.image_employee.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.image_employee.Name = "image_employee";
-            this.image_employee.Size = new System.Drawing.Size(224, 240);
-            this.image_employee.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.image_employee.TabIndex = 33;
-            this.image_employee.TabStop = false;
+            this.picPhuTung.Image = ((System.Drawing.Image)(resources.GetObject("picPhuTung.Image")));
+            this.picPhuTung.Location = new System.Drawing.Point(564, 29);
+            this.picPhuTung.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.picPhuTung.Name = "picPhuTung";
+            this.picPhuTung.Size = new System.Drawing.Size(224, 240);
+            this.picPhuTung.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picPhuTung.TabIndex = 33;
+            this.picPhuTung.TabStop = false;
             // 
             // status
             // 
@@ -492,6 +481,24 @@
             this.label24.TabIndex = 0;
             this.label24.Text = "QUẢN LÝ PHỤ TÙNG";
             // 
+            // btnChooseFile
+            // 
+            this.btnChooseFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(102)))), ((int)(((byte)(85)))));
+            this.btnChooseFile.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChooseFile.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnChooseFile.Image = ((System.Drawing.Image)(resources.GetObject("btnChooseFile.Image")));
+            this.btnChooseFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnChooseFile.Location = new System.Drawing.Point(564, 300);
+            this.btnChooseFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnChooseFile.Name = "btnChooseFile";
+            this.btnChooseFile.Padding = new System.Windows.Forms.Padding(82, 0, 0, 0);
+            this.btnChooseFile.Size = new System.Drawing.Size(337, 65);
+            this.btnChooseFile.TabIndex = 55;
+            this.btnChooseFile.Text = "         CHỌN ẢNH";
+            this.btnChooseFile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnChooseFile.UseVisualStyleBackColor = false;
+            this.btnChooseFile.Click += new System.EventHandler(this.btnChooseFile_Click);
+            // 
             // fQuanLyPhuTung
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -500,13 +507,14 @@
             this.ClientSize = new System.Drawing.Size(1365, 861);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dgvThongTinPhuTung);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.grbPhuTung);
             this.Name = "fQuanLyPhuTung";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "fQuanLyPhuTung";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.image_employee)).EndInit();
+            this.Load += new System.EventHandler(this.fQuanLyPhuTung_Load);
+            this.grbPhuTung.ResumeLayout(false);
+            this.grbPhuTung.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picPhuTung)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinPhuTung)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -516,7 +524,7 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grbPhuTung;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
@@ -527,7 +535,7 @@
         private System.Windows.Forms.Button btnLast;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnFirst;
-        private System.Windows.Forms.PictureBox image_employee;
+        private System.Windows.Forms.PictureBox picPhuTung;
         private System.Windows.Forms.CheckBox status;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtChatLuong;

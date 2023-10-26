@@ -36,5 +36,25 @@ namespace DBMS_CodeDoAn.DAO
             return listPhieuNhap;
         }
 
+        public bool ThemPhieuNhap(string ngayNhap, string maChiNhanh, string maNhaCungCap)
+        {
+            string query = string.Format("insert into PHIEUNHAP(ngayNhap, maChiNhanh, maNhaCungCap) values('{0}', '{1}', '{2}')", ngayNhap.Substring(0, 10), maChiNhanh, maNhaCungCap);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
+
+        public bool CapNhatPhieuNhap(string maPhieuNhap, string ngayNhap, string maChiNhanh, string maNhaCungCap)
+        {
+            string query = string.Format("update PHIEUNHAP set ngayNhap = '{0}', maChiNhanh = '{1}', maNhaCungCap = '{2}' where maPhieuNhap = '{3}'", ngayNhap.Substring(0, 10), maChiNhanh, maNhaCungCap, maPhieuNhap);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
+
+        public bool XoaPhieuNhap(string maPhieuNhap)
+        {
+            string query = string.Format("delete PHIEUNHAP where maPhieuNhap = '{0}'", maPhieuNhap);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
     }
 }

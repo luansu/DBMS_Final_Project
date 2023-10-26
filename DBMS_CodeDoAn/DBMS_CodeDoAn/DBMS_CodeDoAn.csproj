@@ -98,6 +98,12 @@
     <Compile Include="fDangNhap.Designer.cs">
       <DependentUpon>fDangNhap.cs</DependentUpon>
     </Compile>
+    <Compile Include="fHome.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fHome.Designer.cs">
+      <DependentUpon>fHome.cs</DependentUpon>
+    </Compile>
     <Compile Include="fQuanLyBaoDuong.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,16 +194,13 @@
     <Compile Include="fQuanLyPhuTung.Designer.cs">
       <DependentUpon>fQuanLyPhuTung.cs</DependentUpon>
     </Compile>
-    <Compile Include="fTrangChu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="fTrangChu.Designer.cs">
-      <DependentUpon>fTrangChu.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="fDangNhap.resx">
       <DependentUpon>fDangNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fHome.resx">
+      <DependentUpon>fHome.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fQuanLyBaoDuong.resx">
       <DependentUpon>fQuanLyBaoDuong.cs</DependentUpon>
@@ -243,9 +246,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fQuanLyPhuTung.resx">
       <DependentUpon>fQuanLyPhuTung.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="fTrangChu.resx">
-      <DependentUpon>fTrangChu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

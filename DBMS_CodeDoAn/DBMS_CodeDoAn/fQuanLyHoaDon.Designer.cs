@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fQuanLyHoaDon));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grbChiTietHoaDon = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.dtpNgayLapHoaDon = new System.Windows.Forms.DateTimePicker();
@@ -55,54 +55,54 @@
             this.txtMaHoaDon = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtMaKhachHang = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label24 = new System.Windows.Forms.Label();
             this.dgvThongTinHoaDon = new System.Windows.Forms.DataGridView();
-            this.groupBox1.SuspendLayout();
+            this.cbbMaKhachHang = new System.Windows.Forms.ComboBox();
+            this.grbChiTietHoaDon.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinHoaDon)).BeginInit();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // grbChiTietHoaDon
             // 
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.dtpNgayLapHoaDon);
-            this.groupBox1.Controls.Add(this.cbbMaNhanVien);
-            this.groupBox1.Controls.Add(this.btnSave);
-            this.groupBox1.Controls.Add(this.btnDelete);
-            this.groupBox1.Controls.Add(this.btnChiTietHoaDonPhuTung);
-            this.groupBox1.Controls.Add(this.btnChiTietHoaDoaXe);
-            this.groupBox1.Controls.Add(this.btnEdit);
-            this.groupBox1.Controls.Add(this.btnAdd);
-            this.groupBox1.Controls.Add(this.btnReset);
-            this.groupBox1.Controls.Add(this.btnPrevious);
-            this.groupBox1.Controls.Add(this.btnCancel);
-            this.groupBox1.Controls.Add(this.btnLast);
-            this.groupBox1.Controls.Add(this.btnNext);
-            this.groupBox1.Controls.Add(this.btnFirst);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.txtTinhTrang);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.txtTongTien);
-            this.groupBox1.Controls.Add(this.txtMaHoaDon);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txtMaKhachHang);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.groupBox1.Location = new System.Drawing.Point(13, 94);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Size = new System.Drawing.Size(1166, 522);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
+            this.grbChiTietHoaDon.Controls.Add(this.label4);
+            this.grbChiTietHoaDon.Controls.Add(this.label12);
+            this.grbChiTietHoaDon.Controls.Add(this.dtpNgayLapHoaDon);
+            this.grbChiTietHoaDon.Controls.Add(this.cbbMaKhachHang);
+            this.grbChiTietHoaDon.Controls.Add(this.cbbMaNhanVien);
+            this.grbChiTietHoaDon.Controls.Add(this.btnSave);
+            this.grbChiTietHoaDon.Controls.Add(this.btnDelete);
+            this.grbChiTietHoaDon.Controls.Add(this.btnChiTietHoaDonPhuTung);
+            this.grbChiTietHoaDon.Controls.Add(this.btnChiTietHoaDoaXe);
+            this.grbChiTietHoaDon.Controls.Add(this.btnEdit);
+            this.grbChiTietHoaDon.Controls.Add(this.btnAdd);
+            this.grbChiTietHoaDon.Controls.Add(this.btnReset);
+            this.grbChiTietHoaDon.Controls.Add(this.btnPrevious);
+            this.grbChiTietHoaDon.Controls.Add(this.btnCancel);
+            this.grbChiTietHoaDon.Controls.Add(this.btnLast);
+            this.grbChiTietHoaDon.Controls.Add(this.btnNext);
+            this.grbChiTietHoaDon.Controls.Add(this.btnFirst);
+            this.grbChiTietHoaDon.Controls.Add(this.label11);
+            this.grbChiTietHoaDon.Controls.Add(this.label6);
+            this.grbChiTietHoaDon.Controls.Add(this.label8);
+            this.grbChiTietHoaDon.Controls.Add(this.txtTinhTrang);
+            this.grbChiTietHoaDon.Controls.Add(this.label5);
+            this.grbChiTietHoaDon.Controls.Add(this.txtTongTien);
+            this.grbChiTietHoaDon.Controls.Add(this.txtMaHoaDon);
+            this.grbChiTietHoaDon.Controls.Add(this.label3);
+            this.grbChiTietHoaDon.Controls.Add(this.label1);
+            this.grbChiTietHoaDon.Controls.Add(this.label2);
+            this.grbChiTietHoaDon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.grbChiTietHoaDon.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.grbChiTietHoaDon.Location = new System.Drawing.Point(13, 94);
+            this.grbChiTietHoaDon.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.grbChiTietHoaDon.Name = "grbChiTietHoaDon";
+            this.grbChiTietHoaDon.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.grbChiTietHoaDon.Size = new System.Drawing.Size(1166, 522);
+            this.grbChiTietHoaDon.TabIndex = 2;
+            this.grbChiTietHoaDon.TabStop = false;
             // 
             // label4
             // 
@@ -160,6 +160,7 @@
             this.btnSave.Text = "          Lưu Lại";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnDelete
             // 
@@ -177,6 +178,7 @@
             this.btnDelete.Text = "         Xóa";
             this.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnChiTietHoaDonPhuTung
             // 
@@ -226,6 +228,7 @@
             this.btnEdit.Text = "        Sửa Thông Tin";
             this.btnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
@@ -242,6 +245,7 @@
             this.btnAdd.Text = "         Thêm Mới";
             this.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnReset
             // 
@@ -258,6 +262,7 @@
             this.btnReset.Text = "         Nhập Lại";
             this.btnReset.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // btnPrevious
             // 
@@ -287,6 +292,7 @@
             this.btnCancel.Text = "         Hủy";
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnLast
             // 
@@ -430,16 +436,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Tổng Tiền:";
             // 
-            // txtMaKhachHang
-            // 
-            this.txtMaKhachHang.BackColor = System.Drawing.Color.White;
-            this.txtMaKhachHang.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMaKhachHang.Location = new System.Drawing.Point(180, 233);
-            this.txtMaKhachHang.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtMaKhachHang.Name = "txtMaKhachHang";
-            this.txtMaKhachHang.Size = new System.Drawing.Size(415, 39);
-            this.txtMaKhachHang.TabIndex = 1;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -481,6 +477,15 @@
             this.dgvThongTinHoaDon.Size = new System.Drawing.Size(1166, 223);
             this.dgvThongTinHoaDon.TabIndex = 50;
             // 
+            // cbbMaKhachHang
+            // 
+            this.cbbMaKhachHang.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbMaKhachHang.FormattingEnabled = true;
+            this.cbbMaKhachHang.Location = new System.Drawing.Point(180, 234);
+            this.cbbMaKhachHang.Name = "cbbMaKhachHang";
+            this.cbbMaKhachHang.Size = new System.Drawing.Size(415, 40);
+            this.cbbMaKhachHang.TabIndex = 57;
+            // 
             // fQuanLyHoaDon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -489,12 +494,13 @@
             this.ClientSize = new System.Drawing.Size(1192, 859);
             this.Controls.Add(this.dgvThongTinHoaDon);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.grbChiTietHoaDon);
             this.Name = "fQuanLyHoaDon";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "fQuanLyHoaDon";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.Load += new System.EventHandler(this.fQuanLyHoaDon_Load);
+            this.grbChiTietHoaDon.ResumeLayout(false);
+            this.grbChiTietHoaDon.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinHoaDon)).EndInit();
@@ -504,7 +510,7 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grbChiTietHoaDon;
         private System.Windows.Forms.DateTimePicker dtpNgayLapHoaDon;
         private System.Windows.Forms.ComboBox cbbMaNhanVien;
         private System.Windows.Forms.Button btnSave;
@@ -526,7 +532,6 @@
         private System.Windows.Forms.TextBox txtMaHoaDon;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtMaKhachHang;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label24;
@@ -535,5 +540,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnChiTietHoaDoaXe;
         private System.Windows.Forms.Button btnChiTietHoaDonPhuTung;
+        private System.Windows.Forms.ComboBox cbbMaKhachHang;
     }
 }

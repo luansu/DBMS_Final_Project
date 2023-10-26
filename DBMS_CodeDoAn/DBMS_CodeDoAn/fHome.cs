@@ -10,29 +10,14 @@ using System.Windows.Forms;
 
 namespace DBMS_CodeDoAn
 {
-    public partial class fTrangChu : Form
+    public partial class fHome : Form
     {
-        public fTrangChu()
+        public fHome()
         {
             InitializeComponent();
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btnQuanLyNhanVien_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-
-            fQuanLyNhanVien f = new fQuanLyNhanVien();
-            f.ShowDialog();
-
-            this.Show();
-        }
-
-        private void btnQuanLyOTo_Click(object sender, EventArgs e)
+        private void quảnLýXeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
 
@@ -42,7 +27,7 @@ namespace DBMS_CodeDoAn
             this.Show();
         }
 
-        private void btnQuanLyPhuTung_Click(object sender, EventArgs e)
+        private void quảnLýPhụTùngToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
 
@@ -52,7 +37,17 @@ namespace DBMS_CodeDoAn
             this.Show();
         }
 
-        private void btnQuanLyKhachHang_Click(object sender, EventArgs e)
+        private void quảnLýNhânViênToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            fQuanLyNhanVien f = new fQuanLyNhanVien();
+            f.ShowDialog();
+
+            this.Show();
+        }
+
+        private void quảnLýKháchHàngToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
 
@@ -62,7 +57,7 @@ namespace DBMS_CodeDoAn
             this.Show();
         }
 
-        private void btnQuanLyChiNhanh_Click(object sender, EventArgs e)
+        private void quảnLýChiNhánhToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
 
@@ -72,7 +67,7 @@ namespace DBMS_CodeDoAn
             this.Show();
         }
 
-        private void btnQuanLyNhaCungCap_Click(object sender, EventArgs e)
+        private void quảnLýNhàCungCấpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
 
@@ -82,7 +77,7 @@ namespace DBMS_CodeDoAn
             this.Show();
         }
 
-        private void btnQuanLyHoaDon_Click(object sender, EventArgs e)
+        private void quảnLýHóaĐơnToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
 
@@ -92,7 +87,7 @@ namespace DBMS_CodeDoAn
             this.Show();
         }
 
-        private void btnQuanLyPhieuNhap_Click(object sender, EventArgs e)
+        private void quảnLýPhiếuNhậpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
             fQuanLyPhieuNhap f = new fQuanLyPhieuNhap();
@@ -100,7 +95,17 @@ namespace DBMS_CodeDoAn
             this.Show();
         }
 
-        private void btnQuanLyPhieuBDBH_Click(object sender, EventArgs e)
+        private void quảnLýDịchVụBảoDưỡngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            fQuanLyBaoDuong f = new fQuanLyBaoDuong();
+            f.ShowDialog();
+
+            this.Show();
+        }
+
+        private void quảnLýPhiếuBảoDưỡngBảoHànhToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
 
@@ -110,14 +115,9 @@ namespace DBMS_CodeDoAn
             this.Show();
         }
 
-        private void btnQuanLyBaoDuong_Click(object sender, EventArgs e)
+        private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
-            fQuanLyBaoDuong f = new fQuanLyBaoDuong();
-            f.ShowDialog();
-
-            this.Show();
+            this.Close();
         }
     }
 }

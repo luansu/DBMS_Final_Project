@@ -45,6 +45,8 @@ namespace DBMS_CodeDoAn
             dgvThongTinNhanVien.DataSource = listNhanVien;
         }
 
+
+
         #endregion
         
     }

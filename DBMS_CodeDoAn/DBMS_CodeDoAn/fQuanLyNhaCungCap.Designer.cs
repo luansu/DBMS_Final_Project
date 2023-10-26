@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fQuanLyNhaCungCap));
             this.dgvThongTinNhaCungCap = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grbThongTinNhaCungCap = new System.Windows.Forms.GroupBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
@@ -54,7 +54,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label24 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinNhaCungCap)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.grbThongTinNhaCungCap.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,49 +64,49 @@
             this.dgvThongTinNhaCungCap.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvThongTinNhaCungCap.Location = new System.Drawing.Point(15, 430);
             this.dgvThongTinNhaCungCap.Name = "dgvThongTinNhaCungCap";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvThongTinNhaCungCap.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvThongTinNhaCungCap.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvThongTinNhaCungCap.RowHeadersWidth = 62;
             this.dgvThongTinNhaCungCap.RowTemplate.Height = 28;
             this.dgvThongTinNhaCungCap.Size = new System.Drawing.Size(1073, 168);
             this.dgvThongTinNhaCungCap.TabIndex = 7;
             // 
-            // groupBox1
+            // grbThongTinNhaCungCap
             // 
-            this.groupBox1.Controls.Add(this.btnSave);
-            this.groupBox1.Controls.Add(this.btnDelete);
-            this.groupBox1.Controls.Add(this.btnEdit);
-            this.groupBox1.Controls.Add(this.btnAdd);
-            this.groupBox1.Controls.Add(this.btnReset);
-            this.groupBox1.Controls.Add(this.btnPrevious);
-            this.groupBox1.Controls.Add(this.btnCancel);
-            this.groupBox1.Controls.Add(this.btnLast);
-            this.groupBox1.Controls.Add(this.btnNext);
-            this.groupBox1.Controls.Add(this.btnFirst);
-            this.groupBox1.Controls.Add(this.txtTenNhaCungCap);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.txtDiaChi);
-            this.groupBox1.Controls.Add(this.txtSoDienThoai);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txtMaNhaCungCap);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.groupBox1.Location = new System.Drawing.Point(13, 93);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Size = new System.Drawing.Size(1075, 329);
-            this.groupBox1.TabIndex = 6;
-            this.groupBox1.TabStop = false;
+            this.grbThongTinNhaCungCap.Controls.Add(this.btnSave);
+            this.grbThongTinNhaCungCap.Controls.Add(this.btnDelete);
+            this.grbThongTinNhaCungCap.Controls.Add(this.btnEdit);
+            this.grbThongTinNhaCungCap.Controls.Add(this.btnAdd);
+            this.grbThongTinNhaCungCap.Controls.Add(this.btnReset);
+            this.grbThongTinNhaCungCap.Controls.Add(this.btnPrevious);
+            this.grbThongTinNhaCungCap.Controls.Add(this.btnCancel);
+            this.grbThongTinNhaCungCap.Controls.Add(this.btnLast);
+            this.grbThongTinNhaCungCap.Controls.Add(this.btnNext);
+            this.grbThongTinNhaCungCap.Controls.Add(this.btnFirst);
+            this.grbThongTinNhaCungCap.Controls.Add(this.txtTenNhaCungCap);
+            this.grbThongTinNhaCungCap.Controls.Add(this.label11);
+            this.grbThongTinNhaCungCap.Controls.Add(this.label5);
+            this.grbThongTinNhaCungCap.Controls.Add(this.txtDiaChi);
+            this.grbThongTinNhaCungCap.Controls.Add(this.txtSoDienThoai);
+            this.grbThongTinNhaCungCap.Controls.Add(this.label3);
+            this.grbThongTinNhaCungCap.Controls.Add(this.label1);
+            this.grbThongTinNhaCungCap.Controls.Add(this.txtMaNhaCungCap);
+            this.grbThongTinNhaCungCap.Controls.Add(this.label2);
+            this.grbThongTinNhaCungCap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.grbThongTinNhaCungCap.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.grbThongTinNhaCungCap.Location = new System.Drawing.Point(13, 93);
+            this.grbThongTinNhaCungCap.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.grbThongTinNhaCungCap.Name = "grbThongTinNhaCungCap";
+            this.grbThongTinNhaCungCap.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.grbThongTinNhaCungCap.Size = new System.Drawing.Size(1075, 329);
+            this.grbThongTinNhaCungCap.TabIndex = 6;
+            this.grbThongTinNhaCungCap.TabStop = false;
             // 
             // btnSave
             // 
@@ -123,6 +123,7 @@
             this.btnSave.Text = "          Lưu Lại";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnDelete
             // 
@@ -140,6 +141,7 @@
             this.btnDelete.Text = "         Xóa";
             this.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -155,6 +157,7 @@
             this.btnEdit.Text = "        Sửa Thông Tin";
             this.btnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
@@ -171,6 +174,7 @@
             this.btnAdd.Text = "         Thêm Mới";
             this.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnReset
             // 
@@ -187,6 +191,7 @@
             this.btnReset.Text = "         Nhập Lại";
             this.btnReset.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // btnPrevious
             // 
@@ -200,6 +205,7 @@
             this.btnPrevious.Size = new System.Drawing.Size(165, 62);
             this.btnPrevious.TabIndex = 56;
             this.btnPrevious.UseVisualStyleBackColor = false;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
             // 
             // btnCancel
             // 
@@ -216,6 +222,7 @@
             this.btnCancel.Text = "         Hủy";
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnLast
             // 
@@ -229,6 +236,7 @@
             this.btnLast.Size = new System.Drawing.Size(165, 62);
             this.btnLast.TabIndex = 49;
             this.btnLast.UseVisualStyleBackColor = false;
+            this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
             // 
             // btnNext
             // 
@@ -242,6 +250,7 @@
             this.btnNext.Size = new System.Drawing.Size(165, 62);
             this.btnNext.TabIndex = 48;
             this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnFirst
             // 
@@ -256,6 +265,7 @@
             this.btnFirst.Size = new System.Drawing.Size(165, 62);
             this.btnFirst.TabIndex = 47;
             this.btnFirst.UseVisualStyleBackColor = false;
+            this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
             // 
             // txtTenNhaCungCap
             // 
@@ -382,13 +392,14 @@
             this.ClientSize = new System.Drawing.Size(1109, 603);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dgvThongTinNhaCungCap);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.grbThongTinNhaCungCap);
             this.Name = "fQuanLyNhaCungCap";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "fQuanLyNhaCungCap";
+            this.Load += new System.EventHandler(this.fQuanLyNhaCungCap_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinNhaCungCap)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.grbThongTinNhaCungCap.ResumeLayout(false);
+            this.grbThongTinNhaCungCap.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -398,7 +409,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvThongTinNhaCungCap;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grbThongTinNhaCungCap;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;

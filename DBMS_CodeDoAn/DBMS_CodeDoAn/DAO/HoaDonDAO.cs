@@ -36,5 +36,26 @@ namespace DBMS_CodeDoAn.DAO
 
             return listHoaDon;
         }
+
+        public bool ThemHoaDon(string ngayLapHoaDon, float tongTien, string tinhTrang, string maKhachHang, string maNVTH)
+        {
+            string query = string.Format("insert into HOADON(ngayLapHoaDon, tongTien, tinhTrang, maKhachHang, maNhanVienThucHien) values('{0}', {1}, N'{2}', '{3}', '{4}')", ngayLapHoaDon.Substring(0, 10), tongTien, tinhTrang, maKhachHang, maNVTH);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
+
+        public bool CapNhatHoaDon(string maHoaDon, string ngayLapHoaDon, float tongTien, string tinhTrang, string maKhachHang, string maNVTH)
+        {
+            string query = string.Format("update HOADON set ngayLapHoaDon = '{0}', tongTien = {1}, tinhTrang = N'{2}', maKhachHang = '{3}', maNhanVienThucHien = '{4}' where maHoaDon = '{5}'", ngayLapHoaDon.Substring(0, 10), tongTien, tinhTrang, maKhachHang, maNVTH, maHoaDon);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
+
+        public bool XoaHoaDon(string maHoaDon)
+        {
+            string query = string.Format("delete HOADON where maHoaDon = '{0}'", maHoaDon);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
     }
 }

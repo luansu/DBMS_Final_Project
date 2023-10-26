@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fQuanLyChiTietPhieuNhapXe));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grbChiTietPhieuNhapXe = new System.Windows.Forms.GroupBox();
             this.nmSoLuong = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
+            this.cbbMaLoXe = new System.Windows.Forms.ComboBox();
             this.cbbMaPhieuNhap = new System.Windows.Forms.ComboBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -54,46 +55,45 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label24 = new System.Windows.Forms.Label();
             this.dgvThongTinChiTietPhieuNhapXe = new System.Windows.Forms.DataGridView();
-            this.cbbMaXe = new System.Windows.Forms.ComboBox();
-            this.groupBox1.SuspendLayout();
+            this.grbChiTietPhieuNhapXe.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmSoLuong)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinChiTietPhieuNhapXe)).BeginInit();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // grbChiTietPhieuNhapXe
             // 
-            this.groupBox1.Controls.Add(this.nmSoLuong);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.cbbMaXe);
-            this.groupBox1.Controls.Add(this.cbbMaPhieuNhap);
-            this.groupBox1.Controls.Add(this.btnSave);
-            this.groupBox1.Controls.Add(this.btnDelete);
-            this.groupBox1.Controls.Add(this.btnEdit);
-            this.groupBox1.Controls.Add(this.btnAdd);
-            this.groupBox1.Controls.Add(this.btnReset);
-            this.groupBox1.Controls.Add(this.btnPrevious);
-            this.groupBox1.Controls.Add(this.btnCancel);
-            this.groupBox1.Controls.Add(this.btnLast);
-            this.groupBox1.Controls.Add(this.btnNext);
-            this.groupBox1.Controls.Add(this.btnFirst);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.txtGiaNhap);
-            this.groupBox1.Controls.Add(this.txtMaChiTietPhieuNhapXe);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.groupBox1.Location = new System.Drawing.Point(13, 94);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Size = new System.Drawing.Size(1083, 446);
-            this.groupBox1.TabIndex = 52;
-            this.groupBox1.TabStop = false;
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.nmSoLuong);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.label4);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.cbbMaLoXe);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.cbbMaPhieuNhap);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.btnSave);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.btnDelete);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.btnEdit);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.btnAdd);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.btnReset);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.btnPrevious);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.btnCancel);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.btnLast);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.btnNext);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.btnFirst);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.label11);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.label8);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.label5);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.txtGiaNhap);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.txtMaChiTietPhieuNhapXe);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.label7);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.label3);
+            this.grbChiTietPhieuNhapXe.Controls.Add(this.label2);
+            this.grbChiTietPhieuNhapXe.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.grbChiTietPhieuNhapXe.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.grbChiTietPhieuNhapXe.Location = new System.Drawing.Point(13, 94);
+            this.grbChiTietPhieuNhapXe.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.grbChiTietPhieuNhapXe.Name = "grbChiTietPhieuNhapXe";
+            this.grbChiTietPhieuNhapXe.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.grbChiTietPhieuNhapXe.Size = new System.Drawing.Size(1083, 446);
+            this.grbChiTietPhieuNhapXe.TabIndex = 52;
+            this.grbChiTietPhieuNhapXe.TabStop = false;
             // 
             // nmSoLuong
             // 
@@ -114,6 +114,15 @@
             this.label4.Size = new System.Drawing.Size(64, 32);
             this.label4.TabIndex = 59;
             this.label4.Text = "VNĐ";
+            // 
+            // cbbMaLoXe
+            // 
+            this.cbbMaLoXe.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbMaLoXe.FormattingEnabled = true;
+            this.cbbMaLoXe.Location = new System.Drawing.Point(180, 174);
+            this.cbbMaLoXe.Name = "cbbMaLoXe";
+            this.cbbMaLoXe.Size = new System.Drawing.Size(415, 38);
+            this.cbbMaLoXe.TabIndex = 57;
             // 
             // cbbMaPhieuNhap
             // 
@@ -139,6 +148,7 @@
             this.btnSave.Text = "          Lưu Lại";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnDelete
             // 
@@ -156,6 +166,7 @@
             this.btnDelete.Text = "         Xóa";
             this.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -171,6 +182,7 @@
             this.btnEdit.Text = "        Sửa Thông Tin";
             this.btnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
@@ -187,6 +199,7 @@
             this.btnAdd.Text = "         Thêm Mới";
             this.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnReset
             // 
@@ -203,6 +216,7 @@
             this.btnReset.Text = "         Nhập Lại";
             this.btnReset.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // btnPrevious
             // 
@@ -232,6 +246,7 @@
             this.btnCancel.Text = "         Hủy";
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnLast
             // 
@@ -293,9 +308,9 @@
             this.label8.Location = new System.Drawing.Point(12, 179);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(76, 25);
+            this.label8.Size = new System.Drawing.Size(103, 25);
             this.label8.TabIndex = 21;
-            this.label8.Text = "Mã Xe:";
+            this.label8.Text = "Mã Lô Xe:";
             // 
             // label5
             // 
@@ -394,15 +409,6 @@
             this.dgvThongTinChiTietPhieuNhapXe.Size = new System.Drawing.Size(1084, 219);
             this.dgvThongTinChiTietPhieuNhapXe.TabIndex = 55;
             // 
-            // cbbMaXe
-            // 
-            this.cbbMaXe.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbMaXe.FormattingEnabled = true;
-            this.cbbMaXe.Location = new System.Drawing.Point(180, 174);
-            this.cbbMaXe.Name = "cbbMaXe";
-            this.cbbMaXe.Size = new System.Drawing.Size(415, 38);
-            this.cbbMaXe.TabIndex = 57;
-            // 
             // fQuanLyChiTietPhieuNhapXe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -411,12 +417,13 @@
             this.ClientSize = new System.Drawing.Size(1109, 776);
             this.Controls.Add(this.dgvThongTinChiTietPhieuNhapXe);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.grbChiTietPhieuNhapXe);
             this.Name = "fQuanLyChiTietPhieuNhapXe";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "fQuanLyChiTietPhieuNhapXe";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.Load += new System.EventHandler(this.fQuanLyChiTietPhieuNhapXe_Load);
+            this.grbChiTietPhieuNhapXe.ResumeLayout(false);
+            this.grbChiTietPhieuNhapXe.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmSoLuong)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -427,7 +434,7 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grbChiTietPhieuNhapXe;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbbMaPhieuNhap;
         private System.Windows.Forms.Button btnSave;
@@ -452,6 +459,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.DataGridView dgvThongTinChiTietPhieuNhapXe;
-        private System.Windows.Forms.ComboBox cbbMaXe;
+        private System.Windows.Forms.ComboBox cbbMaLoXe;
     }
 }

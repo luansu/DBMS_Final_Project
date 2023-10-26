@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DBMS_CodeDoAn.DTO
 {
@@ -16,7 +18,7 @@ namespace DBMS_CodeDoAn.DTO
         private string xuatXu;
         private float giaBan;
         private string chatLuong;
-        private string hinhAnh;
+        private byte[] hinhAnh;
         public string MaPhuTung { get => maPhuTung; set => maPhuTung = value; }
         public string LoaiPhuTung { get => loaiPhuTung; set => loaiPhuTung = value; }
         public string TenPhuTung { get => tenPhuTung; set => tenPhuTung = value; }
@@ -24,18 +26,10 @@ namespace DBMS_CodeDoAn.DTO
         public string XuatXu { get => xuatXu; set => xuatXu = value; }
         public float GiaBan { get => giaBan; set => giaBan = value; }
         public string ChatLuong { get => chatLuong; set => chatLuong = value; }
-        public string HinhAnh { get => hinhAnh; set => hinhAnh = value; }
+        public byte[] HinhAnh { get => hinhAnh; set => hinhAnh = value; }
 
-        public PhuTung(string maPhuTung, string loaiPhuTung, string tenPhuTung, string thuongHieu, string xuatXu, float giaBan, string chatLuong, string hinhAnh)
+        public PhuTung(string maPhuTung, string loaiPhuTung, string tenPhuTung, string thuongHieu, string xuatXu, float giaBan, string chatLuong, byte[] hinhAnh)
         {
-            MaPhuTung = maPhuTung;
-            LoaiPhuTung = loaiPhuTung;
-            TenPhuTung = tenPhuTung;
-            ThuongHieu = thuongHieu;
-            XuatXu = xuatXu;
-            GiaBan = giaBan;
-            ChatLuong = chatLuong;
-            HinhAnh = hinhAnh;
             MaPhuTung = maPhuTung;
             LoaiPhuTung = loaiPhuTung;
             TenPhuTung = tenPhuTung;
@@ -55,7 +49,18 @@ namespace DBMS_CodeDoAn.DTO
             XuatXu = row["xuatXu"].ToString();
             GiaBan = (float)Convert.ToDouble(row["giaBan"].ToString());
             ChatLuong = row["chatLuong"].ToString();
-            HinhAnh = row["hinhAnh"].ToString();
+            /*if (row["hinhAnh"].ToString() != "")
+            {
+                hinhAnh = StringToByte(row["hinhAnh"].ToString());
+            }
+            else
+                HinhAnh = null;*/
+        }
+
+        byte[] StringToByte(string str)
+        {
+            byte[] bytes = Encoding.ASCII.GetBytes(str);
+            return bytes; ;
         }
     }
 }

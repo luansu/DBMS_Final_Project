@@ -13,7 +13,6 @@ C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_Cod
 C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\bin\Debug\EntityFramework.SqlServer.xml
 C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.csproj.CopyComplete
 C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fDangNhap.resources
-C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fTrangChu.resources
 C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyOTo.resources
 C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyNhanVien.resources
 C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyPhuTung.resources
@@ -29,3 +28,4 @@ C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_Cod
 C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyBaoDuong.resources
 C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyPhieuBaoDuong.resources
 C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fQuanLyChiTietPhieuBaoDuong.resources
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.fHome.resources

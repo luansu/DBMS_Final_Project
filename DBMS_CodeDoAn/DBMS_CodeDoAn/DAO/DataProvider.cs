@@ -121,5 +121,7 @@ namespace DBMS_CodeDoAn.DAO
             }
             return data;
         }
+
+        //public byte[] 
     }
 }

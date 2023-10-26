@@ -36,5 +36,11 @@ namespace DBMS_CodeDoAn.DAO
 
             return listDanhSachCTPNPTung;
         }
+        public bool ThemChiTietPhieuNhapPhuTung(string maPhuTung, string maPhieuNhap, float giaNhap, int soLuong)
+        {
+            string query = string.Format("insert into CHITIETPHIEUNHAPPHUTUNG(maPhuTung, maPhieuNhap, giaNhap, soLuong) values ('{0}', '{1}', {2}, {3})");
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
     }
 }

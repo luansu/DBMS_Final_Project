@@ -21,6 +21,41 @@ namespace DBMS_CodeDoAn
         }
 
         #region event
+        private void fQuanLyChiTietPhieuNhapXe_Load(object sender, EventArgs e)
+        {
+            DisableButtonSystem();
+            DisableTextBox();
+            EnableButtonEditData();
+        }
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+
+        }
 
         #endregion
 
@@ -30,7 +65,7 @@ namespace DBMS_CodeDoAn
         {
             LoadDanhSachChiTietPhieuNhapXe();
             LoadDanhSachMaPhieuNhap();
-            LoadDanhSachMaXe();
+            LoadDanhSachMaLoXe();
         }
 
         void LoadDanhSachChiTietPhieuNhapXe()
@@ -46,10 +81,61 @@ namespace DBMS_CodeDoAn
             cbbMaPhieuNhap.DisplayMember = "maPhieuNhap";
         }
 
-        void LoadDanhSachMaXe()
+        void LoadDanhSachMaLoXe()
         {
-            List<string> listMaXe = XeDAO.Instance.DanhSachMaXe();
-            cbbMaXe.DataSource = listMaXe;
+            List<string> listMaLoXe = XeDAO.Instance.DanhSachMaLoXe();
+            cbbMaLoXe.DataSource = listMaLoXe;
+        }
+
+        void ClearText()
+        {
+            foreach (Control item in grbChiTietPhieuNhapXe.Controls)
+            {
+                if (item is TextBox)
+                {
+                    ((TextBox)item).ResetText();
+                }
+            }
+        }
+        void EnableButtonEditData()
+        {
+            btnAdd.Enabled = true;
+            btnEdit.Enabled = true;
+            btnDelete.Enabled = true;
+        }
+        void DisableButtonEditData()
+        {
+            btnAdd.Enabled = false;
+            btnEdit.Enabled = false;
+            btnDelete.Enabled = false;
+        }
+        void EnableButtonSystem()
+        {
+            btnSave.Enabled = true;
+            btnReset.Enabled = true;
+            btnCancel.Enabled = true;
+        }
+        void DisableButtonSystem()
+        {
+            btnSave.Enabled = false;
+            btnReset.Enabled = false;
+            btnCancel.Enabled = false;
+        }
+        void DisableTextBox()
+        {
+            txtMaChiTietPhieuNhapXe.Enabled = false;
+            cbbMaPhieuNhap.Enabled = false;
+            cbbMaLoXe.Enabled = false;
+            txtGiaNhap.Enabled = false;
+            nmSoLuong.Enabled = false;
+        }
+        void EnableTextBox()
+        {
+            txtMaChiTietPhieuNhapXe.Enabled = true;
+            cbbMaPhieuNhap.Enabled = true;
+            cbbMaLoXe.Enabled = true;
+            txtGiaNhap.Enabled = true;
+            nmSoLuong.Enabled = true;
         }
 
         #endregion
