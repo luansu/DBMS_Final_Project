@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.Pkcs;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using DBMS_CodeDoAn.DTO;
 
 namespace DBMS_CodeDoAn.DAO
@@ -23,6 +26,23 @@ namespace DBMS_CodeDoAn.DAO
 
         private string strCon = @"Data Source=.;Initial Catalog=DBMS_DOAN_QUANLYCUAHANGXE;Integrated Security=True";
         private DataProvider() { }
+
+        public void Init(SqlConnection conn)
+        {
+            conn = new SqlConnection(strCon);
+        }
+        public void Connect(SqlConnection sqlCon)
+        {
+            Init(sqlCon);
+            if (sqlCon.State != ConnectionState.Open)
+                sqlCon.Open();
+        }
+
+        public void Disconnect(SqlConnection sqlCon)
+        { 
+            if (sqlCon != null && sqlCon.State != ConnectionState.Closed)
+                sqlCon.Close();
+        }
 
         public DataTable ExcuteQuery(string query, object[] parameter = null)
         {
@@ -86,7 +106,7 @@ namespace DBMS_CodeDoAn.DAO
                     }
                 }
 
-                 data = cmd.ExecuteNonQuery();
+                data = cmd.ExecuteNonQuery();
 
                 sqlCon.Close();
             }
@@ -122,6 +142,34 @@ namespace DBMS_CodeDoAn.DAO
             return data;
         }
 
-        //public byte[] 
+        public byte[] ConvertImageToByteArray(Image image)
+        {
+            try
+            {
+                if (image == null) { return null; }
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    image.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+                    return stream.ToArray();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+        }
+
+        public Image ConvertByteArrayToImage(byte[] byteArray)
+        {
+            if (byteArray == null)
+            {
+                return null;
+            }
+            using (MemoryStream stream = new MemoryStream(byteArray))
+            {
+                return Image.FromStream(stream);
+            }
+        }
     }
 }

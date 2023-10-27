@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace DBMS_CodeDoAn.DTO
 {
@@ -18,7 +18,7 @@ namespace DBMS_CodeDoAn.DTO
         private string xuatXu;
         private float giaBan;
         private string chatLuong;
-        private byte[] hinhAnh;
+        private string hinhAnh;
         public string MaPhuTung { get => maPhuTung; set => maPhuTung = value; }
         public string LoaiPhuTung { get => loaiPhuTung; set => loaiPhuTung = value; }
         public string TenPhuTung { get => tenPhuTung; set => tenPhuTung = value; }
@@ -26,9 +26,9 @@ namespace DBMS_CodeDoAn.DTO
         public string XuatXu { get => xuatXu; set => xuatXu = value; }
         public float GiaBan { get => giaBan; set => giaBan = value; }
         public string ChatLuong { get => chatLuong; set => chatLuong = value; }
-        public byte[] HinhAnh { get => hinhAnh; set => hinhAnh = value; }
+        public string HinhAnh { get => hinhAnh; set => hinhAnh = value; }
 
-        public PhuTung(string maPhuTung, string loaiPhuTung, string tenPhuTung, string thuongHieu, string xuatXu, float giaBan, string chatLuong, byte[] hinhAnh)
+        public PhuTung(string maPhuTung, string loaiPhuTung, string tenPhuTung, string thuongHieu, string xuatXu, float giaBan, string chatLuong, string hinhAnh)
         {
             MaPhuTung = maPhuTung;
             LoaiPhuTung = loaiPhuTung;
@@ -49,18 +49,37 @@ namespace DBMS_CodeDoAn.DTO
             XuatXu = row["xuatXu"].ToString();
             GiaBan = (float)Convert.ToDouble(row["giaBan"].ToString());
             ChatLuong = row["chatLuong"].ToString();
-            /*if (row["hinhAnh"].ToString() != "")
-            {
-                hinhAnh = StringToByte(row["hinhAnh"].ToString());
-            }
-            else
-                HinhAnh = null;*/
+            HinhAnh = row["hinhAnh"].ToString();
         }
 
-        byte[] StringToByte(string str)
+        private byte[] ConvertImageToByteArray(Image image)
         {
-            byte[] bytes = Encoding.ASCII.GetBytes(str);
-            return bytes; ;
+            if (image == null)
+            {
+                return null;
+            }
+            ImageConverter _imageConverter = new ImageConverter();
+            byte[] xByte = (byte[])_imageConverter.ConvertTo(image, typeof(byte[]));
+            return xByte;
+        }
+
+        private Image ConvertByteArrayToImage(byte[] byteArray)
+        {
+            if (byteArray == null)
+            {
+                return null;
+            }
+            try
+            {
+                using (MemoryStream stream = new MemoryStream(byteArray))
+                {
+                    return Image.FromStream(stream);
+                }
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }
