@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -63,20 +64,24 @@ namespace DBMS_CodeDoAn
             string tenBaoDuong = txtTenBaoDuong.Text;
             string loaiBaoDuong = txtLoaiBaoDuong.Text;
             float phiBaoDuong = (float)Convert.ToDouble(txtPhiBaoDuong.Text.ToString());
+            
             if (strBtn == "Add")
             {
-                bool result = ThemDichVuBaoDuong(tenBaoDuong, loaiBaoDuong, phiBaoDuong);
-
-                if (result)
+                try
                 {
+                    bool result = ThemDichVuBaoDuong(tenBaoDuong, loaiBaoDuong, phiBaoDuong);
                     MessageBox.Show("Thêm dịch vụ bảo dưỡng mới thành công");
                 }
-                else
+                catch (SqlException ex)
                 {
-                    MessageBox.Show("Có lỗi khi thêm dịch vụ bảo dưỡng, vui lòng kiểm tra lại");
+                    if (ex.Message.Contains("correct format"))
+                    {
+                        MessageBox.Show("Dịch vụ bảo dưỡng này đã tồn tại");
+                    }
                 }
 
             }
+
             else if (strBtn == "Delete")
             {
                 if (MessageBox.Show("Bạn có chắc muốn xóa dòng này?", "Cảnh báo!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)

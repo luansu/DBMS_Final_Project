@@ -58,11 +58,11 @@ namespace DBMS_CodeDoAn.DAO
             return result > 0;
         }
 
-        public List<KhachHang> TimKiemThongTinKhachHang(string maKhachHang, string hoTenKH, string ngaySinh, string gioiTinh, string CCCD, string diaChi, string soDienThoai)
+        public List<KhachHang> TimKiemThongTinKhachHang(string hoTenKH, string CCCD, string diaChi, string soDienThoai)
         {
             List<KhachHang> listKhachHang = new List<KhachHang>();
 
-            string query = string.Format("select * from KHACHHANG where hoTenKhachHang like N'%{}%' and CCCD like N'%{}%' and diaChi like N'%{}%' and soDienThoai like N'%{}%'");
+            string query = string.Format("select * from KHACHHANG where hoTenKhachHang like N'%{0}%' and CCCD like N'%{1}%' and diaChi like N'%{2}%' and soDienThoai like N'%{3}%'", hoTenKH, CCCD, diaChi, soDienThoai);
 
             DataTable data = DataProvider.Instance.ExcuteQuery(query);
 
