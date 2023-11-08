@@ -50,3 +50,5 @@ from PHIEUNHAP PN
 inner join CHITIETPHIEUNHAPXE CTPNX
 on PN.maPhieuNhap = CTPNX.maPhieuNhap
 
+go
+

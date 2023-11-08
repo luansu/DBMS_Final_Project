@@ -25,7 +25,7 @@ create table NHANVIEN(
 	chucVu nvarchar(50),
 	tinhTrangLamViec bit default 1,
 	maChiNhanh nvarchar(20),
-	hinhAnh image
+	hinhAnh nvarchar(200)
 	foreign key (maChiNhanh) references CHINHANH(maChiNhanh)
 )
 go
@@ -75,7 +75,7 @@ create table LOXE(
 	chieuRong int check (chieuRong > 0), 
 	chieuCao int check (chieuCao > 0), 
 	banKinhQuayVong int check (banKinhQuayVong >= 0),
-	hinhAnh image
+	hinhAnh nvarchar(200)
 )
 go
 
@@ -96,9 +96,10 @@ CREATE TABLE PHUTUNG(
 	xuatXu nvarchar(50), 
 	giaBan float check (giaBan > 0), 
 	chatLuong nvarchar(50),
-	hinhAnh image
+	hinhAnh nvarchar(200)
 )
 go
+
 
 -- Tạo bảng PHIẾU NHẬP
 create table PHIEUNHAP(
@@ -249,11 +250,11 @@ go
 ----
 create table KHOXE
 (
-	maKhoXe nvarchar(20) primary key,
 	maChiNhanh nvarchar(20),
 	maLoXe nvarchar(20),
 	soLuongXeCon int default 0,
 	soLuongXeDaBan int default 0,
+	primary key (maChiNhanh, maLoXe),
 	foreign key (maChiNhanh) references CHINHANH(maChiNhanh),
 	foreign key (maLoXe) references LOXE(maLoXe)
 )
@@ -261,16 +262,14 @@ go
 
 create table KHOPHUTUNG
 (
-	maKhoPhuTung nvarchar(20) primary key,
 	maChiNhanh nvarchar(20),
 	maPhuTung nvarchar(20),
 	soLuongPhuTungCon int default 0,
-	soLuongPhuTungDaBan int default 0
+	soLuongPhuTungDaBan int default 0,
+	primary key (maChiNhanh, maPhuTung),
 	foreign key (maChiNhanh) references CHINHANH(maChiNhanh),
 	foreign key (maPhuTung) references PHUTUNG(maPhuTung)
 )
-
-
 
 
 

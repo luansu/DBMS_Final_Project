@@ -116,11 +116,11 @@ VALUES ('LOXE001_XE001', 'LOXE001'),
 go
 
 INSERT INTO PHUTUNG (maPhuTung, loaiPhuTung, tenPhuTung, thuongHieu, xuatXu, giaBan, chatLuong, hinhAnh)
-VALUES ('PT001', N'Lốp xe', N'Lốp Michelin', 'Michelin', N'Pháp', 800, N'Cao cấp', ''),
-       ('PT002', N'Bình xăng', N'Bình xăng Yamaha', 'Yamaha', N'Nhật Bản', 50, N'Tiêu chuẩn', ''),
-       ('PT003', N'Dầu nhớt', N'Dầu nhớt Motul', 'Motul', N'Pháp', 150, N'Cao cấp', ''),
-       ('PT004', N'Đèn pha', N'Đèn pha Philips', 'Philips', N'Hà Lan', 120, N'Tiêu chuẩn', ''),
-       ('PT005', N'Bánh xe', N'Bánh xe Vision', 'Vision', N'Nhật Bản', 100, N'Tiêu chuẩn', ''),
+VALUES ('PT001', N'Lốp xe', N'Lốp Michelin', 'Michelin', N'Pháp', 800, N'Cao cấp', 'C:\Users\WIN 10\Downloads\DoanThanhNien.jpg'),
+       ('PT002', N'Bình xăng', N'Bình xăng Yamaha', 'Yamaha', N'Nhật Bản', 50, N'Tiêu chuẩn', 'C:\Users\WIN 10\Downloads\DoanThanhNien.jpg'),
+       ('PT003', N'Dầu nhớt', N'Dầu nhớt Motul', 'Motul', N'Pháp', 150, N'Cao cấp', 'C:\Users\WIN 10\Downloads\DoanThanhNien.jpg'),
+       ('PT004', N'Đèn pha', N'Đèn pha Philips', 'Philips', N'Hà Lan', 120, N'Tiêu chuẩn', 'C:\Users\WIN 10\Downloads\DoanThanhNien.jpg'),
+       ('PT005', N'Bánh xe', N'Bánh xe Vision', 'Vision', N'Nhật Bản', 100, N'Tiêu chuẩn', 'C:\Users\WIN 10\Downloads\DoanThanhNien.jpg'),
        ('PT006', N'Hộp số', N'Hộp số ZF', 'ZF', N'Đức', 300, N'Cao cấp', ''),
        ('PT007', N'Bơm xăng', N'Bơm xăng Bosch', 'Bosch', N'Đức', 80, N'Tiêu chuẩn', ''),
        ('PT008', N'Bình điện', N'Bình điện Exide', 'Exide', N'Mỹ', 70, N'Tiêu chuẩn', ''),

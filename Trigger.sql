@@ -67,39 +67,8 @@ begin tran
 rollback
 go
 --------------------------------------------------------------------------------
---Trigger khi thêm Chi nhánh thì tự động tạo kho
-create or alter trigger trg_ThemKhoTheoChiNhanh
-on CHINHANH
-after insert
-as
-begin
-	declare @maChiNhanh nvarchar(20)
-	set @maChiNhanh = (select maChiNhanh from inserted)
-
-	declare @maKhoXe nvarchar(20), @maKhoPhuTung nvarchar(20)
-	set @maKhoXe = 'KHOXE_' + @maChiNhanh
-	set @maKhoPhuTung = 'KHOPHUTUNG_' + @maChiNhanh
-
-	insert into KHOXE(maKhoXe, maChiNhanh)
-	values(@maKhoXe, @maChiNhanh)
-		
-	insert into KHOPHUTUNG(maKhoPhuTung, maChiNhanh)
-	values(@maKhoPhuTung, @maChiNhanh)
-end
-go
---TEST
-begin tran
-	insert into CHINHANH(maChiNhanh, tenChiNhanh, diaChi)
-	values ('XUANTHE', 'XuanThe', '')
-
-	select * from KHOXE
-	select * from KHOPHUTUNG
-rollback
-go
-
---------------------------------------------------------------------------------
 --Trigger khi nhập hàng về chi nhánh thì sẽ cập nhật vào kho
--- Cập nhật kho xe
+---------- Cập nhật kho xe
 create or alter trigger trg_CapNhatKhoXeKhiNhapHang
 on CHITIETPHIEUNHAPXE
 after insert 
@@ -108,10 +77,10 @@ begin
 	declare @maChiNhanh nvarchar(20), @maLoXe nvarchar(20), @soLuong int
 	select @maChiNhanh = maChiNhanh, @maLoXe = maLoXe, @soLuong = soLuong
 	from PHIEUNHAP PN
-	inner join CHITIETPHIEUNHAPXE CTPNX
-	on PN.maPhieuNhap = CTPNX.maPhieuNhap
+	inner join inserted
+	on PN.maPhieuNhap = inserted.maPhieuNhap
 
-	if (@maLoXe in (select maLoXe from KHOXE))
+	if ( (@maChiNhanh in (select maChiNhanh from KHOXE)) and (@maLoXe in (select maLoXe from KHOXE)) )
 	begin
 		Update KHOXE
 		set soLuongXeCon = soLuongXeCon + @soLuong
@@ -119,29 +88,55 @@ begin
 	end
 	else
 	begin
-		insert into KHOXE(maKhoXe, maChiNhanh, maLoXe, soLuongXeCon)
-		values('KHOXE_' + @maChiNhanh, @maChiNhanh, @maLoXe, @soLuong)
+		insert into KHOXE(maChiNhanh, maLoXe, soLuongXeCon)
+		values(@maChiNhanh, @maLoXe, @soLuong)
 	end 
 end
 go
 --Test
 begin tran
-	insert into CHINHANH(maChiNhanh, tenChiNhanh, diaChi)
-	values ('XUANTHE', 'XuanThe', '')
-
-	select * from KHOXE
-
 	insert into PHIEUNHAP(maPhieuNhap, maChiNhanh, maNhaCungCap)
-	values ('PN100', 'XUANTHE', 'NCC-XE001')
+	values ('PN100', 'CNHN', 'NCC-XE001')
 	insert into CHITIETPHIEUNHAPXE(maChiTietPhieuNhapXe, maLoXe, maPhieuNhap, giaNhap, soLuong)
-	values ('CTPNXE100','LOXE003','PN100', 100000000, 10)
-
+	values ('CTPNXE100','LOXE001','PN001', 100000000, 10)
 	select * from KHOXE
 rollback
+go
+---------- Cập nhật kho phụ tùng
+create or alter trigger trg_CapNhatKhoPhuTungKhiNhapHang
+on CHITIETPHIEUNHAPPHUTUNG
+after insert
+as
+begin
+	declare @maChiNhanh nvarchar(20), @maPhuTung nvarchar(20), @soLuong int
+	select @maChiNhanh = maChiNhanh, @maPhuTung = maPhuTung, @soLuong = soLuong
+	from PHIEUNHAP PN
+	inner join inserted on PN.maPhieuNhap = inserted.maPhieuNhap
+	if ( (@maChiNhanh in (select maChiNhanh from KHOPHUTUNG)) and (@maPhuTung in (select maPhuTung from KHOPHUTUNG)) )
+	begin
+		update KHOPHUTUNG
+		set soLuongPhuTungCon = soLuongPhuTungCon + @soLuong
+		where maChiNhanh = @maChiNhanh and maPhuTung = @maPhuTung
+	end
+	else
+	begin
+		insert into KHOPHUTUNG(maChiNhanh, maPhuTung, soLuongPhuTungCon)
+		values(@maChiNhanh, @maPhuTung, @soLuong)
+	end
+end
+go
+--Test
+begin tran
+	insert into PHIEUNHAP(maPhieuNhap, maChiNhanh, maNhaCungCap)
+	values ('PN100', 'CNHN', 'NCC-PT001')
+	insert into CHITIETPHIEUNHAPPHUTUNG(maChiTietPhieuNhapPhuTung, maPhuTung, maPhieuNhap, giaNhap, soLuong)
+	values ('CTPNXE100','PT001','PN001', 100000000, 10)
+	select * from KHOPHUTUNG
+rollback
+--------------------------------------------------------------------------------
+-- TRIGGER khi xuất hóa đơn mặt hàng cho khách hàng thì sẽ cập nhật lại số lượng hàng trong kho
 
-select PN.maPhieuNhap, maChiNhanh, maLoXe, soLuong from PHIEUNHAP PN
-inner join CHITIETPHIEUNHAPXE CTPNX
-on PN.maPhieuNhap = CTPNX.maPhieuNhap
+
 
 --------------------------------------------------------------------------------
 -- Tạo TRIGGER khi thêm nhân viên thì tài khoản tự động thêm
