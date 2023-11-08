@@ -1,6 +1,21 @@
 ﻿use DBMS_DOAN_QUANLYCUAHANGXE
 go
 
+----------------------------------------------------------------
+CREATE or ALTER TRIGGER tg_ThayDoiTrangThaiHoaDon on CHITIETHOADONXE 
+for update, insert as
+BEGIN
+	DECLARE @soTienDaTra money, @maHoaDon nvarchar(20), @tongTien money
+	SELECT @soTienDaTra = ins.soTienDaTra, @maHoaDon = ins.maHoaDon 	FROM inserted as ins
+	SElECT @tongTien = hd.tongTien 						FROM HOADON as hd 								WHERE hd.maHoaDon = @maHoaDon
+	IF @tongTien <= @soTienDaTra
+	BEGIN 
+		UPDATE HOADON 
+		SET tinhTrang = N'Đã Thanh Toán'
+		WHERE maHoaDon = @maHoaDon
+	END
+END
+go
 --------------------------------------------------------------------------------
 -- Trigger khi nhập xe về thì mã xe tự động tạo theo mã lô xe
 create or alter trigger trg_SinhMaXeKhiNhapXe
@@ -135,9 +150,23 @@ begin tran
 rollback
 --------------------------------------------------------------------------------
 -- TRIGGER khi xuất hóa đơn mặt hàng cho khách hàng thì sẽ cập nhật lại số lượng hàng trong kho
+-- Hóa đơn xe
+--create or alter trigger trg_CapNhatKhoXeKhiBan 
 
 
-
+--------------------------------------------------------------------------------
+-- TRIGGER tự động sinh mã nhân viên
+go
+CREATE or Alter trigger tg_ThemNhanVien on NHANVIEN
+instead of insert
+as
+BEGIN
+	declare @hoTenNhanVien nvarchar(50), @CCCD nvarchar(20), @ngaySinh date, @gioiTinh nvarchar(5), @diaChi nvarchar(255), @soDienThoai nvarchar(20), @chucVu  nvarchar(50), @maChiNhanh nvarchar(20), @hinhAnh nvarchar(200)
+	select @hoTenNhanVien = nv.hoTenNhanVien, @CCCD = nv.CCCD, @ngaySinh = nv.ngaySinh, @gioiTinh = nv.gioiTinh, @diaChi = nv.diaChi, @soDienThoai = nv.soDienThoai, @chucVu = nv.chucVu, @maChiNhanh = nv.maChiNhanh, @hinhAnh = nv.hinhAnh
+	from inserted as nv
+	print (dbo.fn_TaoMaNhanVien(@maChiNhanh))
+	insert into NHANVIEN(maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh, hinhAnh) Values(dbo.fn_TaoMaNhanVien(@maChiNhanh), @hoTenNhanVien , @CCCD , @ngaySinh, @gioiTinh, @diaChi , @soDienThoai, @chucVu, @maChiNhanh, @hinhAnh)
+END
 --------------------------------------------------------------------------------
 -- Tạo TRIGGER khi thêm nhân viên thì tài khoản tự động thêm
 -- Set Tên đăng nhập mặc định là mã nhân viên

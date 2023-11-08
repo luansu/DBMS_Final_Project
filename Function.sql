@@ -1,5 +1,6 @@
 ﻿use DBMS_DOAN_QUANLYCUAHANGXE
 go
+-------------------------------------------------------------------------
 -- Function tự động sinh mã bảo dưỡng
 create or alter function fn_SinhMaBaoDuong()
 returns nvarchar(20)
@@ -27,6 +28,111 @@ begin tran
 	select * from DICHVUBAODUONG
 rollback
 select * from DICHVUBAODUONG
+go
+-------------------------------------------------------------------------------------------------
+-- Function tự động sinh Phiếu bảo dưỡng
+create or alter function fn_SinhMaPhieuBaoDuong()
+returns nvarchar(20)
+as
+begin
+	declare @NextID nvarchar(20), @LastID nvarchar(20)
+	select @LastID = ISNULL(MAX(CAST(SUBSTRING(maPhieuBaoDuong, 4, LEN(maPhieuBaoDuong) - 3) as int)), 0)
+	from PHIEUBAODUONG
+
+	if (@LastID < 999)
+		set @NextID = 'PBD' + RIGHT('000' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar), 3)
+	else
+		set @NextID = 'PBD' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar)
+	return @NextID
+end
+go
+-- add contraint
+alter table PHIEUBAODUONG add constraint contr_MaPhieuBaoDuong
+default dbo.fn_SinhMaPhieuBaoDuong() for maPhieuBaoDuong
+begin tran
+	insert into PHIEUBAODUONG(ngayLapPhieu, tongTien, maKhachHang, maNhanVienThucHien)
+	values('2003-08-10', 1111, 'KH003', 'NVHCM001')
+
+	update PHIEUBAODUONG set ngayLapPhieu = '{}', tongTien = 2, maKhachHang = '{}', maNhanVienThucHien = '{}'
+	where maPhieuBaoDuong = '{}'
+	select * from PHIEUBAODUONG
+rollback
+go
+-------------------------------------------------------------------------------------------------
+-- Function tự động sinh mã chi tiết PBD
+create or alter function fn_SinhMaChiTietPhieuBaoDuong()
+returns nvarchar(20)
+as
+begin	
+	declare @NextID nvarchar(20), @LastID nvarchar(20)
+	select @LastID = ISNULL(MAX(CAST(SUBSTRING(maChiTietPhieuBaoDuong, 6, LEN(maChiTietPhieuBaoDuong) - 5) as int)), 0)
+	from CHITIETPHIEUBAODUONG
+
+	if (@LastID < 999)
+		set @NextID = 'CTPBD' + RIGHT('000' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar), 3)
+	else
+		set @NextID = 'CTPBD' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar)
+	return @NextID
+end
+go
+-- add constraint
+alter table CHITIETPHIEUBAODUONG add constraint contr_MaChiTietPBD
+default dbo.fn_SinhMaChiTietPhieuBaoDuong() for maChiTietPhieuBaoDuong
+begin tran
+	insert into CHITIETPHIEUBAODUONG(maBaoDuong, maPhieuBaoDuong, thanhTien)
+	values('DVBD001', 'PBD001', 20000)
+
+	select * from CHITIETPHIEUBAODUONG
+rollback
+go
+-------------------------------------------------------------------------------------------------
+-- Function tự động sinh mã Hợp đồng bảo hành
+create or alter function fn_SinhMaHopDongBaoHanh()
+returns nvarchar(20)
+as
+begin	
+	declare @NextID nvarchar(20), @LastID nvarchar(20)
+	select @LastID = ISNULL(MAX(CAST(SUBSTRING(maHopDongBaoHanh, 5, LEN(maHopDongBaoHanh) - 4) as int)), 0)
+	from HOPDONGBAOHANH
+
+	if (@LastID < 999)
+		set @NextID = 'HDBH' + RIGHT('000' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar), 3)
+	else
+		set @NextID = 'HDBH' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar)
+	return @NextID
+end
+go
+-- add constraint
+alter table HOPDONGBAOHANH add constraint contr_MaHopDongBaoHanh
+default dbo.fn_SinhMaHopDongBaoHanh() for maHopDongBaoHanh
+begin tran
+	insert into HOPDONGBAOHANH(maXe, maKhachHang, ngayKyBaoHanh, thoiHanBaoHanh)
+	values('LOXE001_XE001', 'KH001', '2003-08-09', '2003-08-10')
+
+	select * from HOPDONGBAOHANH
+rollback
+go
+-------------------------------------------------------------------------------------------------
+-- Function tự động sinh mã Phiếu bảo hành
+create or alter function fn_SinhMaPhieuBaoHanh()
+returns nvarchar(20)
+as
+begin	
+	declare @NextID nvarchar(20), @LastID nvarchar(20)
+	select @LastID = ISNULL(MAX(CAST(SUBSTRING(maPhieuBaoHanh, 4, LEN(maPhieuBaoHanh) - 3) as int)), 0)
+	from PHIEUBAOHANH
+
+	if (@LastID < 999)
+		set @NextID = 'PBH' + RIGHT('000' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar), 3)
+	else
+		set @NextID = 'PBH' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar)
+	return @NextID
+end
+go
+-- add constraint
+alter table PHIEUBAOHANH add constraint contr_MaPhieuBaoHanh
+default dbo.fn_SinhMaPhieuBaoHanh() for maPhieuBaoHanh
+
 -------------------------------------------------------------------------------------------------
 -- Function tự động sinh mã khách hàng
 go
@@ -268,6 +374,31 @@ begin tran
 rollback
 go
 --------------------------------------------------------------------------------------------------
+-- Function tự động sinh mã nhân viên
+create or alter function fn_TaoMaNhanVien
+(@MaChiNhanh nvarchar(20))
+returns nvarchar(20)
+as
+begin
+	declare @nextID nvarchar(20), @Count int, @TienTo varchar(20), @TenChiNhanh nvarchar(50), @I int
+	declare @DodaiMa int
+	SET @DodaiMa = 3
+	SELECT @TenChiNhanh = cn.tenChiNhanh FROM CHINHANH cn WHERE cn.maChiNhanh =  @MaChiNhanh
+	SELECT @Count = count(*) FROM NHANVIEN vn WHERE vn.maChiNhanh = @MaChiNhanh
+	SET @I =  charindex(' ', @TenChiNhanh)
+	SET @TienTo = SUBSTRING(@TenChiNhanh, 1, 1)
+	WHILE @I > 0
+	BEGIN
+		SET @TienTo = CONCAT(@TienTo, SUBSTRING(@TenChiNhanh, @I + 1, 1))
+		SET @TenChiNhanh = SUBSTRING(@TenChiNhanh, @I + 1, len(@TenChiNhanh) -1)
+		SET @I =  charindex(' ', @TenChiNhanh)
+	END
+	SET @nextID = CONCAT(CONCAT(CONCAT('NV', SUBSTRING(@TienTo,3, @DodaiMa)), REPLICATE('0', @DodaiMa - len(@Count))), @Count + 1)
+	return @nextID
+end
+go
+
+------------------------------------------------------------------
 -- Function tính tổng số tiền khách hàng phải trả
 -- khi thanh toán 1 chiếc xe
 go
