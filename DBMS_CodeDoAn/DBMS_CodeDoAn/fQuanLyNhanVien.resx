@@ -307,7 +307,7 @@
         HPObMfOYvz6wUcbU4Joxy8AjWczxL8C6nAbnhOfqS0nyAWuHeu16zcEGAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="choose_file.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnChooseFile.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAC1dJREFUWEet
         l3tcjncfx6+OKoTJNiXTgTJGRrZ4MKc57LGtjYfM5PA4jGFms8PDkBnmUKqRyqEckggRZaZGraNIESo6
@@ -361,7 +361,7 @@
         fKcnf+5KTEnHP/i/mCT9GzjOogJcLw/WAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="image_employee.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="picNhanVien.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABGdBTUEAALGPC/xhBQAAPldJREFUeF7t
         XQd4VcXWFVCx+36xIwIqKopPROmdAAk19F6ld0VABRWpivTeq0CAFAKhhNBCLwkt9N4s2J/tNZ97/2vt

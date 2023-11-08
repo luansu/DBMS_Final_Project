@@ -57,5 +57,22 @@ namespace DBMS_CodeDoAn.DAO
             int result = DataProvider.Instance.ExcuteNonQuery(query);
             return result > 0;
         }
+
+        public List<KhachHang> TimKiemThongTinKhachHang(string hoTenKH, string CCCD, string diaChi, string soDienThoai)
+        {
+            List<KhachHang> listKhachHang = new List<KhachHang>();
+
+            string query = string.Format("select * from KHACHHANG where hoTenKhachHang like N'%{0}%' and CCCD like N'%{1}%' and diaChi like N'%{2}%' and soDienThoai like N'%{3}%'", hoTenKH, CCCD, diaChi, soDienThoai);
+
+            DataTable data = DataProvider.Instance.ExcuteQuery(query);
+
+            foreach (DataRow row in data.Rows)
+            {
+                KhachHang khachHang = new KhachHang(row);
+                listKhachHang.Add(khachHang);
+            }
+
+            return listKhachHang;
+        }
     }
 }

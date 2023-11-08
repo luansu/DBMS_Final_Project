@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fQuanLyPhuTung));
             this.grbPhuTung = new System.Windows.Forms.GroupBox();
+            this.btnChooseFile = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
@@ -60,7 +61,6 @@
             this.dgvThongTinPhuTung = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label24 = new System.Windows.Forms.Label();
-            this.btnChooseFile = new System.Windows.Forms.Button();
             this.grbPhuTung.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPhuTung)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongTinPhuTung)).BeginInit();
@@ -106,6 +106,24 @@
             this.grbPhuTung.Size = new System.Drawing.Size(1339, 574);
             this.grbPhuTung.TabIndex = 2;
             this.grbPhuTung.TabStop = false;
+            // 
+            // btnChooseFile
+            // 
+            this.btnChooseFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(102)))), ((int)(((byte)(85)))));
+            this.btnChooseFile.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChooseFile.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnChooseFile.Image = ((System.Drawing.Image)(resources.GetObject("btnChooseFile.Image")));
+            this.btnChooseFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnChooseFile.Location = new System.Drawing.Point(564, 300);
+            this.btnChooseFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnChooseFile.Name = "btnChooseFile";
+            this.btnChooseFile.Padding = new System.Windows.Forms.Padding(82, 0, 0, 0);
+            this.btnChooseFile.Size = new System.Drawing.Size(337, 65);
+            this.btnChooseFile.TabIndex = 55;
+            this.btnChooseFile.Text = "         CHỌN ẢNH";
+            this.btnChooseFile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnChooseFile.UseVisualStyleBackColor = false;
+            this.btnChooseFile.Click += new System.EventHandler(this.btnChooseFile_Click);
             // 
             // btnSave
             // 
@@ -204,6 +222,7 @@
             this.btnPrevious.Size = new System.Drawing.Size(165, 62);
             this.btnPrevious.TabIndex = 46;
             this.btnPrevious.UseVisualStyleBackColor = false;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
             // 
             // btnCancel
             // 
@@ -234,6 +253,7 @@
             this.btnLast.Size = new System.Drawing.Size(174, 62);
             this.btnLast.TabIndex = 39;
             this.btnLast.UseVisualStyleBackColor = false;
+            this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
             // 
             // btnNext
             // 
@@ -247,6 +267,7 @@
             this.btnNext.Size = new System.Drawing.Size(165, 62);
             this.btnNext.TabIndex = 38;
             this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnFirst
             // 
@@ -261,6 +282,7 @@
             this.btnFirst.Size = new System.Drawing.Size(165, 62);
             this.btnFirst.TabIndex = 37;
             this.btnFirst.UseVisualStyleBackColor = false;
+            this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
             // 
             // picPhuTung
             // 
@@ -268,7 +290,7 @@
             this.picPhuTung.Location = new System.Drawing.Point(564, 29);
             this.picPhuTung.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.picPhuTung.Name = "picPhuTung";
-            this.picPhuTung.Size = new System.Drawing.Size(224, 240);
+            this.picPhuTung.Size = new System.Drawing.Size(255, 255);
             this.picPhuTung.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picPhuTung.TabIndex = 33;
             this.picPhuTung.TabStop = false;
@@ -455,8 +477,9 @@
             // 
             // dgvThongTinPhuTung
             // 
+            this.dgvThongTinPhuTung.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvThongTinPhuTung.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvThongTinPhuTung.Location = new System.Drawing.Point(12, 682);
+            this.dgvThongTinPhuTung.Location = new System.Drawing.Point(11, 682);
             this.dgvThongTinPhuTung.Name = "dgvThongTinPhuTung";
             this.dgvThongTinPhuTung.RowHeadersWidth = 62;
             this.dgvThongTinPhuTung.RowTemplate.Height = 28;
@@ -475,29 +498,11 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Georgia", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(584, 9);
+            this.label24.Location = new System.Drawing.Point(376, 10);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(546, 56);
             this.label24.TabIndex = 0;
             this.label24.Text = "QUẢN LÝ PHỤ TÙNG";
-            // 
-            // btnChooseFile
-            // 
-            this.btnChooseFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(102)))), ((int)(((byte)(85)))));
-            this.btnChooseFile.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChooseFile.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnChooseFile.Image = ((System.Drawing.Image)(resources.GetObject("btnChooseFile.Image")));
-            this.btnChooseFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnChooseFile.Location = new System.Drawing.Point(564, 300);
-            this.btnChooseFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnChooseFile.Name = "btnChooseFile";
-            this.btnChooseFile.Padding = new System.Windows.Forms.Padding(82, 0, 0, 0);
-            this.btnChooseFile.Size = new System.Drawing.Size(337, 65);
-            this.btnChooseFile.TabIndex = 55;
-            this.btnChooseFile.Text = "         CHỌN ẢNH";
-            this.btnChooseFile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnChooseFile.UseVisualStyleBackColor = false;
-            this.btnChooseFile.Click += new System.EventHandler(this.btnChooseFile_Click);
             // 
             // fQuanLyPhuTung
             // 

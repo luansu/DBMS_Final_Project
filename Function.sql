@@ -1,6 +1,5 @@
 ﻿use DBMS_DOAN_QUANLYCUAHANGXE
 go
-
 -- Function tự động sinh mã bảo dưỡng
 create or alter function fn_SinhMaBaoDuong()
 returns nvarchar(20)
@@ -90,9 +89,34 @@ rollback
 go
 --------------------------------------------------------------------------------------------------
 -- Function tự sinh mã chi tiết phiếu nhập xe
+create or alter function fn_SinhMaChiTietPhieuNhapXe()
+returns nvarchar(20)
+as
+begin
+	declare @NextId nvarchar(20), @LastID nvarchar(20)
+	select @LastID = ISNULL(MAX(CAST(SUBSTRING(maChiTietPhieuNhapXe, 6, LEN(maChiTietPhieuNhapXe) - 5) as int)), 0)
+	from CHITIETPHIEUNHAPXE
+	
+	if (@LastID < 999)
+	begin
+		set @NextId = 'CTPNX' + RIGHT('000' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar), 3)
+	end
+	else
+	begin
+		set @NextId = 'CTPNX' + CAST(ISNULL(@LastID, 0) + 1 as nvarchar)
+	end
+	return @NextId
+end
+go
+-- Add constraint
+alter table CHITIETPHIEUNHAPXE add constraint contr_SinhMaChiTietPhieuNhapXe
+default dbo.fn_SinhMaChiTietPhieuNhapXe() for maChiTietPhieuNhapXe
+begin tran
+	insert into CHITIETPHIEUNHAPXE(maLoXe, maPhieuNhap, giaNhap, soLuong)
+	values('LOXE001', 'PN001', 11111, 111)
 
-
-
+	select * from CHITIETPHIEUNHAPXE
+rollback
 --------------------------------------------------------------------------------------------------
 -- Function tự sinh mã chi tiết phiếu nhập phụ tùng
 go

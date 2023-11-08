@@ -6,6 +6,7 @@ using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.VisualStyles;
 
 namespace DBMS_CodeDoAn.DAO
 {
@@ -87,6 +88,7 @@ namespace DBMS_CodeDoAn.DAO
             return listXe;
         }
 
+<<<<<<< HEAD
         public bool ThemLoXe(string maLoXe, string tenXe, string mauSac, decimal giaBan, int soChoNgoi, string xuatXu, string hangXe, string loaiXe, string phienBanXe, int tocDoToiDa, decimal trongLuong, decimal trongTai, string loaiNhienLieu, decimal congSuatDongCo, decimal dungTichDongCo, string loaiDongCo, decimal khoangSangGam, decimal chieuDaiCoSo, decimal chieuDai, decimal chieuRong, decimal chieuCao, decimal banKinhQuayVong, string hinhAnh, string moTa)
         {
             string query = string.Format("INSERT INTO LOXE (maLoXe, tenXe, mauSac, giaBan, soChoNgoi, xuatXu, hangXe, loaiXe, phienBanXe, tocDoToiDa, trongLuong, trongTai, loaiNhienLieu, congSuatDongCo, dungTichDongCo, loaiDongCo, khoangSangGam, chieuDaiCoSo, chieuDai, chieuRong, chieuCao, banKinhQuayVong, hinhAnh, moTa) " +
@@ -114,5 +116,7 @@ namespace DBMS_CodeDoAn.DAO
             int result = DataProvider.Instance.ExcuteNonQuery(query);
             return result > 0;
         }
+=======
+>>>>>>> e1def508216fb74d5ee14a749b3c32593fcf3078
     }
 }
