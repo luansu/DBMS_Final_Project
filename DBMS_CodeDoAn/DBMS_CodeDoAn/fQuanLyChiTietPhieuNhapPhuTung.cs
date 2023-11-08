@@ -14,6 +14,7 @@ namespace DBMS_CodeDoAn
 {
     public partial class fQuanLyChiTietPhieuNhapPhuTung : Form
     {
+        int index = 0;
         string strBtn = "";
         BindingSource sourceChiTietPhieuNhapPT = new BindingSource();
         public fQuanLyChiTietPhieuNhapPhuTung()
@@ -23,6 +24,12 @@ namespace DBMS_CodeDoAn
         }
 
         #region event
+
+        private void fQuanLyChiTietPhieuNhapPhuTung_Load(object sender, EventArgs e)
+        {
+            DisableButtonSystem();
+            DisableTextBox();
+        }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -38,12 +45,14 @@ namespace DBMS_CodeDoAn
             DisableButtonEditData();
             EnableButtonSystem();
             EnableTextBox();
+            strBtn = "Edit";
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
             DisableButtonEditData();
             EnableButtonSystem();
+            strBtn = "Delete";
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -70,8 +79,34 @@ namespace DBMS_CodeDoAn
                     MessageBox.Show("Thêm thất bại");
                 }
             }
-
-
+            else if (strBtn == "Edit")
+            {
+                bool result = CapNhatChiTietPhieuNhapPhuTung(maChiTietPhieuNhapPhuTung, maPhuTung, maPhieuNhap, giaNhap, soLuong);
+                if (result)
+                {
+                    MessageBox.Show("Cập nhật chi tiết phiếu nhập phụ tùng thành công");
+                }
+                else
+                {
+                    MessageBox.Show("Cập nhật thất bại");
+                }
+            }
+            else if (strBtn == "Delete")
+            {
+                if (MessageBox.Show("Bạn có thật sự muốn xóa chi tiết phiếu nhập phụ tùng này", "Chú ý", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    bool result = XoaChiTietPhieuNhapPhuTung(maChiTietPhieuNhapPhuTung);
+                    if (result)
+                    {
+                        MessageBox.Show("Xóa chi tiết phiếu nhập phụ tùng thành công");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Xóa thất bại");
+                    }
+                }
+            }
+            LoadDanhSachChiTietPhieuNhapPhuTung();
             ClearText();
         }
 
@@ -86,6 +121,36 @@ namespace DBMS_CodeDoAn
             DisableTextBox();
             EnableButtonEditData();
             ClearText();
+        }
+
+        private void btnFirst_Click(object sender, EventArgs e)
+        {
+            index = 0;
+            GetDataInDataGridView(index);
+        }
+
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            if (index > 0)
+            {
+                index--;
+                GetDataInDataGridView(index);
+            }
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            if (index < dgvThongTinChiTietPhieuNhapPhuTung.Rows.Count - 1)
+            {
+                index++;
+                GetDataInDataGridView(index);
+            }
+        }
+
+        private void btnLast_Click(object sender, EventArgs e)
+        {
+            index = dgvThongTinChiTietPhieuNhapPhuTung.Rows.Count - 1;
+            GetDataInDataGridView(index);
         }
 
         #endregion
@@ -124,6 +189,26 @@ namespace DBMS_CodeDoAn
         bool ThemChiTietPhieuNhapPhuTung(string maPhuTung, string maPhieuNhap, float giaNhap, int soLuong)
         {
             return ChiTietPhieuNhapPhuTungDAO.Instance.ThemChiTietPhieuNhapPhuTung(maPhuTung, maPhieuNhap, giaNhap, soLuong);
+        }
+
+        bool CapNhatChiTietPhieuNhapPhuTung(string maChiTietPNPT, string maPhuTung, string maPhieuNhap, float giaNhap, int soLuong)
+        {
+            return ChiTietPhieuNhapPhuTungDAO.Instance.CapNhatChiTietPhieuNhapPhuTung(maChiTietPNPT, maPhuTung, maPhieuNhap, giaNhap, soLuong);
+        }
+
+        bool XoaChiTietPhieuNhapPhuTung(string maChiTietPNPT)
+        {
+            return ChiTietPhieuNhapPhuTungDAO.Instance.XoaChiTietPhieuNhapPhuTung(maChiTietPNPT);
+        }
+
+        void GetDataInDataGridView(int idx)
+        {
+            DataGridViewRow row = dgvThongTinChiTietPhieuNhapPhuTung.Rows[idx];
+            txtMaChiTietPhieuNhapPhuTung.Text = row.Cells[0].Value.ToString();
+            cbbMaPhuTung.Text = row.Cells[1].Value.ToString();
+            cbbMaPhieuNhap.Text = row.Cells[2].Value.ToString();
+            txtGiaNhap.Text = row.Cells[3].Value.ToString();
+            nmSoLuong.Value = (int)row.Cells[4].Value;
         }
 
         void BindingData()
@@ -179,7 +264,6 @@ namespace DBMS_CodeDoAn
         }
         void EnableTextBox()
         {
-            txtMaChiTietPhieuNhapPhuTung.Enabled = true;
             cbbMaPhieuNhap.Enabled = true;
             cbbMaPhuTung.Enabled = true;
             txtGiaNhap.Enabled = true;

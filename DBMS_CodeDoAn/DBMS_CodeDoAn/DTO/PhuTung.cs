@@ -51,35 +51,5 @@ namespace DBMS_CodeDoAn.DTO
             ChatLuong = row["chatLuong"].ToString();
             HinhAnh = row["hinhAnh"].ToString();
         }
-
-        private byte[] ConvertImageToByteArray(Image image)
-        {
-            if (image == null)
-            {
-                return null;
-            }
-            ImageConverter _imageConverter = new ImageConverter();
-            byte[] xByte = (byte[])_imageConverter.ConvertTo(image, typeof(byte[]));
-            return xByte;
-        }
-
-        private Image ConvertByteArrayToImage(byte[] byteArray)
-        {
-            if (byteArray == null)
-            {
-                return null;
-            }
-            try
-            {
-                using (MemoryStream stream = new MemoryStream(byteArray))
-                {
-                    return Image.FromStream(stream);
-                }
-            }
-            catch
-            {
-                return null;
-            }
-        }
     }
 }

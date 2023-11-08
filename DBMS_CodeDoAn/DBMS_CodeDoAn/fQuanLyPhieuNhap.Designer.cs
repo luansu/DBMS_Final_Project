@@ -418,11 +418,11 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Georgia", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(300, 9);
+            this.label24.Location = new System.Drawing.Point(284, 10);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(603, 56);
+            this.label24.Size = new System.Drawing.Size(651, 56);
             this.label24.TabIndex = 0;
-            this.label24.Text = "QUẢN LÝ PHIẾU NHẬP";
+            this.label24.Text = "QUẢN LÝ PHIẾU NHẬP    ";
             // 
             // fQuanLyPhieuNhap
             // 

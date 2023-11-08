@@ -173,7 +173,6 @@ namespace DBMS_CodeDoAn
             List<PhuTung> listPhuTung = PhuTungDAO.Instance.DanhSachPhuTung();
             bindingPhuTung.DataSource = listPhuTung;
             dgvThongTinPhuTung.DataSource = bindingPhuTung;
-            //picPhuTung.ImageLocation = @"C:\Users\WIN 10\Downloads\DoanThanhNien.jpg";
         }
 
         bool ThemPhuTung(string loaiPhuTung, string tenPhuTung, string thuongHieu, string xuatXu, float giaBan, string chatLuong, string hinhAnh)

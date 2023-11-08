@@ -42,6 +42,8 @@ namespace DBMS_CodeDoAn
 
                 fHome f = new fHome();
                 f.ShowDialog();
+                //fTrangChu f = new fTrangChu();
+                //f.ShowDialog();
 
                 this.Show();
             }

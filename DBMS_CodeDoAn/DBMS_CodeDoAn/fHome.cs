@@ -115,9 +115,18 @@ namespace DBMS_CodeDoAn
             this.Show();
         }
 
+        private void quảnLýKhoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            fQuanLyKho f = new fQuanLyKho();
+            f.ShowDialog();
+            this.Show();
+        }
+
         private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
     }
 }

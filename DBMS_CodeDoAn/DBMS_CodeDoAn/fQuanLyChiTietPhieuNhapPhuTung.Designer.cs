@@ -230,6 +230,7 @@
             this.btnPrevious.Size = new System.Drawing.Size(165, 62);
             this.btnPrevious.TabIndex = 56;
             this.btnPrevious.UseVisualStyleBackColor = false;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
             // 
             // btnCancel
             // 
@@ -260,6 +261,7 @@
             this.btnLast.Size = new System.Drawing.Size(174, 62);
             this.btnLast.TabIndex = 49;
             this.btnLast.UseVisualStyleBackColor = false;
+            this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
             // 
             // btnNext
             // 
@@ -273,6 +275,7 @@
             this.btnNext.Size = new System.Drawing.Size(165, 62);
             this.btnNext.TabIndex = 48;
             this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnFirst
             // 
@@ -287,6 +290,7 @@
             this.btnFirst.Size = new System.Drawing.Size(165, 62);
             this.btnFirst.TabIndex = 47;
             this.btnFirst.UseVisualStyleBackColor = false;
+            this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
             // 
             // label11
             // 
@@ -413,12 +417,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1109, 738);
             this.Controls.Add(this.dgvThongTinChiTietPhieuNhapPhuTung);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.grbChiTietPhieuNhapPhuTung);
             this.Name = "fQuanLyChiTietPhieuNhapPhuTung";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "fQuanLyChiTietPhieuNhapPhuTung";
+            this.Load += new System.EventHandler(this.fQuanLyChiTietPhieuNhapPhuTung_Load);
             this.grbChiTietPhieuNhapPhuTung.ResumeLayout(false);
             this.grbChiTietPhieuNhapPhuTung.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmSoLuong)).EndInit();

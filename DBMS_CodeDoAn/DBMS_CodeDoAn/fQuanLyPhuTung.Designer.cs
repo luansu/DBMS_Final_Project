@@ -498,7 +498,7 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Georgia", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(584, 9);
+            this.label24.Location = new System.Drawing.Point(376, 10);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(546, 56);
             this.label24.TabIndex = 0;

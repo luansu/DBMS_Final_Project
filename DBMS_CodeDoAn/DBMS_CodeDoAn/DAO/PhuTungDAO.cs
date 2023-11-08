@@ -61,5 +61,23 @@ namespace DBMS_CodeDoAn.DAO
             int result = DataProvider.Instance.ExcuteNonQuery(query);
             return result > 0;
         }
+
+        public List<PhuTung> TimKiemThongTinPhuThung(string loaiPhuTung, string tenPhuTung, string thuongHieu, string xuatXu, float giaBan = 0)
+        {
+            List<PhuTung> listPhuTung = new List<PhuTung>();
+
+            string query = string.Format("select * from PHUTUNG where loaiPhuTung like N'{0}' and tenPhuTung like N'{1}' and thuongHieu like N'{2}' and xuatXu like N'{3}' and giaBan = {4}", loaiPhuTung, tenPhuTung, thuongHieu, xuatXu, giaBan);
+            
+            DataTable data = DataProvider.Instance.ExcuteQuery(query);
+
+            foreach (DataRow row in data.Rows)
+            {
+                PhuTung phuTung = new PhuTung(row);
+                listPhuTung.Add(phuTung);
+            }
+
+
+            return listPhuTung;
+        }
     }
 }
