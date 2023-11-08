@@ -222,5 +222,3 @@ begin tran
 	select * from TAIKHOAN
 rollback
 go
-
---

@@ -14,19 +14,21 @@ go
 
 -- Tạo bảng nhân viên 
 -- => Trigger kiểm tra NHÂN VIÊN: CCCD là số, >=18 tuổi
-create table NHANVIEN( 
+	create table NHANVIEN( 
 	maNhanVien nvarchar(20) primary key,
 	hoTenNhanVien nvarchar(50) not null,
-	CCCD nvarchar(20) check (len(CCCD) = 12) unique,
-	ngaySinh date check (DateDiff(year, ngaySinh, GetDate()) >= 18),
+	CCCD nvarchar(20) constraint contr_NhanVien_checkLenCCCD check (len(CCCD) = 12),
+	ngaySinh date constraint contr_NhanVien_checkOld check (DateDiff(year, ngaySinh, GetDate()) >= 18),
 	gioiTinh nvarchar(5),
 	diaChi nvarchar(255),
-	soDienThoai nvarchar(20) check (len(soDienThoai) = 10 or len(soDienThoai) = 11) unique,
+	soDienThoai nvarchar(20) constraint contr_NHANVIEN_checkLenSDT check (len(soDienThoai) = 10 or len(soDienThoai) = 11),
 	chucVu nvarchar(50),
 	tinhTrangLamViec bit default 1,
 	maChiNhanh nvarchar(20),
 	hinhAnh nvarchar(200)
-	foreign key (maChiNhanh) references CHINHANH(maChiNhanh)
+	foreign key (maChiNhanh) references CHINHANH(maChiNhanh),
+	constraint contr_NhanVien_conflictCCCD unique (CCCD),
+	constraint contr_NhanVien_conflictSDT unique (soDienThoai)
 )
 go
 
@@ -47,7 +49,7 @@ create table NHACUNGCAP(
 	maNhaCungCap nvarchar(20) primary key,
 	tenNhaCungCap nvarchar(50) not null,
 	diaChi nvarchar(255) not null,
-	soDienThoai nvarchar(20) check (len(soDienThoai) = 10 or len(soDienThoai) = 11),
+	soDienThoai nvarchar(20) constraint contr_NHACUNGCAP_checkLenSDT check (len(soDienThoai) = 10 or len(soDienThoai) = 11),
 )
 go
 
@@ -56,8 +58,8 @@ create table LOXE(
 	maLoXe nvarchar(20) primary key,
 	tenXe nvarchar(50), 
 	mauSac nvarchar(20), 
-	giaBan float check (giaBan > 0), 
-	soChoNgoi int check (soChoNgoi >= 2) default 4, 
+	giaBan float constraint contr_LOXE_checkGiaBan check (giaBan > 0), 
+	soChoNgoi int constraint contr_LOXE_checkSoChoNgoi check (soChoNgoi >= 2) default 4, 
 	xuatXu nvarchar(50), 
 	hangXe nvarchar(50), 
 	loaiXe nvarchar(50), 
@@ -140,11 +142,11 @@ go
 CREATE TABLE KHACHHANG(
 	maKhachHang nvarchar(20) primary key,
 	hoTenKhachHang nvarchar(50) not null, 
-	ngaySinh date check (DateDiff(year, ngaySinh, GetDate()) >= 18), 
+	ngaySinh date constraint contr_KHACHHANG_checkOld check (DateDiff(year, ngaySinh, GetDate()) >= 18), 
 	gioiTinh nvarchar(5), 
-	CCCD nvarchar(20) check (len(CCCD) = 12) unique, 
+	CCCD nvarchar(20) constraint contr_KHACHHANG_checkLenCCCD check (len(CCCD) = 12) unique, 
 	diaChi nvarchar(255), 
-	soDienThoai nvarchar(20) check (len(soDienThoai) = 10 or len(soDienThoai) = 11) unique,
+	soDienThoai nvarchar(20) constraint contr_KHACHHANG_checkLenSDT check (len(soDienThoai) = 10 or len(soDienThoai) = 11) unique,
 )
 go
 
@@ -153,7 +155,7 @@ create table HOADON(
 	maHoaDon nvarchar(20) primary key,
 	ngayLapHoaDon date default GETDATE(),
 	tongTien float check (tongTien > 0),
-	tinhTrang nvarchar(50) Check (tinhTrang = N'Chưa thanh toán' or tinhTrang = N'Đã thanh toán') default N'Chưa thanh toán',
+	tinhTrang nvarchar(50) constraint contr_HOADON_checkStatus Check (tinhTrang = N'Chưa thanh toán' or tinhTrang = N'Đã thanh toán') default N'Chưa thanh toán',
 	maKhachHang nvarchar(20), 
 	maNhanVienThucHien nvarchar(20)
 	foreign key (maKhachHang) references KHACHHANG(maKhachHang),
@@ -196,7 +198,7 @@ CREATE TABLE HOPDONGBAOHANH(
 	maKhachHang nvarchar(20),
 	ngayKyBaoHanh date, 
 	thoiHanBaoHanh date, 
-	tinhTrang nvarchar(20) check (tinhTrang = N'Còn bảo hành' or tinhTrang = N'Hết hạn'),
+	tinhTrang nvarchar(20) constraint contr_HOPDONGBAOHANH_checkStatus check (tinhTrang = N'Còn bảo hành' or tinhTrang = N'Hết hạn'),
 	foreign key (maXe) references XE(maXe),
 	foreign key (maKhachHang) references KHACHHANG(maKhachHang)
 )
