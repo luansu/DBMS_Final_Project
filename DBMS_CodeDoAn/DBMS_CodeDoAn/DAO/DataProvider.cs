@@ -27,23 +27,6 @@ namespace DBMS_CodeDoAn.DAO
         private string strCon = @"Data Source=.;Initial Catalog=DBMS_DOAN_QUANLYCUAHANGXE;Integrated Security=True";
         private DataProvider() { }
 
-        public void Init(SqlConnection conn)
-        {
-            conn = new SqlConnection(strCon);
-        }
-        public void Connect(SqlConnection sqlCon)
-        {
-            Init(sqlCon);
-            if (sqlCon.State != ConnectionState.Open)
-                sqlCon.Open();
-        }
-
-        public void Disconnect(SqlConnection sqlCon)
-        { 
-            if (sqlCon != null && sqlCon.State != ConnectionState.Closed)
-                sqlCon.Close();
-        }
-
         public DataTable ExcuteQuery(string query, object[] parameter = null)
         {
             DataTable data = new DataTable();

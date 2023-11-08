@@ -61,50 +61,61 @@ namespace DBMS_CodeDoAn
             EnableButtonEditData();
             DisableTextBox();
 
-            string maChiTietHoaDonPhuTung = txtMaChiTietHoaDonPhuTung.Text;
-            string maHoaDon = cbbMaHoaDon.Text;
-            string maPhuTung = cbbMaPhuTung.Text;
-            float soTienDaTra = (float)Convert.ToDouble(txtSoTienDaTra.Text.ToString());
+            try
+            {
+                string maChiTietHoaDonPhuTung = txtMaChiTietHoaDonPhuTung.Text;
+                string maHoaDon = cbbMaHoaDon.Text;
+                string maPhuTung = cbbMaPhuTung.Text;
+                float soTienDaTra = (float)Convert.ToDouble(txtSoTienDaTra.Text.ToString());
 
-            if (strBtn == "Add")
-            {
-                bool result = ThemChiTietHoaDonPhuTung(maHoaDon, maPhuTung, soTienDaTra);
-                if (result)
+                if (strBtn == "Add")
                 {
-                    MessageBox.Show("Thêm chi tiết hóa đơn phụ tùng thành công");
-                }
-                else
-                {
-                    MessageBox.Show("Thêm thất bại");
-                }
-            }
-            else if (strBtn == "Edit")
-            {
-                bool result = CapNhatChiTietHoaDonPhuTung(maChiTietHoaDonPhuTung, maHoaDon, maPhuTung, soTienDaTra);
-                if (result)
-                {
-                    MessageBox.Show("Cập nhật chi tiết hóa đơn phụ tùng thành công");
-                }
-                else
-                {
-                    MessageBox.Show("Cập nhật thất bại");
-                }
-            }
-            else if (strBtn == "Delete")
-            {
-                if (MessageBox.Show("Bạn có chắc muốn xóa chi tiết hóa đơn phụ tùng này không?", "Cảnh báo!", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                {
-                    bool result = XoaChiTietHoaDonPhuTung(maChiTietHoaDonPhuTung);
+                    bool result = ThemChiTietHoaDonPhuTung(maHoaDon, maPhuTung, soTienDaTra);
                     if (result)
                     {
-                        MessageBox.Show("Xóa chi tiết hóa đơn phụ tùng thành công");
+                        MessageBox.Show("Thêm chi tiết hóa đơn phụ tùng thành công");
                     }
                     else
                     {
-                        MessageBox.Show("Xóa thất bại");
+                        MessageBox.Show("Thêm thất bại");
+                    }
+                }
+                else if (strBtn == "Edit")
+                {
+                    bool result = CapNhatChiTietHoaDonPhuTung(maChiTietHoaDonPhuTung, maHoaDon, maPhuTung, soTienDaTra);
+                    if (result)
+                    {
+                        MessageBox.Show("Cập nhật chi tiết hóa đơn phụ tùng thành công");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cập nhật thất bại");
+                    }
+                }
+                else if (strBtn == "Delete")
+                {
+                    if (MessageBox.Show("Bạn có chắc muốn xóa chi tiết hóa đơn phụ tùng này không?", "Cảnh báo!", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    {
+                        bool result = XoaChiTietHoaDonPhuTung(maChiTietHoaDonPhuTung);
+                        if (result)
+                        {
+                            MessageBox.Show("Xóa chi tiết hóa đơn phụ tùng thành công");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Xóa thất bại");
+                        }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("correct format"))
+                {
+                    MessageBox.Show("Số tiền đã trả phải là định dạng số");
+                }
+            }
+
             LoadDanhSachChiTietHoaDonPhuTung();
             ClearText();
         }

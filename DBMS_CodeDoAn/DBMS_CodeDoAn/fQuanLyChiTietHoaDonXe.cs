@@ -61,54 +61,64 @@ namespace DBMS_CodeDoAn
             EnableButtonEditData();
             DisableTextBox();
 
-            string maCTHDXe = txtMaChiTietHoaDonXe.Text;
-            string maHoaDon = cbbMaHoaDon.Text;
-            string maXe = cbbMaXe.Text;
-            string ngayNhan = dtpNgayNhanXe.Value.ToString("yyyy-MM-dd");
-            float soTienDaTra = (float)Convert.ToDouble(txtSoTienDaTra.Text.ToString());
-            float phiDangKyBienSo = (float)Convert.ToDouble(txtPhiDangKyBienSo.Text.ToString());
-            float phiDangKiem = (float)Convert.ToDouble(txtPhiDangKiem.Text.ToString());
-            float phiTruocBa = (float)Convert.ToDouble(txtPhiTruocBa.Text.ToString());
-            float phiBaoHiemTrachNhiemHinhSu = (float)Convert.ToDouble(txtPhiBaoHiemTrachNhiemDanSu.Text.ToString());
-            float phiSuDungDuongBo = (float)Convert.ToDouble(txtPhiSuDungDuongBo.Text.ToString());
+            try
+            {
+                string maCTHDXe = txtMaChiTietHoaDonXe.Text;
+                string maHoaDon = cbbMaHoaDon.Text;
+                string maXe = cbbMaXe.Text;
+                string ngayNhan = dtpNgayNhanXe.Value.ToString("yyyy-MM-dd");
+                float soTienDaTra = (float)Convert.ToDouble(txtSoTienDaTra.Text.ToString());
+                float phiDangKyBienSo = (float)Convert.ToDouble(txtPhiDangKyBienSo.Text.ToString());
+                float phiDangKiem = (float)Convert.ToDouble(txtPhiDangKiem.Text.ToString());
+                float phiTruocBa = (float)Convert.ToDouble(txtPhiTruocBa.Text.ToString());
+                float phiBaoHiemTrachNhiemHinhSu = (float)Convert.ToDouble(txtPhiBaoHiemTrachNhiemDanSu.Text.ToString());
+                float phiSuDungDuongBo = (float)Convert.ToDouble(txtPhiSuDungDuongBo.Text.ToString());
 
-            if (strBtn == "Add")
-            {
-                bool result = ThemChiTietHoaDonXe(maHoaDon, maXe, ngayNhan, soTienDaTra, phiDangKyBienSo, phiDangKiem, phiTruocBa, phiBaoHiemTrachNhiemHinhSu, phiSuDungDuongBo);
-                if (result)
+                if (strBtn == "Add")
                 {
-                    MessageBox.Show("Thêm chi tiết hóa đơn mới thành công");
-                }
-                else
-                {
-                    MessageBox.Show("Thêm thất bại");
-                }
-            }
-            else if (strBtn == "Edit")
-            {
-                bool result = CapNhatChiTietHoaDonXe(maCTHDXe, maHoaDon, maXe, ngayNhan, soTienDaTra, phiDangKyBienSo, phiDangKiem, phiTruocBa, phiBaoHiemTrachNhiemHinhSu, phiSuDungDuongBo);
-                if (result)
-                {
-                    MessageBox.Show("Cập nhật chi tiết hóa đơn thành công");
-                }
-                else
-                {
-                    MessageBox.Show("Cập nhật thất bại");
-                }
-            }
-            else if (strBtn == "Delete")
-            {
-                if (MessageBox.Show("Bạn có thật sự muốn xóa chi tiết hóa đơn này không?", "Cảnh báo!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    bool result = XoaChiTietHoaDonXe(maCTHDXe);
+                    bool result = ThemChiTietHoaDonXe(maHoaDon, maXe, ngayNhan, soTienDaTra, phiDangKyBienSo, phiDangKiem, phiTruocBa, phiBaoHiemTrachNhiemHinhSu, phiSuDungDuongBo);
                     if (result)
                     {
-                        MessageBox.Show("Xóa chi tiết hóa đơn thành công");
+                        MessageBox.Show("Thêm chi tiết hóa đơn mới thành công");
                     }
                     else
                     {
-                        MessageBox.Show("Xóa thất bại");
+                        MessageBox.Show("Thêm thất bại");
                     }
+                }
+                else if (strBtn == "Edit")
+                {
+                    bool result = CapNhatChiTietHoaDonXe(maCTHDXe, maHoaDon, maXe, ngayNhan, soTienDaTra, phiDangKyBienSo, phiDangKiem, phiTruocBa, phiBaoHiemTrachNhiemHinhSu, phiSuDungDuongBo);
+                    if (result)
+                    {
+                        MessageBox.Show("Cập nhật chi tiết hóa đơn thành công");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cập nhật thất bại");
+                    }
+                }
+                else if (strBtn == "Delete")
+                {
+                    if (MessageBox.Show("Bạn có thật sự muốn xóa chi tiết hóa đơn này không?", "Cảnh báo!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        bool result = XoaChiTietHoaDonXe(maCTHDXe);
+                        if (result)
+                        {
+                            MessageBox.Show("Xóa chi tiết hóa đơn thành công");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Xóa thất bại");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("correct format"))
+                {
+                    MessageBox.Show("Dữ liệu nhập phải đúng định dạng, vui Lòng kiểm tra !!!");
                 }
             }
 

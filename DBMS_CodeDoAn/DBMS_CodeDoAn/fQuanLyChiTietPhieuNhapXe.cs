@@ -59,49 +59,59 @@ namespace DBMS_CodeDoAn
             DisableTextBox();
             EnableButtonEditData();
 
-            string maChiTietPhieuNhapXe = txtMaChiTietPhieuNhapXe.Text;
-            string maLoXe = cbbMaLoXe.Text;
-            string maPhieuNhap = cbbMaPhieuNhap.Text;
-            float giaNhap = (float)Convert.ToDouble(txtGiaNhap.Text);
-            int soLuong = (int)nmSoLuong.Value;
+            try
+            {
+                string maChiTietPhieuNhapXe = txtMaChiTietPhieuNhapXe.Text;
+                string maLoXe = cbbMaLoXe.Text;
+                string maPhieuNhap = cbbMaPhieuNhap.Text;
+                float giaNhap = (float)Convert.ToDouble(txtGiaNhap.Text);
+                int soLuong = (int)nmSoLuong.Value;
 
-            if (strBtn == "Add")
-            {
-                bool result = ThemChiTietPhieuNhapXe(maLoXe, maPhieuNhap, giaNhap, soLuong);
-                if (result)
+                if (strBtn == "Add")
                 {
-                    MessageBox.Show("Thêm chi tiết phiếu nhập xe thành công");
-                }
-                else
-                {
-                    MessageBox.Show("Thêm thất bại");
-                }
-            }
-            else if (strBtn == "Edit")
-            {
-                bool result = CapNhatChiTietPhieuNhapXe(maChiTietPhieuNhapXe, maLoXe, maPhieuNhap, giaNhap, soLuong);
-                if (result)
-                {
-                    MessageBox.Show("Cập nhật chi tiết phiếu nhập xe thành công");
-                }
-                else
-                {
-                    MessageBox.Show("Cập nhật thất bại");
-                }
-            }
-            else if (strBtn == "Delete")
-            {
-                if (MessageBox.Show("Bạn có chắc muốn xóa phiếu nhập phụ tùng này không", "Chú ý", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                {
-                    bool result = XoaChiTietPhieuNhapXe(maChiTietPhieuNhapXe);
+                    bool result = ThemChiTietPhieuNhapXe(maLoXe, maPhieuNhap, giaNhap, soLuong);
                     if (result)
                     {
-                        MessageBox.Show("Xóa chi tiết phiếu nhập xe thành công");
+                        MessageBox.Show("Thêm chi tiết phiếu nhập xe thành công");
                     }
                     else
                     {
-                        MessageBox.Show("Xóa thất bại");
+                        MessageBox.Show("Thêm thất bại");
                     }
+                }
+                else if (strBtn == "Edit")
+                {
+                    bool result = CapNhatChiTietPhieuNhapXe(maChiTietPhieuNhapXe, maLoXe, maPhieuNhap, giaNhap, soLuong);
+                    if (result)
+                    {
+                        MessageBox.Show("Cập nhật chi tiết phiếu nhập xe thành công");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cập nhật thất bại");
+                    }
+                }
+                else if (strBtn == "Delete")
+                {
+                    if (MessageBox.Show("Bạn có chắc muốn xóa phiếu nhập phụ tùng này không", "Chú ý", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    {
+                        bool result = XoaChiTietPhieuNhapXe(maChiTietPhieuNhapXe);
+                        if (result)
+                        {
+                            MessageBox.Show("Xóa chi tiết phiếu nhập xe thành công");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Xóa thất bại");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("correct format"))
+                {
+                    MessageBox.Show("Giá nhập phải là kiểu dữ liệu số !!");
                 }
             }
 

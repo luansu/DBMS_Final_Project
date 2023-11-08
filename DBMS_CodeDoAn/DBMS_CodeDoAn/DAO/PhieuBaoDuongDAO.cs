@@ -36,5 +36,26 @@ namespace DBMS_CodeDoAn.DAO
 
             return listPhieuBaoDuong;
         }
+
+        public bool ThemPhieuBaoDuong(string ngayLapPhieu, float tongTien, string maKhachHang, string maNhanVienThucHien)
+        {
+            string query = string.Format("insert into PHIEUBAODUONG(ngayLapPhieu, tongTien, maKhachHang, maNhanVienThucHien) values('{0}', {1}, '{2}', '{3}')", ngayLapPhieu.Substring(0, 10), tongTien, maKhachHang, maNhanVienThucHien);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
+
+        public bool CapNhatPhieuBaoDuong(string maPhieuBaoDuong, string ngayLapPhieu, float tongTien, string maKhachHang, string maNhanVienThucHien)
+        {
+            string query = string.Format("update PHIEUBAODUONG set ngayLapPhieu = '{0}', tongTien = {1}, maKhachHang = '{2}', maNhanVienThucHien = '{3}' where maPhieuBaoDuong = '{4}'", ngayLapPhieu, tongTien, maKhachHang, maNhanVienThucHien, maPhieuBaoDuong);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
+
+        public bool XoaPhieuBaoDuong(string maPhieuBaoDuong)
+        {
+            string query = string.Format("delete PHIEUBAODUONG where maPhieuBaoDuong = '{0}'", maPhieuBaoDuong);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
     }
 }

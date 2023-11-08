@@ -88,35 +88,5 @@ namespace DBMS_CodeDoAn.DAO
             return listXe;
         }
 
-<<<<<<< HEAD
-        public bool ThemLoXe(string maLoXe, string tenXe, string mauSac, decimal giaBan, int soChoNgoi, string xuatXu, string hangXe, string loaiXe, string phienBanXe, int tocDoToiDa, decimal trongLuong, decimal trongTai, string loaiNhienLieu, decimal congSuatDongCo, decimal dungTichDongCo, string loaiDongCo, decimal khoangSangGam, decimal chieuDaiCoSo, decimal chieuDai, decimal chieuRong, decimal chieuCao, decimal banKinhQuayVong, string hinhAnh, string moTa)
-        {
-            string query = string.Format("INSERT INTO LOXE (maLoXe, tenXe, mauSac, giaBan, soChoNgoi, xuatXu, hangXe, loaiXe, phienBanXe, tocDoToiDa, trongLuong, trongTai, loaiNhienLieu, congSuatDongCo, dungTichDongCo, loaiDongCo, khoangSangGam, chieuDaiCoSo, chieuDai, chieuRong, chieuCao, banKinhQuayVong, hinhAnh, moTa) " +
-                "VALUES ('{0}', '{1}', '{2}', {3}, {4}, '{5}', '{6}', '{7}', '{8}', {9}, {10}, {11}, '{12}', {13}, {14}, '{15}', {16}, {17}, {18}, {19}, {20}, '{21}', '{22}')",
-                maLoXe, tenXe, mauSac, giaBan, soChoNgoi, xuatXu, hangXe, loaiXe, phienBanXe, tocDoToiDa, trongLuong, trongTai, loaiNhienLieu, congSuatDongCo, dungTichDongCo, loaiDongCo, khoangSangGam, chieuDaiCoSo, chieuDai, chieuRong, chieuCao, banKinhQuayVong, hinhAnh, moTa);
-
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
-
-            return result > 0;
-        }
-
-        public bool CapNhapLoXe(string maLoXe, string tenXe, string mauSac, decimal giaBan, int soChoNgoi, string xuatXu, string hangXe, string loaiXe, string phienBanXe, int tocDoToiDa, decimal trongLuong, decimal trongTai, string loaiNhienLieu, decimal congSuatDongCo, decimal dungTichDongCo, string loaiDongCo, decimal khoangSangGam, decimal chieuDaiCoSo, decimal chieuDai, decimal chieuRong, decimal chieuCao, decimal banKinhQuayVong, string hinhAnh)
-        {
-            string query = string.Format("UPDATE LOXE SET tenXe = '{0}', mauSac = '{1}', giaBan = {2}, soChoNgoi = {3}, xuatXu = '{4}', hangXe = '{5}', loaiXe = '{6}', phienBanXe = '{7}', tocDoToiDa = {8}, trongLuong = {9}, trongTai = {10}, loaiNhienLieu = '{11}', congSuatDongCo = {12}, dungTichDongCo = {13}, loaiDongCo = '{14}', khoangSangGam = {15}, chieuDaiCoSo = {16}, chieuDai = {17}, chieuRong = {18}, chieuCao = {19}, banKinhQuayVong = {20}, hinhAnh = '{21}' WHERE maLoXe = '{22}'",
-                tenXe, mauSac, giaBan, soChoNgoi, xuatXu, hangXe, loaiXe, phienBanXe, tocDoToiDa, trongLuong, trongTai, loaiNhienLieu, congSuatDongCo, dungTichDongCo, loaiDongCo, khoangSangGam, chieuDaiCoSo, chieuDai, chieuRong, chieuCao, banKinhQuayVong, hinhAnh, maLoXe);
-
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
-            return result > 0;
-        }
-
-        public bool XoaLoXe(string maLoXe)
-        {
-            string query = string.Format("DELETE FROM LOXE WHERE maLoXe = '{0}'", maLoXe);
-
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
-            return result > 0;
-        }
-=======
->>>>>>> e1def508216fb74d5ee14a749b3c32593fcf3078
     }
 }

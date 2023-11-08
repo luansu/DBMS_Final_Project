@@ -24,7 +24,7 @@ namespace DBMS_CodeDoAn.DAO
         {
             List<ChiTietPhieuNhapPhuTung> listDanhSachCTPNPTung = new List<ChiTietPhieuNhapPhuTung> ();
 
-            string query = "select * from CHITIETPHIEUNHAPPHUTUNG";
+            string query = "exec list_CHITIETPHIEUNHAPPHUTUNG";
 
             DataTable data = DataProvider.Instance.ExcuteQuery(query);
 
@@ -38,22 +38,22 @@ namespace DBMS_CodeDoAn.DAO
         }
         public bool ThemChiTietPhieuNhapPhuTung(string maPhuTung, string maPhieuNhap, float giaNhap, int soLuong)
         {
-            string query = string.Format("insert into CHITIETPHIEUNHAPPHUTUNG(maPhuTung, maPhieuNhap, giaNhap, soLuong) values ('{0}', '{1}', {2}, {3})", maPhuTung, maPhieuNhap, giaNhap, soLuong);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Insert_CHITIETPHIEUNHAPPHUTUNG @maPhuTung , @maPhieuNhap , @giaNhap , @soLuong ");
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { maPhuTung, maPhieuNhap, giaNhap, soLuong });
             return result > 0;
         }
 
         public bool CapNhatChiTietPhieuNhapPhuTung(string maChiTietPNPT, string maPhuTung, string maPhieuNhap, float giaNhap, int soLuong)
         {
-            string query = string.Format("update CHITIETPHIEUNHAPPHUTUNG set maPhuTung = '{0}', maPhieuNhap = '{1}', giaNhap = {2}, soLuong = {3} where maChiTietPhieuNhapPhuTung = '{4}'", maPhuTung, maPhieuNhap, giaNhap, soLuong, maChiTietPNPT);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Update_CHITIETPHIEUNHAPPHUTUNG @maChiTietPhieuNhapPhuTung , @maPhuTung , @maPhieuNhap , @giaNhap , @soLuong ");
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] {maChiTietPNPT, maPhuTung, maPhieuNhap, giaNhap, soLuong });
             return result > 0;
         }
 
         public bool XoaChiTietPhieuNhapPhuTung(string maChiTietPNPT)
         {
-            string query = string.Format("delete CHITIETPHIEUNHAPPHUTUNG where maChiTietPhieuNhapPhuTung = '{0}'",maChiTietPNPT);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Delete_CHITIETPHIEUNHAPPHUTUNG  @maChiTietPhieuNhapPhuTung ", maChiTietPNPT);
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { maChiTietPNPT });
             return result > 0;
         }
     }

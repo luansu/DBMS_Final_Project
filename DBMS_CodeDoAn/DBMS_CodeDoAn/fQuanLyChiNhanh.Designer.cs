@@ -101,7 +101,7 @@
             this.grbThongTinChiNhanh.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.grbThongTinChiNhanh.Name = "grbThongTinChiNhanh";
             this.grbThongTinChiNhanh.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.grbThongTinChiNhanh.Size = new System.Drawing.Size(1290, 463);
+            this.grbThongTinChiNhanh.Size = new System.Drawing.Size(1290, 507);
             this.grbThongTinChiNhanh.TabIndex = 49;
             this.grbThongTinChiNhanh.TabStop = false;
             // 
@@ -112,7 +112,7 @@
             this.dgvThongTinChiNhanh.Name = "dgvThongTinChiNhanh";
             this.dgvThongTinChiNhanh.RowHeadersWidth = 62;
             this.dgvThongTinChiNhanh.RowTemplate.Height = 28;
-            this.dgvThongTinChiNhanh.Size = new System.Drawing.Size(542, 258);
+            this.dgvThongTinChiNhanh.Size = new System.Drawing.Size(542, 294);
             this.dgvThongTinChiNhanh.TabIndex = 57;
             // 
             // btnSave
@@ -121,7 +121,7 @@
             this.btnSave.FlatAppearance.BorderSize = 0;
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(696, 385);
+            this.btnSave.Location = new System.Drawing.Point(739, 417);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSave.Name = "btnSave";
             this.btnSave.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
@@ -139,7 +139,7 @@
             this.btnDelete.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
             this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDelete.Location = new System.Drawing.Point(500, 385);
+            this.btnDelete.Location = new System.Drawing.Point(543, 417);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Padding = new System.Windows.Forms.Padding(34, 0, 0, 0);
@@ -156,7 +156,7 @@
             this.btnEdit.FlatAppearance.BorderSize = 0;
             this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
             this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEdit.Location = new System.Drawing.Point(304, 385);
+            this.btnEdit.Location = new System.Drawing.Point(347, 417);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(165, 62);
@@ -172,7 +172,7 @@
             this.btnAdd.FlatAppearance.BorderSize = 0;
             this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
             this.btnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAdd.Location = new System.Drawing.Point(108, 385);
+            this.btnAdd.Location = new System.Drawing.Point(151, 417);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
@@ -189,7 +189,7 @@
             this.btnReset.FlatAppearance.BorderSize = 0;
             this.btnReset.Image = ((System.Drawing.Image)(resources.GetObject("btnReset.Image")));
             this.btnReset.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReset.Location = new System.Drawing.Point(901, 383);
+            this.btnReset.Location = new System.Drawing.Point(944, 415);
             this.btnReset.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnReset.Name = "btnReset";
             this.btnReset.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
@@ -206,7 +206,7 @@
             this.btnPrevious.FlatAppearance.BorderSize = 0;
             this.btnPrevious.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrevious.Image = ((System.Drawing.Image)(resources.GetObject("btnPrevious.Image")));
-            this.btnPrevious.Location = new System.Drawing.Point(304, 313);
+            this.btnPrevious.Location = new System.Drawing.Point(347, 345);
             this.btnPrevious.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(165, 62);
@@ -220,7 +220,7 @@
             this.btnCancel.FlatAppearance.BorderSize = 0;
             this.btnCancel.Image = ((System.Drawing.Image)(resources.GetObject("btnCancel.Image")));
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancel.Location = new System.Drawing.Point(901, 313);
+            this.btnCancel.Location = new System.Drawing.Point(944, 345);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Padding = new System.Windows.Forms.Padding(38, 0, 0, 0);
@@ -237,7 +237,7 @@
             this.btnLast.FlatAppearance.BorderSize = 0;
             this.btnLast.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLast.Image = ((System.Drawing.Image)(resources.GetObject("btnLast.Image")));
-            this.btnLast.Location = new System.Drawing.Point(696, 313);
+            this.btnLast.Location = new System.Drawing.Point(739, 345);
             this.btnLast.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnLast.Name = "btnLast";
             this.btnLast.Size = new System.Drawing.Size(174, 62);
@@ -251,7 +251,7 @@
             this.btnNext.FlatAppearance.BorderSize = 0;
             this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNext.Image = ((System.Drawing.Image)(resources.GetObject("btnNext.Image")));
-            this.btnNext.Location = new System.Drawing.Point(500, 311);
+            this.btnNext.Location = new System.Drawing.Point(543, 343);
             this.btnNext.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(165, 62);
@@ -266,7 +266,7 @@
             this.btnFirst.FlatAppearance.BorderSize = 0;
             this.btnFirst.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFirst.Image = ((System.Drawing.Image)(resources.GetObject("btnFirst.Image")));
-            this.btnFirst.Location = new System.Drawing.Point(108, 313);
+            this.btnFirst.Location = new System.Drawing.Point(151, 345);
             this.btnFirst.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnFirst.Name = "btnFirst";
             this.btnFirst.Size = new System.Drawing.Size(165, 62);
@@ -371,7 +371,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1307, 571);
+            this.ClientSize = new System.Drawing.Size(1307, 615);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.grbThongTinChiNhanh);
             this.Name = "fQuanLyChiNhanh";

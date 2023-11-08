@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -79,52 +80,62 @@ namespace DBMS_CodeDoAn
             EnableButtonEditData();
             DisableTextBox();
 
-            string maHoaDon = txtMaHoaDon.Text;
-            string ngayLapHoaDon = dtpNgayLapHoaDon.Value.ToString("yyyy-MM-dd");
-            float tongTien = (float)Convert.ToDouble(txtTongTien.Text.ToString());
-            string tinhTrang = txtTinhTrang.Text;
-            string maKhachHang = cbbMaKhachHang.Text;
-            string maNVTH = cbbMaNhanVien.Text;
-            
-            if (strBtn == "Add")
+            try
             {
-                bool result = ThemHoaDon(ngayLapHoaDon, tongTien, tinhTrang, maKhachHang, maNVTH);
-                if (result)
+                string maHoaDon = txtMaHoaDon.Text;
+                string ngayLapHoaDon = dtpNgayLapHoaDon.Value.ToString("yyyy-MM-dd");
+                float tongTien = (float)Convert.ToDouble(txtTongTien.Text.ToString());
+                string tinhTrang = txtTinhTrang.Text;
+                string maKhachHang = cbbMaKhachHang.Text;
+                string maNVTH = cbbMaNhanVien.Text;
+
+                if (strBtn == "Add")
                 {
-                    MessageBox.Show("Thêm hóa đơn thành công");
-                }
-                else
-                {
-                    MessageBox.Show("Thêm thất bại");
-                }
-            }
-            else if (strBtn == "Edit")
-            {
-                bool result = CapNhatHoaDon(maHoaDon, ngayLapHoaDon, tongTien, tinhTrang, maKhachHang, maNVTH);
-                if (result)
-                {
-                    MessageBox.Show("Cập nhật hóa đơn thành công");
-                }
-                else
-                {
-                    MessageBox.Show("Cập nhật thất bại");
-                }
-            }
-            else if (strBtn == "Delete")
-            {
-                if (MessageBox.Show("Bạn có chắc muốn xóa hóa đơn này không?", "Cảnh báo!", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                {
-                    bool result = XoaHoaDon(maHoaDon);
+                    bool result = ThemHoaDon(ngayLapHoaDon, tongTien, tinhTrang, maKhachHang, maNVTH);
                     if (result)
                     {
-                        MessageBox.Show("Xóa hóa đơn thành công");
+                        MessageBox.Show("Thêm hóa đơn thành công");
                     }
                     else
                     {
-                        MessageBox.Show("Xóa thất bại");
+                        MessageBox.Show("Thêm thất bại");
                     }
                 }
+                else if (strBtn == "Edit")
+                {
+                    bool result = CapNhatHoaDon(maHoaDon, ngayLapHoaDon, tongTien, tinhTrang, maKhachHang, maNVTH);
+                    if (result)
+                    {
+                        MessageBox.Show("Cập nhật hóa đơn thành công");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cập nhật thất bại");
+                    }
+                }
+                else if (strBtn == "Delete")
+                {
+                    if (MessageBox.Show("Bạn có chắc muốn xóa hóa đơn này không?", "Cảnh báo!", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    {
+                        bool result = XoaHoaDon(maHoaDon);
+                        if (result)
+                        {
+                            MessageBox.Show("Xóa hóa đơn thành công");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Xóa thất bại");
+                        }
+                    }
 
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                if (sqlEx.Message.Contains("column 'tinhTrang'."))
+                {
+                    MessageBox.Show("Tình trạng hóa đơn mặc định là 'Chưa thanh toán' !!");
+                }
             }
 
             ClearText();

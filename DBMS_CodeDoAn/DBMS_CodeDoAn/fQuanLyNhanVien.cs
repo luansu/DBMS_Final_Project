@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -85,46 +86,55 @@ namespace DBMS_CodeDoAn
             int tinhTrangLamViec = txtTinhTrangLamViec.Text == "True" ? 1 : 0;
             string hinhAnh = picNhanVien.ImageLocation;
 
-            if (strBtn == "Add")
+            try
             {
-                maNhanVien = maChiNhanh + '_' + maNhanVien;
-                bool result = ThemNhanVien(maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, tinhTrangLamViec, maChiNhanh, hinhAnh);
-                if (result)
+                if (strBtn == "Add")
                 {
-                    MessageBox.Show("Thêm nhân viên thành công");
-                }
-                else
-                {
-                    MessageBox.Show("Thêm thất bại");
-                }
-            }
-            else if (strBtn == "Edit")
-            {
-                bool result = CapNhatNhanVien(maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, tinhTrangLamViec, maChiNhanh, hinhAnh);
-                if (result)
-                {
-                    MessageBox.Show("Cập nhật thông tin nhân viên thành công");
-                }
-                else
-                {
-                    MessageBox.Show("Cập nhật thất bại");
-                }
-            }
-            else if (strBtn == "Delete")
-            {
-                if (MessageBox.Show("Bạn có thật sự muốn xóa nhân viên này không?", "Chú ý!", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                {
-                    bool result = XoaNhanVien(maNhanVien);
+                    maNhanVien = maChiNhanh + '_' + maNhanVien;
+                    bool result = ThemNhanVien(maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, tinhTrangLamViec, maChiNhanh, hinhAnh);
                     if (result)
                     {
-                        MessageBox.Show("Xoá thông tin nhân viên thành công");
+                        MessageBox.Show("Thêm nhân viên thành công");
                     }
                     else
                     {
-                        MessageBox.Show("Xoá thất bại");
+                        MessageBox.Show("Thêm thất bại");
+                    }
+                }
+                else if (strBtn == "Edit")
+                {
+                    bool result = CapNhatNhanVien(maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, tinhTrangLamViec, maChiNhanh, hinhAnh);
+                    if (result)
+                    {
+                        MessageBox.Show("Cập nhật thông tin nhân viên thành công");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cập nhật thất bại");
+                    }
+                }
+                else if (strBtn == "Delete")
+                {
+                    if (MessageBox.Show("Bạn có thật sự muốn xóa nhân viên này không?", "Chú ý!", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    {
+                        bool result = XoaNhanVien(maNhanVien);
+                        if (result)
+                        {
+                            MessageBox.Show("Xoá thông tin nhân viên thành công");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Xoá thất bại");
+                        }
                     }
                 }
             }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
             ClearText();
             LoadDanhSachNhanVienTheoChiNhanh(maChiNhanh);
         }

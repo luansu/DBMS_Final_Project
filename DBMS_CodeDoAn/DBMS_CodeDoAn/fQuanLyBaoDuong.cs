@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -59,57 +58,65 @@ namespace DBMS_CodeDoAn
             CloseButtonSystem();
             CloseTextBox();
             OpenButtonEditData();
-
-            string maBaoDuong = txtMaBaoDuong.Text;
-            string tenBaoDuong = txtTenBaoDuong.Text;
-            string loaiBaoDuong = txtLoaiBaoDuong.Text;
-            float phiBaoDuong = (float)Convert.ToDouble(txtPhiBaoDuong.Text.ToString());
-            
-            if (strBtn == "Add")
+            try
             {
-                try
+                string maBaoDuong = txtMaBaoDuong.Text;
+                string tenBaoDuong = txtTenBaoDuong.Text;
+                string loaiBaoDuong = txtLoaiBaoDuong.Text;
+                float phiBaoDuong = (float)Convert.ToDouble(txtPhiBaoDuong.Text.ToString());
+
+                if (strBtn == "Add")
                 {
                     bool result = ThemDichVuBaoDuong(tenBaoDuong, loaiBaoDuong, phiBaoDuong);
-                    MessageBox.Show("Thêm dịch vụ bảo dưỡng mới thành công");
-                }
-                catch (SqlException ex)
-                {
-                    if (ex.Message.Contains("correct format"))
-                    {
-                        MessageBox.Show("Dịch vụ bảo dưỡng này đã tồn tại");
-                    }
-                }
 
-            }
-
-            else if (strBtn == "Delete")
-            {
-                if (MessageBox.Show("Bạn có chắc muốn xóa dòng này?", "Cảnh báo!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    bool result = XoaDichVuBaoDuong(maBaoDuong);
                     if (result)
                     {
-                        MessageBox.Show("Xóa dịch vụ bảo dưỡng thành công");
+                        MessageBox.Show("Thêm dịch vụ bảo dưỡng mới thành công");
                     }
                     else
                     {
-                        MessageBox.Show("Xóa dịch vụ bảo dưỡng thất bại");
+                        MessageBox.Show("Có lỗi khi thêm dịch vụ bảo dưỡng, vui lòng kiểm tra lại");
+                    }
+
+                }
+                else if (strBtn == "Delete")
+                {
+                    if (MessageBox.Show("Bạn có chắc muốn xóa dòng này?", "Cảnh báo!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        bool result = XoaDichVuBaoDuong(maBaoDuong);
+                        if (result)
+                        {
+                            MessageBox.Show("Xóa dịch vụ bảo dưỡng thành công");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Xóa dịch vụ bảo dưỡng thất bại");
+                        }
+                    }
+
+                }
+                else if (strBtn == "Update")
+                {
+                    bool result = CapNhatDichVuBaoDuong(maBaoDuong, tenBaoDuong, loaiBaoDuong, phiBaoDuong);
+                    if (result)
+                    {
+                        MessageBox.Show("Cập nhật dịch vụ bảo dưỡng thành công");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cập nhật thất bại");
                     }
                 }
+            }
 
-            }
-            else if (strBtn == "Update")
+            catch (Exception ex)
             {
-                bool result = CapNhatDichVuBaoDuong(maBaoDuong, tenBaoDuong, loaiBaoDuong, phiBaoDuong);
-                if (result)
+                if (ex.Message.Contains("correct format"))
                 {
-                    MessageBox.Show("Cập nhật dịch vụ bảo dưỡng thành công");
-                }
-                else
-                {
-                    MessageBox.Show("Cập nhật thất bại");
+                    MessageBox.Show("Vui lòng nhập đúng định dạng tiền tệ");
                 }
             }
+            
             LoadDanhSachDichVuBaoDuong();
             ClearText();
         }

@@ -24,7 +24,7 @@ namespace DBMS_CodeDoAn.DAO
         {
             List<HoaDon> listHoaDon = new List<HoaDon>();
 
-            string query = "select * from HOADON";
+            string query = "exec list_HOADON";
 
             DataTable data = DataProvider.Instance.ExcuteQuery(query);
 
@@ -39,22 +39,22 @@ namespace DBMS_CodeDoAn.DAO
 
         public bool ThemHoaDon(string ngayLapHoaDon, float tongTien, string tinhTrang, string maKhachHang, string maNVTH)
         {
-            string query = string.Format("insert into HOADON(ngayLapHoaDon, tongTien, tinhTrang, maKhachHang, maNhanVienThucHien) values('{0}', {1}, N'{2}', '{3}', '{4}')", ngayLapHoaDon.Substring(0, 10), tongTien, tinhTrang, maKhachHang, maNVTH);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Insert_HOADON @ngayLapHoaDon , @tongTien , @tinhTrang , @maKhachHang , @maNhanVienThucHien ");
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] {ngayLapHoaDon.Substring(0, 10), tongTien, tinhTrang, maKhachHang, maNVTH });
             return result > 0;
         }
 
         public bool CapNhatHoaDon(string maHoaDon, string ngayLapHoaDon, float tongTien, string tinhTrang, string maKhachHang, string maNVTH)
         {
-            string query = string.Format("update HOADON set ngayLapHoaDon = '{0}', tongTien = {1}, tinhTrang = N'{2}', maKhachHang = '{3}', maNhanVienThucHien = '{4}' where maHoaDon = '{5}'", ngayLapHoaDon.Substring(0, 10), tongTien, tinhTrang, maKhachHang, maNVTH, maHoaDon);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Update_HOADON @maHoaDon , @ngayLapHoaDon , @tongTien , @tinhTrang , @maKhachHang , @maNhanVienThucHien ");
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] {maHoaDon, ngayLapHoaDon.Substring(0, 10), tongTien, tinhTrang, maKhachHang, maNVTH });
             return result > 0;
         }
 
         public bool XoaHoaDon(string maHoaDon)
         {
-            string query = string.Format("delete HOADON where maHoaDon = '{0}'", maHoaDon);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Delete_HOADON @maHoaDon ");
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] {maHoaDon});
             return result > 0;
         }
     }

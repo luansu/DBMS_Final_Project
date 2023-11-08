@@ -24,7 +24,7 @@ namespace DBMS_CodeDoAn.DAO
         {
             List<ChiTietPhieuBaoDuong> listChiTietBaoDuong = new List<ChiTietPhieuBaoDuong>();
 
-            string query = "select * from CHITIETPHIEUBAODUONG";
+            string query = "exec list_CHITIETPHIEUBAODUONG";
 
             DataTable data = DataProvider.Instance.ExcuteQuery(query);
 
@@ -35,6 +35,27 @@ namespace DBMS_CodeDoAn.DAO
             }
 
             return listChiTietBaoDuong;
+        }
+
+        public bool ThemChiTietPhieuBaoDuong(string maBaoDuong, string maPhieuBaoDuong, float thanhTien)
+        {
+            string query = "exec Insert_CHITIETPHIEUBAODUONG @maBaoDuong , @maPhieuBaoDuong , @thanhTien ";
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] {maBaoDuong, maPhieuBaoDuong, thanhTien});
+            return result > 0;
+        }
+
+        public bool CapNhatChiTietPhieuBaoDuong(string maChiTietPhieuBD, string maBaoDuong, string maPhieuBaoDuong, float thanhTien)
+        {
+            string query = "exec Update_CHITIETPHIEUBAODUONG @maChiTietPhieuBaoDuong , @maBaoDuong , @maPhieuBaoDuong , @thanhTien  ";
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] {maChiTietPhieuBD, maBaoDuong, maPhieuBaoDuong, thanhTien });
+            return result > 0;
+        }
+
+        public bool XoaChiTietPhieuBaoDuong(string maChiTietPhieuBD)
+        {
+            string query = "exec Delete_CHITIETPHIEUBAODUONG @maChiTietPhieuBaoDuong ";
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { maChiTietPhieuBD });
+            return result > 0;
         }
     }
 }

@@ -61,51 +61,62 @@ namespace DBMS_CodeDoAn
             EnableButtonEditData();
             DisableTextBox();
 
-            string maChiTietPhieuNhapPhuTung = txtMaChiTietPhieuNhapPhuTung.Text;
-            string maPhuTung = cbbMaPhuTung.Text;
-            string maPhieuNhap = cbbMaPhieuNhap.Text;
-            float giaNhap = (float)Convert.ToDouble(txtGiaNhap.Text.ToString());
-            int soLuong = (int)nmSoLuong.Value;
+            try
+            {
+                string maChiTietPhieuNhapPhuTung = txtMaChiTietPhieuNhapPhuTung.Text;
+                string maPhuTung = cbbMaPhuTung.Text;
+                string maPhieuNhap = cbbMaPhieuNhap.Text;
+                float giaNhap = (float)Convert.ToDouble(txtGiaNhap.Text.ToString());
+                int soLuong = (int)nmSoLuong.Value;
 
-            if (strBtn == "Add")
-            {
-                bool result = ThemChiTietPhieuNhapPhuTung(maPhuTung, maPhieuNhap, giaNhap, soLuong);
-                if (result)
+                if (strBtn == "Add")
                 {
-                    MessageBox.Show("Thêm chi tiết phiếu nhập phụ tùng thành công");
-                }
-                else
-                {
-                    MessageBox.Show("Thêm thất bại");
-                }
-            }
-            else if (strBtn == "Edit")
-            {
-                bool result = CapNhatChiTietPhieuNhapPhuTung(maChiTietPhieuNhapPhuTung, maPhuTung, maPhieuNhap, giaNhap, soLuong);
-                if (result)
-                {
-                    MessageBox.Show("Cập nhật chi tiết phiếu nhập phụ tùng thành công");
-                }
-                else
-                {
-                    MessageBox.Show("Cập nhật thất bại");
-                }
-            }
-            else if (strBtn == "Delete")
-            {
-                if (MessageBox.Show("Bạn có thật sự muốn xóa chi tiết phiếu nhập phụ tùng này", "Chú ý", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                {
-                    bool result = XoaChiTietPhieuNhapPhuTung(maChiTietPhieuNhapPhuTung);
+                    bool result = ThemChiTietPhieuNhapPhuTung(maPhuTung, maPhieuNhap, giaNhap, soLuong);
                     if (result)
                     {
-                        MessageBox.Show("Xóa chi tiết phiếu nhập phụ tùng thành công");
+                        MessageBox.Show("Thêm chi tiết phiếu nhập phụ tùng thành công");
                     }
                     else
                     {
-                        MessageBox.Show("Xóa thất bại");
+                        MessageBox.Show("Thêm thất bại");
+                    }
+                }
+                else if (strBtn == "Edit")
+                {
+                    bool result = CapNhatChiTietPhieuNhapPhuTung(maChiTietPhieuNhapPhuTung, maPhuTung, maPhieuNhap, giaNhap, soLuong);
+                    if (result)
+                    {
+                        MessageBox.Show("Cập nhật chi tiết phiếu nhập phụ tùng thành công");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cập nhật thất bại");
+                    }
+                }
+                else if (strBtn == "Delete")
+                {
+                    if (MessageBox.Show("Bạn có thật sự muốn xóa chi tiết phiếu nhập phụ tùng này", "Chú ý", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    {
+                        bool result = XoaChiTietPhieuNhapPhuTung(maChiTietPhieuNhapPhuTung);
+                        if (result)
+                        {
+                            MessageBox.Show("Xóa chi tiết phiếu nhập phụ tùng thành công");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Xóa thất bại");
+                        }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("correct format"))
+                {
+                    MessageBox.Show("Giá nhập phải là kiểu dữ liệu số !!");
+                }
+            }
+
             LoadDanhSachChiTietPhieuNhapPhuTung();
             ClearText();
         }

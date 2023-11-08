@@ -24,7 +24,7 @@ namespace DBMS_CodeDoAn.DAO
         {
             List<ChiTietHoaDonXe> listHoaDonXe = new List<ChiTietHoaDonXe>();
 
-            string query = "select * from CHITIETHOADONXE";
+            string query = "exec list_CHITIETHOADONXE";
 
             DataTable data = DataProvider.Instance.ExcuteQuery(query);
 
@@ -39,22 +39,22 @@ namespace DBMS_CodeDoAn.DAO
 
         public bool ThemChiTietHoaDonXe(string maHoaDon, string maXe, string ngayNhanXe, float soTienDaTra, float phiDangKyBienSo, float phiDangKiem, float phiTruocBa, float phiBaoHiemTrachNhiemDanSu, float phiSuDungDuongBo)
         {
-            string query = string.Format("insert into CHITIETHOADONXE(maHoaDon, maXe, ngayNhanXe, soTienDaTra, phiDangKyBienSo, phiDangKiem, phiTruocBa, phiBaoHiemTrachNhiemDanSu, phiSuDungDuongBo) values ('{0}', '{1}', '{2}', {3}, {4}, {5}, {6}, {7}, {8})", maHoaDon, maXe, ngayNhanXe.Substring(0, 10), soTienDaTra, phiDangKyBienSo, phiDangKiem, phiTruocBa, phiBaoHiemTrachNhiemDanSu, phiSuDungDuongBo);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Insert_CHITIETHOADONXE @maHoaDon , @maXe , @ngayNhanXe , @soTienDaTra , @phiDangKyBienSo , @phiDangKiem , @phiTruocBa , @phiBaoHiemTrachNhiemDanSu , @phiSuDungDuongBo ");
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] {maHoaDon, maXe, ngayNhanXe.Substring(0, 10), soTienDaTra, phiDangKyBienSo, phiDangKiem, phiTruocBa, phiBaoHiemTrachNhiemDanSu, phiSuDungDuongBo });
             return result > 0;
         }
 
         public bool CapNhatChiTietHoaDonXe(string maChiTietHoaDonXe, string maHoaDon, string maXe, string ngayNhanXe, float soTienDaTra, float phiDangKyBienSo, float phiDangKiem, float phiTruocBa, float phiBaoHiemTrachNhiemDanSu, float phiSuDungDuongBo)
         {
-            string query = string.Format("update CHITIETHOADONXE set maHoaDon = '{0}', maXe = '{1}', ngayNhanXe = '{2}', soTienDaTra = {3}, phiDangKyBienSo = {4}, phiDangKiem = {5}, phiTruocBa = {6}, phiBaoHiemTrachNhiemDanSu = {7}, phiSuDungDuongBo = {8} where maChiTietHoaDonXe = '{9}'", maHoaDon, maXe, ngayNhanXe.Substring(0, 10), soTienDaTra, phiDangKyBienSo, phiDangKiem, phiTruocBa, phiBaoHiemTrachNhiemDanSu, phiSuDungDuongBo, maChiTietHoaDonXe);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Update_CHITIETHOADONXE @maChiTietHoaDonXe , @maHoaDon , @maXe , @ngayNhanXe , @soTienDaTra , @phiDangKyBienSo , @phiDangKiem , @phiTruocBa , @phiBaoHiemTrachNhiemDanSu , @phiSuDungDuongBo ");
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] {maHoaDon, maXe, ngayNhanXe.Substring(0, 10), soTienDaTra, phiDangKyBienSo, phiDangKiem, phiTruocBa, phiBaoHiemTrachNhiemDanSu, phiSuDungDuongBo, maChiTietHoaDonXe });
             return result > 0;
         }
 
         public bool XoaChiTietHoaDonXe(string maChiTietHoaDonXe)
         {
-            string query = string.Format("delete CHITIETHOADONXE where maChiTietHoaDonXe = '{0}'", maChiTietHoaDonXe);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Delete_CHITIETHOADONXE @maChiTietHoaDonXe ");
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] {maChiTietHoaDonXe });
             return result > 0;
         }
     }

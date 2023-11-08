@@ -24,7 +24,7 @@ namespace DBMS_CodeDoAn.DAO
         {
             List<ChiNhanh> listChiNhanh = new List<ChiNhanh>();
 
-            string query = "select * from CHINHANH";
+            string query = "exec list_ChiNhanh";
 
             DataTable data = DataProvider.Instance.ExcuteQuery(query);
 
@@ -39,20 +39,20 @@ namespace DBMS_CodeDoAn.DAO
 
         public bool ThemChiNhanh(string maChiNhanh, string tenChiNhanh, string diaChi)
         {
-            string query = string.Format("Insert into CHINHANH (maChiNhanh, tenChiNhanh, diaChi) values ('{0}', N'{1}', N'{2}')", maChiNhanh, tenChiNhanh, diaChi);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Insert_CHINHANH @maChiNhanh , @tenChiNhanh ,  @diaChi ");
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { maChiNhanh, tenChiNhanh, diaChi });
             return result > 0;
         }
         public bool CapNhatChiNhanh(string maChiNhanh, string tenChiNhanh, string diaChi)
         {
-            string query = string.Format("update CHINHANH set tenChiNhanh = N'{0}', diaChi = N'{1}' where maChiNhanh = '{2}'", tenChiNhanh, diaChi, maChiNhanh);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Update_CHINHANH @tenChiNhanh , @diaChi , @maChiNhanh ");
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { tenChiNhanh, diaChi, maChiNhanh });
             return result > 0;
         }
         public bool XoaChiNhanh(string maChiNhanh)
         {
-            string query = string.Format("delete CHINHANH where maChiNhanh = '{0}'", maChiNhanh);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Delete_CHINHANH @maChiNhanh");
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] {maChiNhanh});
             return result > 0;
         }
     }

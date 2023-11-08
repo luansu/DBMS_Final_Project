@@ -28,7 +28,7 @@ namespace DBMS_CodeDoAn.DAO
         {
             List<PhuTung> listPhuTung = new List<PhuTung>();
 
-            string query = "select * from PHUTUNG";
+            string query = "exec List_PhuTung";
 
             DataTable data = DataProvider.Instance.ExcuteQuery(query);
 
@@ -43,22 +43,22 @@ namespace DBMS_CodeDoAn.DAO
 
         public bool ThemPhuTung(string loaiPhuTung, string tenPhuTung, string thuongHieu, string xuatXu, float giaBan, string chatLuong, string hinhAnh)
         {
-            string query = string.Format("insert into PHUTUNG(loaiPhuTung, tenPhuTung, thuongHieu, xuatXu, giaBan, chatLuong, hinhAnh) values ('{0}', '{1}', '{2}', '{3}', {4}, '{5}', '{6}')", loaiPhuTung, tenPhuTung, thuongHieu, xuatXu, giaBan, chatLuong, hinhAnh);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Insert_PhuTung @loaiPhuTung , @tenPhuTung , @thuongHieu , @xuatXu , @giaBan , @chatLuong , @hinhAnh ");
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] {loaiPhuTung, tenPhuTung, thuongHieu, xuatXu, giaBan, chatLuong, hinhAnh });
             return result > 0;
         }
 
         public bool CapNhatPhuTung(string maPhuTung, string loaiPhuTung, string tenPhuTung, string thuongHieu, string xuatXu, float giaBan, string chatLuong, string hinhAnh)
         {
-            string query = string.Format("Update PHUTUNG set loaiPhuTung = '{0}', tenPhuTung = '{1}', thuongHieu = '{2}', xuatXu = '{3}', giaBan = '{4}', chatLuong = '{5}', hinhAnh = '{6}' where maPhuTung = '{7}'", loaiPhuTung, tenPhuTung, thuongHieu, xuatXu, giaBan, chatLuong, hinhAnh, maPhuTung);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Update_PhuTung @maPhuTung , @loaiPhuTung , @tenPhuTung , @thuongHieu , @xuatXu , @giaBan , @chatLuong , @hinhAnh ");
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] {maPhuTung, loaiPhuTung, tenPhuTung, thuongHieu, xuatXu, giaBan, chatLuong, hinhAnh });
             return result > 0;
         }
 
         public bool XoaPhuTung(string maPhuTung)
         {
-            string query = string.Format("delete PHUTUNG where maPhuTung = '{0}'", maPhuTung);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Delete_PhuTung @maPhuTung ");
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] {maPhuTung });
             return result > 0;
         }
 

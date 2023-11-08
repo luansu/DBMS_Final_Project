@@ -24,7 +24,7 @@ namespace DBMS_CodeDoAn.DAO
         {
             List<KhachHang> listKhachHang = new List<KhachHang>();
 
-            string query = "select * from KHACHHANG";
+            string query = "exec List_KhachHang";
 
             DataTable data = DataProvider.Instance.ExcuteQuery(query);
 
@@ -39,22 +39,20 @@ namespace DBMS_CodeDoAn.DAO
 
         public bool ThemKhachHang(string hoTenKH, string ngaySinh, string gioiTinh, string CCCD, string diaChi, string soDienThoai)
         {
-            string query = string.Format("insert into KHACHHANG(hoTenKhachHang, ngaySinh, gioiTinh, CCCD, diaChi, soDienThoai) values (N'{0}', '{1}', N'{2}', '{3}', N'{4}', '{5}')", 
-                hoTenKH, ngaySinh.ToString().Substring(0, 10), gioiTinh, CCCD, diaChi, soDienThoai);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Insert_KhachHang @hoTenKhachHang , @ngaySinh , @gioiTinh , @CCCD , @diaChi , @soDienThoai");
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { hoTenKH, ngaySinh.ToString().Substring(0, 10), gioiTinh, CCCD, diaChi, soDienThoai });
             return result > 0;
         }
         public bool CapNhatKhachHang(string maKhachHang, string hoTenKH, string ngaySinh, string gioiTinh, string CCCD, string diaChi, string soDienThoai)
         {
-            string query = string.Format("Update KHACHHANG set hoTenKhachHang = N'{0}', ngaySinh = '{1}', gioiTinh = N'{2}', CCCD = '{3}', diaChi = N'{4}', soDienThoai = '{5}' where maKhachHang = '{6}'",
-                hoTenKH, ngaySinh.ToString().Substring(0, 10), gioiTinh, CCCD, diaChi, soDienThoai, maKhachHang);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Update_KhachHang @maKhachHang , @hoTenKhachHang , @ngaySinh , @gioiTinh , @CCCD , @diaChi , @soDienThoai");
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] {maKhachHang, hoTenKH, ngaySinh.ToString().Substring(0, 10), gioiTinh, CCCD, diaChi, soDienThoai});
             return result > 0;
         }
         public bool XoaKhachHang(string maKhachHang)
         {
-            string query = string.Format("delete KHACHHANG where maKhachHang = '{0}'", maKhachHang);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Delete_KhachHang @maKhachHang");
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { maKhachHang });
             return result > 0;
         }
 

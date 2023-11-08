@@ -24,7 +24,7 @@ namespace DBMS_CodeDoAn.DAO
         {
             List<NhaCungCap> listNhaCungCap = new List<NhaCungCap>();
 
-            string query = "select * from NHACUNGCAP";
+            string query = "exec List_NhaCungCap";
 
             DataTable data = DataProvider.Instance.ExcuteQuery(query);
 
@@ -39,22 +39,22 @@ namespace DBMS_CodeDoAn.DAO
 
         public bool ThemNhaCungCap(string maNhaCungCap, string tenNhaCungCap, string diaChi, string soDienThoai)
         {
-            string query = string.Format("insert into NHACUNGCAP(maNhaCungCap, tenNhaCungCap, diaChi, soDienThoai) values('{0}', N'{1}', N'{2}', N'{3}')", maNhaCungCap, tenNhaCungCap, diaChi, soDienThoai);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Insert_NhaCungCap @maNhaCungCap , @tenNhaCungCap , @diaChi , @soDienThoai ");
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { maNhaCungCap, tenNhaCungCap, diaChi, soDienThoai });
             return result > 0;
         }
 
         public bool CapNhatNhaCungCap(string maNhaCungCap, string tenNhaCungCap, string diaChi, string soDienThoai)
         {
-            string query = string.Format("Update NHACUNGCAP set tenNhaCungCap = N'{0}', diaChi = N'{1}', soDienThoai = N'{2}' where maNhaCungCap = '{3}'", tenNhaCungCap, diaChi, soDienThoai, maNhaCungCap);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Update_NhaCungCap @maNhaCungCap , @tenNhaCungCap , @diaChi , @soDienThoai ");
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { maNhaCungCap, tenNhaCungCap, diaChi, soDienThoai });
             return result > 0;
         }
 
         public bool XoaNhaCungCap(string maNhaCungCap)
         {
-            string query = string.Format("delete NHACUNGCAP where maNhaCungCap = '{0}'", maNhaCungCap);
-            return DataProvider.Instance.ExcuteNonQuery(query) > 0;
+            string query = string.Format("exec Delete_NhaCungCap @maNhaCungCap ");
+            return DataProvider.Instance.ExcuteNonQuery(query, new object[] { maNhaCungCap }) > 0;
         }
     }
 }
