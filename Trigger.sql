@@ -7,7 +7,9 @@ for update, insert as
 BEGIN
 	DECLARE @soTienDaTra money, @maHoaDon nvarchar(20), @tongTien money
 	SELECT @soTienDaTra = ins.soTienDaTra, @maHoaDon = ins.maHoaDon 	FROM inserted as ins
-	SElECT @tongTien = hd.tongTien 						FROM HOADON as hd 								WHERE hd.maHoaDon = @maHoaDon
+	SElECT @tongTien = hd.tongTien 						
+	FROM HOADON as hd 								
+	WHERE hd.maHoaDon = @maHoaDon
 	IF @tongTien <= @soTienDaTra
 	BEGIN 
 		UPDATE HOADON 
@@ -166,29 +168,56 @@ BEGIN
 	from inserted as nv
 	print (dbo.fn_TaoMaNhanVien(@maChiNhanh))
 	insert into NHANVIEN(maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh, hinhAnh) Values(dbo.fn_TaoMaNhanVien(@maChiNhanh), @hoTenNhanVien , @CCCD , @ngaySinh, @gioiTinh, @diaChi , @soDienThoai, @chucVu, @maChiNhanh, @hinhAnh)
+	print 111
 END
 --------------------------------------------------------------------------------
 -- Tạo TRIGGER khi thêm nhân viên thì tài khoản tự động thêm
 -- Set Tên đăng nhập mặc định là mã nhân viên
 go
-create or alter trigger trg_ThemTaiKhoan
-on NHANVIEN
-for insert
-as
-begin
-	declare @taiKhoan nvarchar(20), @chucVu nvarchar(50)
-	select @taiKhoan = maNhanVien, @chucVu = chucVu from inserted
-	insert into TAIKHOAN values (@taiKhoan, '1', @chucVu, @taiKhoan)
-end
+CREATE OR ALTER TRIGGER trg_ThemTaiKhoan
+ON NHANVIEN
+AFTER INSERT
+AS
+BEGIN
+	print 111
+    DECLARE @taiKhoan NVARCHAR(20), @chucVu NVARCHAR(50)
+    
+    SELECT @taiKhoan = maNhanVien, @chucVu = chucVu FROM inserted
+    
+    INSERT INTO TAIKHOAN VALUES (@taiKhoan, '1', @chucVu, @taiKhoan)
+    
+    EXEC('CREATE LOGIN ' + @taiKhoan + ' WITH PASSWORD = ''1''')
+    EXEC('CREATE USER ' + @taiKhoan + ' FOR LOGIN ' + @taiKhoan)
+    
+    IF @chucVu = N'Quản lý'
+    BEGIN
+        EXEC('USE DBMS_DOAN_QUANLYCUAHANGXE;
+              EXEC sp_addrolemember r_admin TO ' + @taiKhoan)
+    END
+	ELSE IF @chucVu like N'%bán%'
+	BEGIN 
+		EXEC('USE DBMS_DOAN_QUANLYCUAHANGXE;
+              EXEC sp_addrolemember r_seller TO ' + @taiKhoan)
+	END
+	ELSE IF @chucVu like N'%bảo%'
+	BEGIN 
+		EXEC('USE DBMS_DOAN_QUANLYCUAHANGXE;
+              EXEC sp_addrolemember r_maintenace TO ' + @taiKhoan)
+	END 
+END
+
 go
 
 -- Test
 begin tran
 	INSERT INTO CHINHANH (maChiNhanh, tenChiNhanh, diaChi)
 	VALUES ('CN001', N'Chi nhánh A', N'123 Đường A, Quận 1, TP.HCM')
-	INSERT INTO NHANVIEN (maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh)
-	VALUES ('NV001', N'Nguyễn Văn A', '123456789012', '1990-05-15', N'Nam', N'123 Đường X, Quận Y, TP.HCM', '0123456789', N'Quản lý', 'CN001')
+	INSERT INTO NHANVIEN (hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh)
+	VALUES (N'Nguyễn Văn A', '123459189012', '1990-05-15', N'Nam', N'123 Đường X, Quận Y, TP.HCM', '0123456789', N'Quản lý', 'CNHCM')
 	select * from TaiKhoan
+	delete NHANVIEN WHERE maNhanVien = 'NVHCM008'
+	select * from NHANVIEN
+	select * from CHINHANH
 rollback
 go
 
@@ -222,3 +251,16 @@ begin tran
 	select * from TAIKHOAN
 rollback
 go
+
+-- Trigger đuổi việc nhân viên
+CREATE or Alter trigger tg_XoaNhanVien on NHANVIEN
+after delete
+as
+BEGIN
+	declare @maNhanVien nvarchar(20), @taiKhoan nvarchar(20)
+	select @maNhanVien = d.maNhanVien from deleted d
+	select @taiKhoan = tk.tenDangNhap from TAIKHOAN tk where tk.maNhanVien = @maNhanVien
+	EXEC('USE DBMS_DOAN_QUANLYCUAHANGXE;
+              DROP USER ' + @taiKhoan)
+END
+
