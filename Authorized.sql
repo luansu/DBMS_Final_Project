@@ -5,14 +5,20 @@ create role r_admin;
 create role r_seller;
 create role r_maintenace;
 
-GRANT insert, select, delete, update on DBMS_DOAN_QUANLYCUAHANGXE to r_admin;
-EXEC sp_addrolemember r_seller
+GRANT insert, select, delete, update, exec on DBMS_DOAN_QUANLYCUAHANGXE to r_admin;
 begin tran;
-grant select on DBMS_DOAN_QUANLYCUAHANGXE to r_seller
+grant select, references on DBMS_DOAN_QUANLYCUAHANGXE to r_seller
 
 deny select on dbo.PHIEUNHAP to r_seller
 deny select on dbo.CHITIETPHIEUNHAPXE to r_seller
 deny select on dbo.CHITIETPHIEUNHAPPHUTUNG to r_seller
+
+grant exec on sp_LietKeNhanVienTheoChiNhanh to r_seller
+
+-- sp_LoXeTheoXuatXu
+-- sp_ThongTinKhachHang
+-- sp_ThongTinXeTheoLo
+-- 
 
 grant insert, update on dbo.KHAHCHANG to r_seller
 grant insert, update on dbo.HOADON to r_seller

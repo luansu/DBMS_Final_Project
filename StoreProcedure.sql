@@ -486,8 +486,7 @@ as
 	update NHANVIEN set hoTenNhanVien = @hoTenNhanVien, CCCD = @CCCD, ngaySinh = @ngaySinh, gioiTinh = @gioiTinh, diaChi = @diaChi, soDienThoai = @soDienThoai, chucVu = @chucVu, tinhTrangLamViec = @tinhTrangLamViec, maChiNhanh = @maChiNhanh, hinhAnh = @hinhAnh where maNhanVien = @maNhanVien
 
 exec Update_NhanVien @maNhanVien, @hoTenNhanVien, @CCCD, @ngaySinh, @gioiTinh, @diaChi, @soDienThoai, @chucVu, @tinhTrangLamViec, @maChiNhanh, @hinhAnh
-
-
+go
 
 create or alter proc Delete_NhanVien @maNhanVien nvarchar(20)
 as
@@ -497,7 +496,92 @@ exec Delete_NhanVien @maNhanVien
 
 
 
-
 create or alter proc TimKiemNhanVien @maNhanVien nvarchar(20), @hoTenNhanVien nvarchar(50), @CCCD nvarchar(20), @ngaySinh date, @gioiTinh nvarchar(5), @diaChi nvarchar(255, @soDienThoai nvarchar(20), @chucVu nvarchar(50), @tinhTrangLamViec bit, @maChiNhanh nvarchar(20), @hinhAnh nvarchar(200)
 as
 	select * from NHANVIEN where hoTenNhanVien like N'%{0}%' and CCCD like N'%{1}%' and diaChi like N'%{2}%' and soDienThoai like N'%{3}%' and chucVu like N'%{4}%' and maChiNhanh like N'%{5}%'
+
+go
+create or alter proc sp_TaoChiTietHoaDonPhuTung @maHoaDon nvarchar(20), @maPhuTung nvarchar(20)
+as 
+begin
+	DECLARE @maChiTietHoaDonPhuTung NVARCHAR(20)
+    DECLARE @soTienDaTra float -- Change the data type as needed
+
+    -- Generate the maChiTietHoaDonPhuTung using the dbo.fn_SinhMaChiTietHoaDonPhuTung() function
+    SET @maChiTietHoaDonPhuTung = dbo.fn_SinhMaChiTietHoaDonPhuTung()
+
+    -- Set the value for soTienDaTra (you may want to adjust this)
+    SET @soTienDaTra = 0 -- Change this value as needed
+	insert into CHITIETHOADONPHUTUNG(maChiTietHoaDonPhuTung, maHoaDon, maPhuTung, soTienDaTra) values (@maChiTietHoaDonPhuTung, @maHoaDon, @maPhuTung, @soTienDaTra)
+end
+
+begin tran
+	exec sp_TaoChiTietHoaDonPhuTung 'HD001', 'PT007'
+	select * from CHITIETHOADONPHUTUNG
+	rollback
+
+go
+create or alter proc sp_TaoChiTietHoaDonXe @maHoaDon nvarchar(20), @maXe nvarchar(20), @ngayNhanXe date
+as 
+begin
+	
+    DECLARE @soTienDaTra float
+	DECLARE @phiDangKyBienSo float 
+	declare @phiDangKiem float 
+	declare @phiTruocBa float
+	declare @phiBaoHiemTrachNhiemDanSu float
+	declare @phiSuDungDuongBo float
+
+
+	SET @phiTruocBa = dbo.fn_checkPhiTruocBa(@maXe)
+	set @phiDangKyBienSo = dbo.fn_checkPhiCapBienSo(@maXe)
+	set @phiDangKiem = 250000
+	set @phiBaoHiemTrachNhiemDanSu = 437000
+	set @phiSuDungDuongBo = 1430000
+	set @soTienDaTra = 0
+
+
+    -- Set the value for soTienDaTra (you may want to adjust this)
+    SET @soTienDaTra = 0 -- Change this value as needed
+	insert into CHITIETHOADONXE( maHoaDon, maXe, ngayNhanXe, soTienDaTra, phiDangKyBienSo, phiDangKiem, phiTruocBa, phiBaoHiemTrachNhiemDanSu, phiSuDungDuongBo) 
+	values ( @maHoaDon, @maXe, @ngayNhanXe, @soTienDaTra, @phiDangKyBienSo, @phiDangKiem, @phiTruocBa, @phiBaoHiemTrachNhiemDanSu, @phiSuDungDuongBo)
+end
+
+begin tran
+	exec sp_TaoChiTietHoaDonXe 'HD004', 'LOXE005_XE002', '2023-11-11'
+	select * from CHITIETHOADONXE
+	rollback
+
+create or alter proc List_LoXe
+as 
+	select * from LOXE
+exec List_LoXe
+
+
+create or alter proc Insert_LoXe @maLoXe nvarchar(20), @tenXe nvarchar(50), @mauSac nvarchar(20), @giaBan float, @soChoNgoi int, @xuatXu nvarchar(50), @hangXe nvarchar(50), @loaiXe nvarchar(50), @phienBanXe nvarchar(50),
+		@tocDoToiDa int, @trongLuong int, @trongTai int, @loaiNhienLieu nvarchar(50), @congSuatDongCo int, @dungTichDongCo int, @loaiDongCo nvarchar(50), @khoangSangGam int, @chieuDaiCoSo int, @chieuDai int, @chieuRong int, @chieuCao int, @banKinhQuayVong int, @hinhAnh nvarchar(200)
+as 
+	insert into LOXE (maLoXe, tenXe, mauSac, giaBan, soChoNgoi, xuatXu, hangXe, loaiXe, phienBanXe, tocDoToiDa, trongLuong, trongTai,
+             loaiNhienLieu, congSuatDongCo, dungTichDongCo, loaiDongCo, khoangSangGam, chieuDaiCoSo, chieuDai, chieuRong, chieuCao, banKinhQuayVong, hinhAnh) 
+			 values (@maLoXe, @tenXe, @mauSac, @giaBan, @soChoNgoi, @xuatXu, @hangXe, @loaiXe, @phienBanXe, @tocDoToiDa, @trongLuong, @trongTai,
+             @loaiNhienLieu, @congSuatDongCo, @dungTichDongCo, @loaiDongCo, @khoangSangGam, @chieuDaiCoSo, @chieuDai, @chieuRong, @chieuCao, @banKinhQuayVong, @hinhAnh)
+
+exec Insert_LoXe @maLoXe, @tenXe, @mauSac, @giaBan, @soChoNgoi, @xuatXu, @hangXe, @loaiXe, @phienBanXe, @tocDoToiDa, @trongLuong, @trongTai,
+             @loaiNhienLieu, @congSuatDongCo, @dungTichDongCo, @loaiDongCo, @khoangSangGam, @chieuDaiCoSo, @chieuDai, @chieuRong, @chieuCao, @banKinhQuayVong, @hinhAnh
+
+
+
+create or alter proc Update_LoXe @maLoXe nvarchar(20), @tenXe nvarchar(50), @mauSac nvarchar(20), @giaBan float, @soChoNgoi int, @xuatXu nvarchar(50), @hangXe nvarchar(50), @loaiXe nvarchar(50), @phienBanXe nvarchar(50),
+		@tocDoToiDa int, @trongLuong int, @trongTai int, @loaiNhienLieu nvarchar(50), @congSuatDongCo int, @dungTichDongCo int, @loaiDongCo nvarchar(50), @khoangSangGam int, @chieuDaiCoSo int, @chieuDai int, @chieuRong int, @chieuCao int, @banKinhQuayVong int, @hinhAnh nvarchar(200)
+as 
+	update LOXE set tenXe = @tenXe, mauSac = @mauSac, giaBan = @giaBan, soChoNgoi = @soChoNgoi, xuatXu = @xuatXu, hangXe = @hangXe, loaiXe = @loaiXe, phienBanXe = @phienBanXe, tocDoToiDa = @tocDoToiDa, trongLuong = @trongLuong, trongTai = @trongTai,
+            loaiNhienLieu = @loaiNhienLieu, congSuatDongCo = @congSuatDongCo, dungTichDongCo = @dungTichDongCo, loaiDongCo = @loaiDongCo, khoangSangGam = @khoangSangGam, chieuDaiCoSo = @chieuDaiCoSo, chieuDai = @chieuDai, chieuRong = @chieuRong, chieuCao = @chieuCao, banKinhQuayVong = @banKinhQuayVong, hinhAnh = @hinhAnh
+			where maLoXe = @maLoXe
+
+exec Update_LoXe @maLoXe, @tenXe, @mauSac, @giaBan, @soChoNgoi, @xuatXu, @hangXe, @loaiXe, @phienBanXe, @tocDoToiDa, @trongLuong, @trongTai,
+             @loaiNhienLieu, @congSuatDongCo, @dungTichDongCo, @loaiDongCo, @khoangSangGam, @chieuDaiCoSo, @chieuDai, @chieuRong, @chieuCao, @banKinhQuayVong, @hinhAnh
+
+
+create or alter proc Delete_LoXe @maLoXe nvarchar(20)
+as
+	delete LOXE where maLoXe = @maLoXe
