@@ -90,7 +90,6 @@ namespace DBMS_CodeDoAn
             {
                 if (strBtn == "Add")
                 {
-                    maNhanVien = maChiNhanh + '_' + maNhanVien;
                     bool result = ThemNhanVien(maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, tinhTrangLamViec, maChiNhanh, hinhAnh);
                     if (result)
                     {
@@ -131,7 +130,10 @@ namespace DBMS_CodeDoAn
             }
             catch (SqlException ex)
             {
-                MessageBox.Show(ex.Message);
+                if (ex.Message.Contains("contr_NHANVIEN_checkLenSDT"))
+                {
+                    MessageBox.Show("Loi SDT");
+                }
             }
 
 
