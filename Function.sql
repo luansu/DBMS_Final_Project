@@ -571,7 +571,7 @@ as
 begin
 	return dbo.fn_DoanhThuBanPhuTungTheoChiNhanh(@MaChiNhanh) + dbo.fn_DoanhThuBanXeTheoChiNhanh(@MaChiNhanh) - dbo.fn_ThongKeTienNhapPhuTungTheoChiNhanh(@MaChiNhanh) - dbo.fn_ThongKeTienNhapXeTheoChiNhanh(@MaChiNhanh)
 end
-
+go
 -- Lợi nhuận trên toàn chi nhánh
 create or alter function fn_LoiNhuanToanChiNhanh()
 returns money
@@ -579,5 +579,65 @@ as
 begin
 return dbo.fn_DoanhThuBanPhuTungToanChiNhanh() + dbo.fn_DoanhThuBanXeToanChiNhanh() - dbo.fn_ThongKeTienNhapPhuTungToanChiNhanh() - dbo.fn_ThongKeTienNhapXeToanChiNhanh()
 end
+go
 
+-- Tổng tiền chưa thanh toán xe theo chi nhánh
+
+create or alter function fn_TongTienChuaThanhToanXeTheoChiNhanh
+(@maChiNhanh nvarchar(20))
+returns money 
+as
+begin
+	declare @TongTien money
+	select @TongTien = sum(hd.tongTien - ct.soTienDaTra) 
+	from CHITIETHOADONXE ct, HOADON hd, NHANVIEN nv
+	where ct.maHoaDon = hd.maHoaDon and hd.maNhanVienThucHien = nv.maNhanVien and nv.maChiNhanh = @MaChiNhanh										
+	if @TongTien is null return 0
+	return @TongTien
+end
+go
+
+-- Tổng tiền chưa thanh toán xe toàn chi nhánh
+create or alter function fn_TongTienChuaThanhToanXeToanChiNhanh()
+returns money
+as
+begin
+	declare @TongTien money
+	select @TongTien = sum(hd.tongTien - ct.soTienDaTra) 
+	from CHITIETHOADONXE ct, HOADON hd
+	where ct.maHoaDon = hd.maHoaDon									
+	if @TongTien is null return 0
+	return @TongTien
+end
+go
+
+-- Tổng tiền chưa thanh toán phụ tùng theo chi nhánh
+
+create or alter function fn_TongTienChuaThanhToanXeTheoChiNhanh
+(@maChiNhanh nvarchar(20))
+returns money 
+as
+begin
+	declare @TongTien money
+	select @TongTien = sum(hd.tongTien - ct.soTienDaTra) 
+	from CHITIETHOADONPHUTUNG ct, HOADON hd, NHANVIEN nv
+	where ct.maHoaDon = hd.maHoaDon and hd.maNhanVienThucHien = nv.maNhanVien and nv.maChiNhanh = @MaChiNhanh										
+	if @TongTien is null return 0
+	return @TongTien
+end
+go
+
+-- Tổng tiền chưa thanh toán phụ tùng toàn chi nhánh
+create or alter function fn_TongTienChuaThanhToanXeToanChiNhanh()
+returns money
+as
+begin
+	declare @TongTien money
+	select @TongTien = sum(hd.tongTien - ct.soTienDaTra) 
+	from CHITIETHOADONPHUTUNG ct, HOADON hd
+	where ct.maHoaDon = hd.maHoaDon									
+	if @TongTien is null return 0
+	return @TongTien
+end
+go
 
