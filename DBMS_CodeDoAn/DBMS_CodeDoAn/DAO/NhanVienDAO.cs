@@ -25,7 +25,7 @@ namespace DBMS_CodeDoAn.DAO
         {
             List<NhanVien> listNhanVien = new List<NhanVien>();
 
-            string query = "select * from NhanVien where maChiNhanh = '" + maChiNhanh + "'";
+            string query = "select * from fn_LayDanhSachNhanVienTheoChiNhanh ("+ maChiNhanh + ")";
 
             DataTable data = DataProvider.Instance.ExcuteQuery(query);
 
@@ -57,8 +57,8 @@ namespace DBMS_CodeDoAn.DAO
 
         public bool ThemNhanVien(string maNhanVien, string hoTenNhanVien, string CCCD, string ngaySinh, string gioiTinh, string diaChi, string soDienThoai, string chucVu, int tinhTrangLamViec, string maChiNhanh, string hinhAnh)
         {
-            string query = string.Format("insert into NHANVIEN (maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, tinhTrangLamViec, maChiNhanh, hinhAnh) values ('{0}', N'{1}', '{2}', '{3}', N'{4}', N'{5}', '{6}', N'{7}', {8}, '{9}', '{10}')", maNhanVien, hoTenNhanVien, CCCD, ngaySinh.Substring(0, 10), gioiTinh, diaChi, soDienThoai, chucVu, tinhTrangLamViec, maChiNhanh, hinhAnh);
-            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            string query = string.Format("exec Insert_NhanVien @hoTenNhanVien , @CCCD , @ngaySinh , @gioiTinh , @diaChi , @soDienThoai , @chucVu , @tinhTrangLamViec , @maChiNhanh , @hinhAnh ");
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] {hoTenNhanVien, CCCD, ngaySinh.Substring(0, 10), gioiTinh, diaChi, soDienThoai, chucVu, tinhTrangLamViec, maChiNhanh, hinhAnh });
             return result > 0;
         }
 
