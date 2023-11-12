@@ -442,5 +442,142 @@ select dbo.fn_TongSoTienCanThanhToan('KH001', 'LOXE001_XE001') as N'Tổng tiề
 go
 
 
+-- Lấy danh sách nhân viên theo chi nhánh
+create OR alter function fn_LayDanhSachNhanVienTheoChiNhanh
+(@MaChiNhanh nvarchar(20))
+returns table
+as
+return (
+    select * from NHANVIEN nv
+    where nv.maChiNhanh = @MaChiNhanh
+)
+go
+
+-- Lấy danh sách hóa đơn chưa thanh toán
+create or alter function fn_LayDanhSachHoaDonChuaThanhToan()
+returns table
+as
+return(
+	select * from HOADON hd
+	where hd.tinhTrang != N'Đã thanh toán'
+)
+
+-- Thống kê tiền nhập xe theo chi nhánh 
+create or alter function fn_ThongKeTienNhapXeTheoChiNhanh
+(@MaChiNhanh nvarchar(20))
+returns money
+as
+begin
+	declare @TongTien money
+	select @TongTien = sum(ct.giaNhap * ct.soLuong) from CHITIETPHIEUNHAPXE ct, PHIEUNHAP pn where pn.maPhieuNhap = ct.maPhieuNhap and pn.maChiNhanh = @MaChiNhanh
+	if @TongTien is null return 0
+	return @TongTien
+end
+
+-- Thống kê tiền nhập xe trên toàn chi nhánh
+create or alter function fn_ThongKeTienNhapXeToanChiNhanh()
+returns money
+as
+begin
+	declare @TongTien money
+	select @TongTien = sum(ct.giaNhap * ct.soLuong) from CHITIETPHIEUNHAPXE ct
+	if @TongTien is null return 0
+	return @TongTien
+end
+
+-- Thống kê tiền nhập phụ tùng theo chi nhánh
+create or alter function fn_ThongKeTienNhapPhuTungTheoChiNhanh
+
+(@MaChiNhanh nvarchar(20))
+returns money
+as
+begin
+	declare @TongTien money
+	select @TongTien = sum(ct.giaNhap * ct.soLuong) from CHITIETPHIEUNHAPPHUTUNG ct, PHIEUNHAP pn where pn.maPhieuNhap = ct.maPhieuNhap and pn.maChiNhanh = @MaChiNhanh
+	if @TongTien is null return 0
+	return @TongTien
+end
+
+-- Thống kê tiền nhập phụ tùng toàn chi nhánh
+create or alter function fn_ThongKeTienNhapPhuTungToanChiNhanh()
+returns money
+as
+begin
+	declare @TongTien money
+	select @TongTien = sum(ct.giaNhap * ct.soLuong) from CHITIETPHIEUNHAPPHUTUNG ct
+	if @TongTien is null return 0
+	return @TongTien
+end
+
+-- Doanh thu bán xe theo chi nhánh
+create or alter function fn_DoanhThuBanXeTheoChiNhanh
+(@MaChiNhanh nvarchar(20))
+returns money
+as
+begin
+	declare @TongTien money
+	select @TongTien = sum(ct.soTienDaTra) 
+	from CHITIETHOADONXE ct, HOADON hd, NHANVIEN nv
+	where ct.maHoaDon = hd.maHoaDon and hd.maNhanVienThucHien = nv.maNhanVien and nv.maChiNhanh = @MaChiNhanh										
+	if @TongTien is null return 0
+	return @TongTien
+end
+
+-- Doanh thu bán xe trên toàn chi nhánh
+create or alter function fn_DoanhThuBanXeToanChiNhanh()
+returns money
+as
+begin
+	declare @TongTien money
+	select @TongTien = sum(ct.soTienDaTra) 
+	from CHITIETHOADONXE ct, HOADON hd
+	where ct.maHoaDon = hd.maHoaDon									
+	if @TongTien is null return 0
+	return @TongTien
+end
+
+-- Doanh thu bán phụ tùng theo chi nhánh
+create or alter function fn_DoanhThuBanPhuTungTheoChiNhanh
+(@MaChiNhanh nvarchar(20))
+returns money
+as
+begin
+	declare @TongTien money
+	select @TongTien = sum(ct.soTienDaTra) 
+	from CHITIETHOADONPhuTung ct, HOADON hd, NHANVIEN nv
+	where ct.maHoaDon = hd.maHoaDon and hd.maNhanVienThucHien = nv.maNhanVien and nv.maChiNhanh = @MaChiNhanh										
+	if @TongTien is null return 0
+	return @TongTien
+end
+
+-- Doanh thu bán phụ tùng trên toàn chi nhánh
+create or alter function fn_DoanhThuBanPhuTungToanChiNhanh()
+returns money
+as
+begin
+	declare @TongTien money
+	select @TongTien = sum(ct.soTienDaTra) 
+	from CHITIETHOADONPHUTUNG ct, HOADON hd
+	where ct.maHoaDon = hd.maHoaDon									
+	if @TongTien is null return 0
+	return @TongTien
+end
+
+-- Lợi nhuận theo chi nhánh
+create or alter function fn_LoiNhuanTheoChiNhanh
+(@MaChiNhanh nvarchar(20))
+returns money
+as
+begin
+	return dbo.fn_DoanhThuBanPhuTungTheoChiNhanh(@MaChiNhanh) + dbo.fn_DoanhThuBanXeTheoChiNhanh(@MaChiNhanh) - dbo.fn_ThongKeTienNhapPhuTungTheoChiNhanh(@MaChiNhanh) - dbo.fn_ThongKeTienNhapXeTheoChiNhanh(@MaChiNhanh)
+end
+
+-- Lợi nhuận trên toàn chi nhánh
+create or alter function fn_LoiNhuanToanChiNhanh()
+returns money
+as
+begin
+return dbo.fn_DoanhThuBanPhuTungToanChiNhanh() + dbo.fn_DoanhThuBanXeToanChiNhanh() - dbo.fn_ThongKeTienNhapPhuTungToanChiNhanh() - dbo.fn_ThongKeTienNhapXeToanChiNhanh()
+end
 
 
