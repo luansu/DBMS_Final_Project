@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DBMS_CodeDoAn.DAO;
+using DBMS_CodeDoAn.DTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DBMS_CodeDoAn.Forms;
+using System.Security.Cryptography.Pkcs;
 
 namespace DBMS_CodeDoAn
 {
@@ -15,6 +19,13 @@ namespace DBMS_CodeDoAn
         public fHome()
         {
             InitializeComponent();
+        }
+
+        #region Events
+
+        private void fHome_Load(object sender, EventArgs e)
+        {
+            LoadListXe(); 
         }
 
         private void quảnLýXeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -127,6 +138,43 @@ namespace DBMS_CodeDoAn
         {
             this.Close();
         }
+
+        #endregion 
+
+        
+
+        #region Methos
+
+        void LoadListXe()
+        {
+            List<Xe> listXe = XeDAO.Instance.DanhSachXe();
+
+            foreach (Xe xe in listXe)
+            {
+                
+                string path = xe.HinhAnh.Replace(@"\", @"\\");
+                Button btn = new Button()
+                {
+                    Width = 200, Height = 200,
+                };
+                if (xe.HinhAnh != "")
+                {
+                    btn.BackgroundImage = Image.FromFile(path);
+                    btn.BackgroundImageLayout = ImageLayout.Zoom;
+                    btn.Text = xe.TenXe + Environment.NewLine + xe.GiaBan;
+                    btn.TextAlign = ContentAlignment.BottomCenter;
+                }
+                else
+                {
+                    btn.Text = xe.TenXe + Environment.NewLine + xe.GiaBan;
+                }
+                flpXe.Controls.Add(btn);
+                
+            }
+        }
+
+
+        #endregion
 
     }
 }

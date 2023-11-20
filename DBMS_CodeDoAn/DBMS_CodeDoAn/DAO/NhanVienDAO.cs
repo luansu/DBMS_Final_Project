@@ -25,7 +25,7 @@ namespace DBMS_CodeDoAn.DAO
         {
             List<NhanVien> listNhanVien = new List<NhanVien>();
 
-            string query = "select * from fn_LayDanhSachNhanVienTheoChiNhanh ("+ maChiNhanh + ")";
+            string query = "select * from fn_LayDanhSachNhanVienTheoChiNhanh ('" + maChiNhanh + "')";
 
             DataTable data = DataProvider.Instance.ExcuteQuery(query);
 
@@ -55,7 +55,7 @@ namespace DBMS_CodeDoAn.DAO
             return listNhanVien;
         }
 
-        public bool ThemNhanVien(string maNhanVien, string hoTenNhanVien, string CCCD, string ngaySinh, string gioiTinh, string diaChi, string soDienThoai, string chucVu, int tinhTrangLamViec, string maChiNhanh, string hinhAnh)
+        public bool ThemNhanVien(string hoTenNhanVien, string CCCD, string ngaySinh, string gioiTinh, string diaChi, string soDienThoai, string chucVu, int tinhTrangLamViec, string maChiNhanh, string hinhAnh)
         {
             string query = string.Format("exec Insert_NhanVien @hoTenNhanVien , @CCCD , @ngaySinh , @gioiTinh , @diaChi , @soDienThoai , @chucVu , @tinhTrangLamViec , @maChiNhanh , @hinhAnh ");
             int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] {hoTenNhanVien, CCCD, ngaySinh.Substring(0, 10), gioiTinh, diaChi, soDienThoai, chucVu, tinhTrangLamViec, maChiNhanh, hinhAnh });

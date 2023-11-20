@@ -160,15 +160,13 @@ rollback
 -- TRIGGER tự động sinh mã nhân viên
 go
 CREATE or Alter trigger tg_ThemNhanVien on NHANVIEN
-instead of insert
+instead of insert 
 as
 BEGIN
 	declare @hoTenNhanVien nvarchar(50), @CCCD nvarchar(20), @ngaySinh date, @gioiTinh nvarchar(5), @diaChi nvarchar(255), @soDienThoai nvarchar(20), @chucVu  nvarchar(50), @maChiNhanh nvarchar(20), @hinhAnh nvarchar(200)
 	select @hoTenNhanVien = nv.hoTenNhanVien, @CCCD = nv.CCCD, @ngaySinh = nv.ngaySinh, @gioiTinh = nv.gioiTinh, @diaChi = nv.diaChi, @soDienThoai = nv.soDienThoai, @chucVu = nv.chucVu, @maChiNhanh = nv.maChiNhanh, @hinhAnh = nv.hinhAnh
 	from inserted as nv
-	print (dbo.fn_TaoMaNhanVien(@maChiNhanh))
 	insert into NHANVIEN(maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh, hinhAnh) Values(dbo.fn_TaoMaNhanVien(@maChiNhanh), @hoTenNhanVien , @CCCD , @ngaySinh, @gioiTinh, @diaChi , @soDienThoai, @chucVu, @maChiNhanh, @hinhAnh)
-	print 111
 END
 --------------------------------------------------------------------------------
 -- Tạo TRIGGER khi thêm nhân viên thì tài khoản tự động thêm
@@ -192,17 +190,17 @@ BEGIN
     IF @chucVu = N'Quản lý'
     BEGIN
         EXEC('USE DBMS_DOAN_QUANLYCUAHANGXE;
-              EXEC sp_addrolemember r_admin TO ' + @taiKhoan)
+              EXEC sp_addrolemember r_admin, ' + @taiKhoan)
     END
 	ELSE IF @chucVu like N'%bán%'
 	BEGIN 
 		EXEC('USE DBMS_DOAN_QUANLYCUAHANGXE;
-              EXEC sp_addrolemember r_seller TO ' + @taiKhoan)
+              EXEC sp_addrolemember r_seller, ' + @taiKhoan)
 	END
 	ELSE IF @chucVu like N'%bảo%'
 	BEGIN 
 		EXEC('USE DBMS_DOAN_QUANLYCUAHANGXE;
-              EXEC sp_addrolemember r_maintenace TO ' + @taiKhoan)
+              EXEC sp_addrolemember r_maintenace, ' + @taiKhoan)
 	END 
 END
 
@@ -252,15 +250,4 @@ begin tran
 rollback
 go
 
--- Trigger đuổi việc nhân viên
-CREATE or Alter trigger tg_XoaNhanVien on NHANVIEN
-after delete
-as
-BEGIN
-	declare @maNhanVien nvarchar(20), @taiKhoan nvarchar(20)
-	select @maNhanVien = d.maNhanVien from deleted d
-	select @taiKhoan = tk.tenDangNhap from TAIKHOAN tk where tk.maNhanVien = @maNhanVien
-	EXEC('USE DBMS_DOAN_QUANLYCUAHANGXE;
-              DROP USER ' + @taiKhoan)
-END
 

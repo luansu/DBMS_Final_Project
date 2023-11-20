@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DBMS_CodeDoAn.DTO;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DBMS_CodeDoAn.DAO
 {
@@ -125,34 +126,27 @@ namespace DBMS_CodeDoAn.DAO
             return data;
         }
 
-        public byte[] ConvertImageToByteArray(Image image)
+        public byte[] converImgToByte(System.Windows.Forms.TextBox txtPathImage)
         {
-            try
-            {
-                if (image == null) { return null; }
-                using (MemoryStream stream = new MemoryStream())
-                {
-                    image.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
-                    return stream.ToArray();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return null;
-            }
+            FileStream fs;
+            fs = new FileStream(txtPathImage.Text, FileMode.Open, FileAccess.Read);
+            byte[] picbyte = new byte[fs.Length];
+            fs.Read(picbyte, 0, Convert.ToInt32(fs.Length));
+            fs.Close();
+            return picbyte;
         }
 
-        public Image ConvertByteArrayToImage(byte[] byteArray)
+        // Method Convert Byte arr to Image
+        public Image ByteToImg(string byteString)
         {
-            if (byteArray == null)
-            {
-                return null;
-            }
-            using (MemoryStream stream = new MemoryStream(byteArray))
-            {
-                return Image.FromStream(stream);
-            }
+            if (byteString == "")
+                 return null;
+            byte[] imgBytes = Convert.FromBase64String(byteString);
+            MemoryStream ms = new MemoryStream(imgBytes, 0, imgBytes.Length);
+            ms.Write(imgBytes, 0, imgBytes.Length);
+            Image image = Image.FromStream(ms, true);
+            return image;
         }
+
     }
 }

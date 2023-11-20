@@ -90,7 +90,7 @@ namespace DBMS_CodeDoAn
             {
                 if (strBtn == "Add")
                 {
-                    bool result = ThemNhanVien(maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, tinhTrangLamViec, maChiNhanh, hinhAnh);
+                    bool result = ThemNhanVien(hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, tinhTrangLamViec, maChiNhanh, hinhAnh);
                     if (result)
                     {
                         MessageBox.Show("Thêm nhân viên thành công");
@@ -130,10 +130,7 @@ namespace DBMS_CodeDoAn
             }
             catch (SqlException ex)
             {
-                if (ex.Message.Contains("contr_NHANVIEN_checkLenSDT"))
-                {
-                    MessageBox.Show("Loi SDT");
-                }
+                MessageBox.Show($"Error: {ex.Message}");
             }
 
 
@@ -186,9 +183,9 @@ namespace DBMS_CodeDoAn
             cbbGioiTinh.DataSource = listGioiTinh;
         }
 
-        bool ThemNhanVien(string maNhanVien, string hoTenNhanVien, string CCCD, string ngaySinh, string gioiTinh, string diaChi, string soDienThoai, string chucVu, int tinhTrangLamViec, string maChiNhanh, string hinhAnh)
+        bool ThemNhanVien(string hoTenNhanVien, string CCCD, string ngaySinh, string gioiTinh, string diaChi, string soDienThoai, string chucVu, int tinhTrangLamViec, string maChiNhanh, string hinhAnh)
         {
-            return NhanVienDAO.Instance.ThemNhanVien(maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, tinhTrangLamViec, maChiNhanh, hinhAnh);
+            return NhanVienDAO.Instance.ThemNhanVien(hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, tinhTrangLamViec, maChiNhanh, hinhAnh);
         }
 
         bool CapNhatNhanVien(string maNhanVien, string hoTenNhanVien, string CCCD, string ngaySinh, string gioiTinh, string diaChi, string soDienThoai, string chucVu, int tinhTrangLamViec, string maChiNhanh, string hinhAnh)
@@ -215,7 +212,6 @@ namespace DBMS_CodeDoAn
             txtTinhTrangLamViec.DataBindings.Add("Text", dgvThongTinNhanVien.DataSource, "tinhTrangLamViec", true, DataSourceUpdateMode.Never);
             cbbMaChiNhanh.DataBindings.Add("Text", dgvThongTinNhanVien.DataSource, "maChiNhanh", true, DataSourceUpdateMode.Never);
             picNhanVien.DataBindings.Add("ImageLocation", dgvThongTinNhanVien.DataSource, "hinhAnh", true, DataSourceUpdateMode.Never);
-
 
             // Lỗi
             if (txtTinhTrangLamViec.Text == "True")
@@ -304,14 +300,14 @@ namespace DBMS_CodeDoAn
             dtpNgaySinh.Enabled = true;
         }
 
-        void OpenPicture(PictureBox pic)
+        void OpenPicture(PictureBox pic1)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Chọn ảnh";
             openFileDialog.Filter = "Image File(*.gif; *.jpg; *.jpeg; *.bmp; *.wmf; *.png)| *.gif; *.jpg; *.jpeg; *.bmp; *.wmf; *.png";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                pic.ImageLocation = openFileDialog.FileName;
+                pic1.ImageLocation = openFileDialog.FileName;
             }
         }
 

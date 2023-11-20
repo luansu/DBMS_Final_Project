@@ -641,3 +641,72 @@ begin
 end
 go
 
+
+
+create or alter function fn_findTenChiNhanhByMaXe (@maXe nvarchar(20))
+returns nvarchar(20)
+as 
+begin
+	declare @tenChiNhanh nvarchar(50)
+	select @tenChiNhanh = ChiNhanh.tenChiNhanh from ChiNhanh, PHIEUNHAP, CHITIETPHIEUNHAPXE, LOXE, XE where CHINHANH.maChiNhanh = PHIEUNHAP.maChiNhanh 
+	and PHIEUNHAP.maPhieuNhap = CHITIETPHIEUNHAPXE.maPhieuNhap and CHITIETPHIEUNHAPXE.maLoXe = LOXE.maLoXe and LOXE.maLoXe = Xe.maLoXe and XE.maXe = @maXe
+	return @tenChiNhanh
+end
+
+begin tran
+	select dbo.fn_findTenChiNhanhByMaXe('LOXE001_XE001')
+	rollback
+
+
+create or alter function fn_checkPhiTruocBa(@maXe nvarchar (20))
+returns float
+as
+begin
+	Declare @gia float
+	select @gia = giaBan from LOXE, Xe where LOXE.maLoXe = XE.maLoXe and maXe = @maXe
+	declare @tenChiNhanh nvarchar(20)
+	set @tenChiNhanh =  dbo.fn_findTenChiNhanhByMaXe(@maXe)
+	Declare @phiTruocBa float
+	if @tenChiNhanh LIKE N'%Hà Nội' or @tenChiNhanh LIKE N'%Hồ Chí Minh'
+	begin
+		set @phiTruocBa = 0.15 * @gia
+	end
+	else 
+	begin
+		set @phiTruocBa = 0.1 * @gia
+	end
+	return @phiTruocBa
+end
+
+begin tran
+
+	select dbo.fn_checkPhiTruocBa('LOXE001_XE001')
+	rollback
+
+
+create or alter function fn_checkPhiCapBienSo(@maXe nvarchar (20))
+returns float
+as
+begin
+	declare @tenChiNhanh nvarchar(20)
+	set @tenChiNhanh =  dbo.fn_findTenChiNhanhByMaXe(@maXe)
+	Declare @phiBienSo float
+	if @tenChiNhanh LIKE N'%Hà Nội' or @tenChiNhanh LIKE N'%Hồ Chí Minh'
+	begin
+		set @phiBienSo = 20000000
+	end
+	else if @tenChiNhanh LIKE N'%Huế' or @tenChiNhanh LIKE N'%Đà Nẵng' or @tenChiNhanh LIKE N'%Cần Thơ'
+	begin
+		set @phiBienSo = 1000000
+	end
+	else 
+	begin
+		set @phiBienSo = 200000
+	end
+	return @phiBienSo
+end
+
+begin tran
+	select dbo.fn_checkPhiCapBienSo('LOXE004_XE001')
+	rollback
+

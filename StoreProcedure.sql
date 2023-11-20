@@ -585,3 +585,17 @@ exec Update_LoXe @maLoXe, @tenXe, @mauSac, @giaBan, @soChoNgoi, @xuatXu, @hangXe
 create or alter proc Delete_LoXe @maLoXe nvarchar(20)
 as
 	delete LOXE where maLoXe = @maLoXe
+
+-- Procedure xóa nhân viên
+create or alter proc sp_XoaNhanVien @maNhanVien nvarchar(20)
+as 
+begin
+	EXEC('USE DBMS_DOAN_QUANLYCUAHANGXE;
+              EXEC sp_dropuser ' + @maNhanVien)
+	EXEC('USE DBMS_DOAN_QUANLYCUAHANGXE;
+              EXEC sp_droplogin ' + @maNhanVien)
+	delete nhanvien where maNhanVien = @maNhanVien
+	delete TAIKHOAN WHERE maNhanVien = @maNhanVien
+end
+
+create or alter proc sp_InsertNhanVien(@maNhanVien nvarchar(20), hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh, hinhAnh

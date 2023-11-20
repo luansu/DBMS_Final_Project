@@ -276,11 +276,11 @@
             this.btnChooseFile.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnChooseFile.Image = ((System.Drawing.Image)(resources.GetObject("btnChooseFile.Image")));
             this.btnChooseFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnChooseFile.Location = new System.Drawing.Point(562, 330);
+            this.btnChooseFile.Location = new System.Drawing.Point(562, 343);
             this.btnChooseFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnChooseFile.Name = "btnChooseFile";
             this.btnChooseFile.Padding = new System.Windows.Forms.Padding(82, 0, 0, 0);
-            this.btnChooseFile.Size = new System.Drawing.Size(411, 66);
+            this.btnChooseFile.Size = new System.Drawing.Size(349, 66);
             this.btnChooseFile.TabIndex = 54;
             this.btnChooseFile.Text = "         CHỌN ẢNH";
             this.btnChooseFile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -596,10 +596,10 @@
             // 
             // car_image
             // 
-            this.car_image.Location = new System.Drawing.Point(562, 40);
+            this.car_image.Location = new System.Drawing.Point(562, 43);
             this.car_image.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.car_image.Name = "car_image";
-            this.car_image.Size = new System.Drawing.Size(338, 277);
+            this.car_image.Size = new System.Drawing.Size(349, 283);
             this.car_image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.car_image.TabIndex = 36;
             this.car_image.TabStop = false;

@@ -65,3 +65,4 @@ C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_Cod
 C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.csproj.SuggestedBindingRedirects.cache
 C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.exe.config
 C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.exe.licenses
+C:\aDrop_Box\Job\Study_21110927\2023-2024\Ki_1\DBMS\Final\DBMS_CodeDoAn\DBMS_CodeDoAn\obj\Debug\DBMS_CodeDoAn.Forms.ChiTietXe.resources
