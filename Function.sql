@@ -1,5 +1,6 @@
 ﻿use DBMS_DOAN_QUANLYCUAHANGXE
 go
+
 -------------------------------------------------------------------------
 -- Function tự động sinh mã bảo dưỡng
 create or alter function fn_SinhMaBaoDuong()
@@ -22,13 +23,6 @@ alter table DICHVUBAODUONG add constraint constr_MaBaoDuong
 default dbo.fn_SinhMaBaoDuong() for maBaoDuong
 go
 --alter table DICHVUBAODUONG drop constraint constr_MaBaoDuong
-begin tran
-	insert into DICHVUBAODUONG(tenBaoDuong, loaiBaoDuong, phiBaoDuong)
-	values ('a', 'a', 1)
-	select * from DICHVUBAODUONG
-rollback
-select * from DICHVUBAODUONG
-go
 -------------------------------------------------------------------------------------------------
 -- Function tự động sinh Phiếu bảo dưỡng
 create or alter function fn_SinhMaPhieuBaoDuong()
@@ -49,14 +43,6 @@ go
 -- add contraint
 alter table PHIEUBAODUONG add constraint contr_MaPhieuBaoDuong
 default dbo.fn_SinhMaPhieuBaoDuong() for maPhieuBaoDuong
-begin tran
-	insert into PHIEUBAODUONG(ngayLapPhieu, tongTien, maKhachHang, maNhanVienThucHien)
-	values('2003-08-10', 1111, 'KH003', 'NVHCM001')
-
-	update PHIEUBAODUONG set ngayLapPhieu = '{}', tongTien = 2, maKhachHang = '{}', maNhanVienThucHien = '{}'
-	where maPhieuBaoDuong = '{}'
-	select * from PHIEUBAODUONG
-rollback
 go
 -------------------------------------------------------------------------------------------------
 -- Function tự động sinh mã chi tiết PBD
@@ -78,12 +64,6 @@ go
 -- add constraint
 alter table CHITIETPHIEUBAODUONG add constraint contr_MaChiTietPBD
 default dbo.fn_SinhMaChiTietPhieuBaoDuong() for maChiTietPhieuBaoDuong
-begin tran
-	insert into CHITIETPHIEUBAODUONG(maBaoDuong, maPhieuBaoDuong, thanhTien)
-	values('DVBD001', 'PBD001', 20000)
-
-	select * from CHITIETPHIEUBAODUONG
-rollback
 go
 -------------------------------------------------------------------------------------------------
 -- Function tự động sinh mã Hợp đồng bảo hành
@@ -105,12 +85,6 @@ go
 -- add constraint
 alter table HOPDONGBAOHANH add constraint contr_MaHopDongBaoHanh
 default dbo.fn_SinhMaHopDongBaoHanh() for maHopDongBaoHanh
-begin tran
-	insert into HOPDONGBAOHANH(maXe, maKhachHang, ngayKyBaoHanh, thoiHanBaoHanh)
-	values('LOXE001_XE001', 'KH001', '2003-08-09', '2003-08-10')
-
-	select * from HOPDONGBAOHANH
-rollback
 go
 -------------------------------------------------------------------------------------------------
 -- Function tự động sinh mã Phiếu bảo hành
@@ -154,12 +128,6 @@ go
 -- Add Constraint cho mã Khách hàng
 alter table KHACHHANG add constraint contr_MaKhachHang
 default dbo.fn_SinhMaKhachHang() for maKhachHang
---
-begin tran
-	insert into KHACHHANG(hoTenKhachHang, ngaySinh, diaChi, gioiTinh, CCCD, soDienThoai)
-	values ('a', '', 'a', 'Nam', '111111111111', '1111111111')
-	select * from KHACHHANG
-rollback
 go
 --------------------------------------------------------------------------------------------------
 --Function tự động sinh mã phiếu nhập
@@ -185,14 +153,6 @@ go
 alter table PHIEUNHAP add constraint contr_SinhMaPhieuNhap
 default dbo.fn_SinhMaPhieuNhap() for maPhieuNhap
 go
---
-begin tran
-	insert into PHIEUNHAP(ngayNhap, maNhaCungCap, maChiNhanh)
-	values ('2003-08-10', 'NCC-XE001', 'CNHN')
-
-	select * from PHIEUNHAP
-rollback
-go
 --------------------------------------------------------------------------------------------------
 -- Function tự sinh mã chi tiết phiếu nhập xe
 create or alter function fn_SinhMaChiTietPhieuNhapXe()
@@ -217,12 +177,6 @@ go
 -- Add constraint
 alter table CHITIETPHIEUNHAPXE add constraint contr_SinhMaChiTietPhieuNhapXe
 default dbo.fn_SinhMaChiTietPhieuNhapXe() for maChiTietPhieuNhapXe
-begin tran
-	insert into CHITIETPHIEUNHAPXE(maLoXe, maPhieuNhap, giaNhap, soLuong)
-	values('LOXE001', 'PN001', 11111, 111)
-
-	select * from CHITIETPHIEUNHAPXE
-rollback
 --------------------------------------------------------------------------------------------------
 -- Function tự sinh mã chi tiết phiếu nhập phụ tùng
 go
@@ -246,13 +200,6 @@ go
 alter table CHITIETPHIEUNHAPPHUTUNG add constraint contr_SinhMaChiTietPhieuNhapPhuTung
 default dbo.fn_SinhMaChiTietPhieuNhapPhuTung() for maChiTietPhieuNhapPhuTung
 go
-begin tran
-	insert into CHITIETPHIEUNHAPPHUTUNG(maPhuTung, maPhieuNhap, giaNhap, soLuong)
-	values ('PT001', 'PN001', 20000, 10)
-
-	select * from CHITIETPHIEUNHAPPHUTUNG
-rollback
-go
 --------------------------------------------------------------------------------------------------
 --Function sinh mã hóa đơn
 create or alter function fn_SinhMaHoaDon()
@@ -274,12 +221,6 @@ go
 --Add constraint
 alter table HOADON add constraint contr_SinhMaHoaDon
 default dbo.fn_SinhMaHoaDon() for maHoaDon
-go
-begin tran
-	insert into HOADON(ngayLapHoaDon, tongTien, tinhTrang, maKhachHang, maNhanVienThucHien)
-	values('2003-08-10', 111111, N'Chưa thanh toán', 'KH001', 'NVHN001')
-	select * from HOADON
-rollback
 go
 --------------------------------------------------------------------------------------------------
 -- Function tự tạo mã chi tiết hóa đơn phụ tùng
@@ -306,12 +247,6 @@ go
 alter table CHITIETHOADONPHUTUNG add constraint contr_SinhMaCTHDPT
 default dbo.fn_SinhMaChiTietHoaDonPhuTung() for maChiTietHoaDonPhuTung
 go
-begin tran
-	insert into CHITIETHOADONPHUTUNG(maHoaDon, maPhuTung, soTienDaTra)
-	values ('HD001', 'PT001', 100000)
-	select * from CHITIETHOADONPHUTUNG
-rollback
-go
 --------------------------------------------------------------------------------------------------
 -- Function sinh mã chi tiết hóa đơn xe
 create or alter function fn_SinhMaCTHDXe()
@@ -335,15 +270,9 @@ go
 -- Add Constraint
 alter table CHITIETHOADONXE add constraint contr_SinhMaCTHDXe
 default dbo.fn_SinhMaCTHDXe() for maChiTietHoaDonXe
-begin tran
-	insert into CHITIETHOADONXE(maHoaDon, maXe, ngayNhanXe, soTienDaTra, phiDangKyBienSo, phiDangKiem, phiTruocBa, phiBaoHiemTrachNhiemDanSu, phiSuDungDuongBo)
-	values ('HD001', 'LOXE001_XE001', '2003-08-10', 100000000, 2000000, 1000000, 1000000, 1000000, 1000000)
-	select * from CHITIETHOADONXE
-
-rollback
-go
 --------------------------------------------------------------------------------------------------
 -- Function sinh mã phụ tùng
+go
 create or alter function fn_SinhMaPhuTung()
 returns nvarchar(20)
 as
@@ -366,12 +295,6 @@ go
 --Add constraint
 alter table PHUTUNG add constraint contr_SinhMaPhuTung
 default dbo.fn_SinhMaPhuTung() for maPhuTung
---Test
-begin tran
-	insert into PHUTUNG(loaiPhuTung, tenPhuTung, thuongHieu, xuatXu, giaBan, chatLuong)
-	values ('', '', '', '', 10000, '')
-	select * from PHUTUNG
-rollback
 go
 --------------------------------------------------------------------------------------------------
 -- Function tự động sinh mã nhân viên
@@ -438,9 +361,8 @@ begin
 end
 go
 
-select dbo.fn_TongSoTienCanThanhToan('KH001', 'LOXE001_XE001') as N'Tổng tiền'
+--select dbo.fn_TongSoTienCanThanhToan('KH001', 'LOXE001_XE001') as N'Tổng tiền'
 go
-
 
 -- Lấy danh sách nhân viên theo chi nhánh
 create OR alter function fn_LayDanhSachNhanVienTheoChiNhanh
@@ -461,7 +383,7 @@ return(
 	select * from HOADON hd
 	where hd.tinhTrang != N'Đã thanh toán'
 )
-
+go
 -- Thống kê tiền nhập xe theo chi nhánh 
 create or alter function fn_ThongKeTienNhapXeTheoChiNhanh
 (@MaChiNhanh nvarchar(20))
@@ -473,7 +395,7 @@ begin
 	if @TongTien is null return 0
 	return @TongTien
 end
-
+go
 -- Thống kê tiền nhập xe trên toàn chi nhánh
 create or alter function fn_ThongKeTienNhapXeToanChiNhanh()
 returns money
@@ -484,7 +406,7 @@ begin
 	if @TongTien is null return 0
 	return @TongTien
 end
-
+go
 -- Thống kê tiền nhập phụ tùng theo chi nhánh
 create or alter function fn_ThongKeTienNhapPhuTungTheoChiNhanh
 
@@ -497,7 +419,7 @@ begin
 	if @TongTien is null return 0
 	return @TongTien
 end
-
+go
 -- Thống kê tiền nhập phụ tùng toàn chi nhánh
 create or alter function fn_ThongKeTienNhapPhuTungToanChiNhanh()
 returns money
@@ -508,7 +430,7 @@ begin
 	if @TongTien is null return 0
 	return @TongTien
 end
-
+go
 -- Doanh thu bán xe theo chi nhánh
 create or alter function fn_DoanhThuBanXeTheoChiNhanh
 (@MaChiNhanh nvarchar(20))
@@ -522,7 +444,7 @@ begin
 	if @TongTien is null return 0
 	return @TongTien
 end
-
+go
 -- Doanh thu bán xe trên toàn chi nhánh
 create or alter function fn_DoanhThuBanXeToanChiNhanh()
 returns money
@@ -535,7 +457,7 @@ begin
 	if @TongTien is null return 0
 	return @TongTien
 end
-
+go
 -- Doanh thu bán phụ tùng theo chi nhánh
 create or alter function fn_DoanhThuBanPhuTungTheoChiNhanh
 (@MaChiNhanh nvarchar(20))
@@ -549,7 +471,7 @@ begin
 	if @TongTien is null return 0
 	return @TongTien
 end
-
+go
 -- Doanh thu bán phụ tùng trên toàn chi nhánh
 create or alter function fn_DoanhThuBanPhuTungToanChiNhanh()
 returns money
@@ -562,7 +484,7 @@ begin
 	if @TongTien is null return 0
 	return @TongTien
 end
-
+go
 -- Lợi nhuận theo chi nhánh
 create or alter function fn_LoiNhuanTheoChiNhanh
 (@MaChiNhanh nvarchar(20))
@@ -643,70 +565,4 @@ go
 
 
 
-create or alter function fn_findTenChiNhanhByMaXe (@maXe nvarchar(20))
-returns nvarchar(20)
-as 
-begin
-	declare @tenChiNhanh nvarchar(50)
-	select @tenChiNhanh = ChiNhanh.tenChiNhanh from ChiNhanh, PHIEUNHAP, CHITIETPHIEUNHAPXE, LOXE, XE where CHINHANH.maChiNhanh = PHIEUNHAP.maChiNhanh 
-	and PHIEUNHAP.maPhieuNhap = CHITIETPHIEUNHAPXE.maPhieuNhap and CHITIETPHIEUNHAPXE.maLoXe = LOXE.maLoXe and LOXE.maLoXe = Xe.maLoXe and XE.maXe = @maXe
-	return @tenChiNhanh
-end
-
-begin tran
-	select dbo.fn_findTenChiNhanhByMaXe('LOXE001_XE001')
-	rollback
-
-
-create or alter function fn_checkPhiTruocBa(@maXe nvarchar (20))
-returns float
-as
-begin
-	Declare @gia float
-	select @gia = giaBan from LOXE, Xe where LOXE.maLoXe = XE.maLoXe and maXe = @maXe
-	declare @tenChiNhanh nvarchar(20)
-	set @tenChiNhanh =  dbo.fn_findTenChiNhanhByMaXe(@maXe)
-	Declare @phiTruocBa float
-	if @tenChiNhanh LIKE N'%Hà Nội' or @tenChiNhanh LIKE N'%Hồ Chí Minh'
-	begin
-		set @phiTruocBa = 0.15 * @gia
-	end
-	else 
-	begin
-		set @phiTruocBa = 0.1 * @gia
-	end
-	return @phiTruocBa
-end
-
-begin tran
-
-	select dbo.fn_checkPhiTruocBa('LOXE001_XE001')
-	rollback
-
-
-create or alter function fn_checkPhiCapBienSo(@maXe nvarchar (20))
-returns float
-as
-begin
-	declare @tenChiNhanh nvarchar(20)
-	set @tenChiNhanh =  dbo.fn_findTenChiNhanhByMaXe(@maXe)
-	Declare @phiBienSo float
-	if @tenChiNhanh LIKE N'%Hà Nội' or @tenChiNhanh LIKE N'%Hồ Chí Minh'
-	begin
-		set @phiBienSo = 20000000
-	end
-	else if @tenChiNhanh LIKE N'%Huế' or @tenChiNhanh LIKE N'%Đà Nẵng' or @tenChiNhanh LIKE N'%Cần Thơ'
-	begin
-		set @phiBienSo = 1000000
-	end
-	else 
-	begin
-		set @phiBienSo = 200000
-	end
-	return @phiBienSo
-end
-
-begin tran
-	select dbo.fn_checkPhiCapBienSo('LOXE004_XE001')
-	rollback
 

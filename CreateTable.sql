@@ -14,7 +14,7 @@ go
 
 -- Tạo bảng nhân viên 
 -- => Trigger kiểm tra NHÂN VIÊN: CCCD là số, >=18 tuổi
-	create table NHANVIEN( 
+create table NHANVIEN( 
 	maNhanVien nvarchar(20) primary key,
 	hoTenNhanVien nvarchar(50) not null,
 	CCCD nvarchar(20) constraint contr_NhanVien_checkLenCCCD check (len(CCCD) = 12),
@@ -25,7 +25,7 @@ go
 	chucVu nvarchar(50),
 	tinhTrangLamViec bit default 1,
 	maChiNhanh nvarchar(20),
-	hinhAnh nvarchar(200)
+	hinhAnh nvarchar(300),
 	foreign key (maChiNhanh) references CHINHANH(maChiNhanh),
 	constraint contr_NhanVien_conflictCCCD unique (CCCD),
 	constraint contr_NhanVien_conflictSDT unique (soDienThoai)
@@ -77,7 +77,7 @@ create table LOXE(
 	chieuRong int check (chieuRong > 0), 
 	chieuCao int check (chieuCao > 0), 
 	banKinhQuayVong int check (banKinhQuayVong >= 0),
-	hinhAnh nvarchar(200)
+	hinhAnh nvarchar(300)
 )
 go
 
@@ -98,7 +98,7 @@ CREATE TABLE PHUTUNG(
 	xuatXu nvarchar(50), 
 	giaBan float check (giaBan > 0), 
 	chatLuong nvarchar(50),
-	hinhAnh nvarchar(200)
+	hinhAnh nvarchar(300)
 )
 go
 

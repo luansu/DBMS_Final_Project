@@ -4,7 +4,19 @@ go
 create role r_admin;
 create role r_seller;
 create role r_maintenace;
+---
+create login u1 with password = '1'
+create user u1 for login u1
 
+create login u2 with password = '1'
+create user u2 for login u2
+
+EXEC sp_addrolemember r_admin, u1
+EXEC sp_addrolemember r_seller, u2
+select * from NHANVIEN
+
+GRANT insert, select, delete, update, exec on DBMS_DOAN_QUANLYCUAHANGXE to r_admin;
+----
 GRANT insert, select, delete, update, exec on DBMS_DOAN_QUANLYCUAHANGXE to r_admin;
 begin tran;
 grant select, references on DBMS_DOAN_QUANLYCUAHANGXE to r_seller

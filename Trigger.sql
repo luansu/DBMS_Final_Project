@@ -6,10 +6,8 @@ CREATE or ALTER TRIGGER tg_ThayDoiTrangThaiHoaDon on CHITIETHOADONXE
 for update, insert as
 BEGIN
 	DECLARE @soTienDaTra money, @maHoaDon nvarchar(20), @tongTien money
-	SELECT @soTienDaTra = ins.soTienDaTra, @maHoaDon = ins.maHoaDon 	FROM inserted as ins
-	SElECT @tongTien = hd.tongTien 						
-	FROM HOADON as hd 								
-	WHERE hd.maHoaDon = @maHoaDon
+	SELECT @soTienDaTra = ins.soTienDaTra, @maHoaDon = ins.maHoaDon FROM inserted as ins
+	SElECT @tongTien = hd.tongTien FROM HOADON as hd WHERE hd.maHoaDon = @maHoaDon
 	IF @tongTien <= @soTienDaTra
 	BEGIN 
 		UPDATE HOADON 
@@ -74,15 +72,6 @@ begin
 	end
 end
 go
--- TEST
-begin tran
-	insert into CHITIETPHIEUNHAPXE(maChiTietPhieuNhapXe, maLoXe, maPhieuNhap, giaNhap, soLuong)
-	values ('CTPNX111', 'LOXE009', 'PN004', 200000000, 20)
-
-	select * from CHITIETPHIEUNHAPXE
-	select * from XE
-rollback
-go
 --------------------------------------------------------------------------------
 --Trigger khi nhập hàng về chi nhánh thì sẽ cập nhật vào kho
 ---------- Cập nhật kho xe
@@ -110,15 +99,6 @@ begin
 	end 
 end
 go
---Test
-begin tran
-	insert into PHIEUNHAP(maPhieuNhap, maChiNhanh, maNhaCungCap)
-	values ('PN100', 'CNHN', 'NCC-XE001')
-	insert into CHITIETPHIEUNHAPXE(maChiTietPhieuNhapXe, maLoXe, maPhieuNhap, giaNhap, soLuong)
-	values ('CTPNXE100','LOXE001','PN001', 100000000, 10)
-	select * from KHOXE
-rollback
-go
 ---------- Cập nhật kho phụ tùng
 create or alter trigger trg_CapNhatKhoPhuTungKhiNhapHang
 on CHITIETPHIEUNHAPPHUTUNG
@@ -142,14 +122,6 @@ begin
 	end
 end
 go
---Test
-begin tran
-	insert into PHIEUNHAP(maPhieuNhap, maChiNhanh, maNhaCungCap)
-	values ('PN100', 'CNHN', 'NCC-PT001')
-	insert into CHITIETPHIEUNHAPPHUTUNG(maChiTietPhieuNhapPhuTung, maPhuTung, maPhieuNhap, giaNhap, soLuong)
-	values ('CTPNXE100','PT001','PN001', 100000000, 10)
-	select * from KHOPHUTUNG
-rollback
 --------------------------------------------------------------------------------
 -- TRIGGER khi xuất hóa đơn mặt hàng cho khách hàng thì sẽ cập nhật lại số lượng hàng trong kho
 -- Hóa đơn xe
@@ -160,13 +132,18 @@ rollback
 -- TRIGGER tự động sinh mã nhân viên
 go
 CREATE or Alter trigger tg_ThemNhanVien on NHANVIEN
-instead of insert 
+instead of insert
 as
 BEGIN
-	declare @hoTenNhanVien nvarchar(50), @CCCD nvarchar(20), @ngaySinh date, @gioiTinh nvarchar(5), @diaChi nvarchar(255), @soDienThoai nvarchar(20), @chucVu  nvarchar(50), @maChiNhanh nvarchar(20), @hinhAnh nvarchar(200)
+	declare @hoTenNhanVien nvarchar(50), @CCCD nvarchar(20), @ngaySinh date, @gioiTinh nvarchar(5), @diaChi nvarchar(255), @soDienThoai nvarchar(20), @chucVu  nvarchar(50), @maChiNhanh nvarchar(20), @hinhAnh nvarchar(300)
 	select @hoTenNhanVien = nv.hoTenNhanVien, @CCCD = nv.CCCD, @ngaySinh = nv.ngaySinh, @gioiTinh = nv.gioiTinh, @diaChi = nv.diaChi, @soDienThoai = nv.soDienThoai, @chucVu = nv.chucVu, @maChiNhanh = nv.maChiNhanh, @hinhAnh = nv.hinhAnh
 	from inserted as nv
-	insert into NHANVIEN(maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh, hinhAnh) Values(dbo.fn_TaoMaNhanVien(@maChiNhanh), @hoTenNhanVien , @CCCD , @ngaySinh, @gioiTinh, @diaChi , @soDienThoai, @chucVu, @maChiNhanh, @hinhAnh)
+	
+	declare @maNhanVien nvarchar(20)
+	set @maNhanVien = dbo.fn_TaoMaNhanVien(@maChiNhanh)
+
+	insert into NHANVIEN(maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh, hinhAnh) 
+	Values(@maNhanVien, @hoTenNhanVien , @CCCD , @ngaySinh, @gioiTinh, @diaChi , @soDienThoai, @chucVu, @maChiNhanh, @hinhAnh)
 END
 --------------------------------------------------------------------------------
 -- Tạo TRIGGER khi thêm nhân viên thì tài khoản tự động thêm
@@ -203,51 +180,45 @@ BEGIN
               EXEC sp_addrolemember r_maintenace, ' + @taiKhoan)
 	END 
 END
-
 go
 
 -- Test
-begin tran
-	INSERT INTO CHINHANH (maChiNhanh, tenChiNhanh, diaChi)
-	VALUES ('CN001', N'Chi nhánh A', N'123 Đường A, Quận 1, TP.HCM')
-	INSERT INTO NHANVIEN (hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh)
-	VALUES (N'Nguyễn Văn A', '123459189012', '1990-05-15', N'Nam', N'123 Đường X, Quận Y, TP.HCM', '0123456789', N'Quản lý', 'CNHCM')
-	select * from TaiKhoan
-	delete NHANVIEN WHERE maNhanVien = 'NVHCM008'
-	select * from NHANVIEN
-	select * from CHINHANH
-rollback
-go
+--begin tran
+--	INSERT INTO CHINHANH (maChiNhanh, tenChiNhanh, diaChi)
+--	VALUES ('CN001', N'Chi nhánh A', N'123 Đường A, Quận 1, TP.HCM')
+--	INSERT INTO NHANVIEN (maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh)
+--	VALUES ('NV001', N'Nguyễn Văn A', '123456789012', '1990-05-15', N'Nam', N'123 Đường X, Quận Y, TP.HCM', '0123456789', N'Quản lý', 'CN001')
+--	select * from TaiKhoan
+--rollback
+--go
 
 -- Tạo trigger Khi sửa mã nhân viên thì tài khoản cũng sẽ cập nhật theo
-create or alter trigger trg_CapNhatTaiKhoan
-on NHANVIEN
-for update
-as
-begin
-	declare @taiKhoanCu nvarchar(20), @taiKhoanMoi nvarchar(20)
-	set @taiKhoanMoi = (select maNhanVien from inserted)
-	set @taiKhoanCu = (select maNhanVien from deleted)
-	Update TAIKHOAN
-	set tenDangNhap = @taiKhoanMoi, maNhanVien = @taiKhoanMoi
-	where tenDangNhap = @taiKhoanCu
-end
-go
+--create or alter trigger trg_CapNhatTaiKhoan
+--on NHANVIEN
+--for update
+--as
+--begin
+--	declare @taiKhoanCu nvarchar(20), @taiKhoanMoi nvarchar(20)
+--	set @taiKhoanMoi = (select maNhanVien from inserted)
+--	set @taiKhoanCu = (select maNhanVien from deleted)
+--	Update TAIKHOAN
+--	set tenDangNhap = @taiKhoanMoi, maNhanVien = @taiKhoanMoi
+--	where tenDangNhap = @taiKhoanCu
+--end
+--go
 -- Test
-begin tran
-	INSERT INTO CHINHANH (maChiNhanh, tenChiNhanh, diaChi)
-	VALUES ('CN001', N'Chi nhánh A', N'123 Đường A, Quận 1, TP.HCM')
-	INSERT INTO NHANVIEN (maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh)
-	VALUES ('NV001', N'Nguyễn Văn A', '123456789012', '1990-05-15', N'Nam', N'123 Đường X, Quận Y, TP.HCM', '0123456789', N'Quản lý', 'CN001')
+--begin tran
+--	INSERT INTO CHINHANH (maChiNhanh, tenChiNhanh, diaChi)
+--	VALUES ('CN001', N'Chi nhánh A', N'123 Đường A, Quận 1, TP.HCM')
+--	INSERT INTO NHANVIEN (maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh)
+--	VALUES ('NV001', N'Nguyễn Văn A', '123456789012', '1990-05-15', N'Nam', N'123 Đường X, Quận Y, TP.HCM', '0123456789', N'Quản lý', 'CN001')
 
-	select * from TaiKhoan
+--	select * from TaiKhoan
 
-	update NHANVIEN
-	set maNhanVien = 'NV002'
-	where maNhanVien = 'NV001'
+--	update NHANVIEN
+--	set maNhanVien = 'NV002'
+--	where maNhanVien = 'NV001'
 
-	select * from TAIKHOAN
-rollback
-go
-
-
+--	select * from TAIKHOAN
+--rollback
+--go
