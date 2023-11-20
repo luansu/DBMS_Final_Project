@@ -15,15 +15,14 @@ EXEC sp_addrolemember r_admin, u1
 EXEC sp_addrolemember r_seller, u2
 select * from NHANVIEN
 
+---- Cấp quyền cho admin
 GRANT insert, select, delete, update, exec on DBMS_DOAN_QUANLYCUAHANGXE to r_admin;
-----
-GRANT insert, select, delete, update, exec on DBMS_DOAN_QUANLYCUAHANGXE to r_admin;
-begin tran;
-grant select, references on DBMS_DOAN_QUANLYCUAHANGXE to r_seller
 
-deny select on dbo.PHIEUNHAP to r_seller
-deny select on dbo.CHITIETPHIEUNHAPXE to r_seller
-deny select on dbo.CHITIETPHIEUNHAPPHUTUNG to r_seller
+-- Cấp quyền cho r_seller
+GRANT exec on DBMS_DOAN_QUANLYCUAHANGXE to r_admin;
+deny insert, select, update, exec on dbo.PHIEUNHAP to r_seller
+deny insert, select, update, exec on dbo.CHITIETPHIEUNHAPXE to r_seller
+deny insert, select, update, exec on dbo.CHITIETPHIEUNHAPPHUTUNG to r_seller
 
 grant exec on sp_LietKeNhanVienTheoChiNhanh to r_seller
 
@@ -32,14 +31,14 @@ grant exec on sp_LietKeNhanVienTheoChiNhanh to r_seller
 -- sp_ThongTinXeTheoLo
 -- 
 
-grant insert, update on dbo.KHAHCHANG to r_seller
-grant insert, update on dbo.HOADON to r_seller
-grant update on dbo.CHITIETHOADONXE to r_seller
-grant update on dbo.CHITIETHOADONPHUTUNG to r_seller
-grant insert, update on dbo.PHIEUBAODUONG to r_seller
-grant update on dbo.CHITIETPHIEUBAODUONG to r_seller
-grant update on dbo.CHITIETPHIEUBAODUONG to r_seller
-grant insert, update on dbo.HOPDONGBAOHANH to r_seller
+grant insert, update, exec on dbo.KHAHCHANG to r_seller
+grant insert, update, exec on dbo.HOADON to r_seller
+grant update, exec on dbo.CHITIETHOADONXE to r_seller
+grant update, exec on dbo.CHITIETHOADONPHUTUNG to r_seller
+grant insert, update, exec on dbo.PHIEUBAODUONG to r_seller
+grant update, exec on dbo.CHITIETPHIEUBAODUONG to r_seller
+grant update, exec on dbo.CHITIETPHIEUBAODUONG to r_seller
+grant insert, update, exec on dbo.HOPDONGBAOHANH to r_seller
 
 
 -- Phân quyền cho role mataienmain
