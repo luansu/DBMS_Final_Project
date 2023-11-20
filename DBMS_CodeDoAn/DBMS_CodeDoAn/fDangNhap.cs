@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,6 @@ namespace DBMS_CodeDoAn
         {
             InitializeComponent();
         }
-
         #region event
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -31,15 +31,14 @@ namespace DBMS_CodeDoAn
                 e.Cancel = true;
             }
         }
-
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string tenDangNhap = txtAccount.Text;
             string matKhau = txtPassword.Text;
             if (KiemTraDangNhap(tenDangNhap, matKhau))
             {
+                saveLogin(tenDangNhap, matKhau);
                 this.Hide();
-
                 fHome f = new fHome();
                 f.ShowDialog();
                 //fTrangChu f = new fTrangChu();
@@ -62,7 +61,16 @@ namespace DBMS_CodeDoAn
         {
             return TaiKhoanDAO.Instance.KiemTraDangNhap(taiKhoan, matKhau);
         }
-
+        private void saveLogin(string taiKhoan, string matKhau)
+        {
+            string filePath = "log.txt";
+            using (FileStream fs = new FileStream(filePath, FileMode.Create))
+            using (StreamWriter writer = new StreamWriter(fs))
+            {
+                writer.WriteLine(taiKhoan);
+                writer.WriteLine(matKhau);
+            }
+        }
         #endregion
     }
 }

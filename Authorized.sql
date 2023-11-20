@@ -19,7 +19,7 @@ select * from NHANVIEN
 GRANT insert, select, delete, update, exec on DBMS_DOAN_QUANLYCUAHANGXE to r_admin;
 
 -- Cấp quyền cho r_seller
-GRANT exec on DBMS_DOAN_QUANLYCUAHANGXE to r_admin;
+GRANT select, exec on DBMS_DOAN_QUANLYCUAHANGXE to r_seller;
 deny insert, select, update, exec on dbo.PHIEUNHAP to r_seller
 deny insert, select, update, exec on dbo.CHITIETPHIEUNHAPXE to r_seller
 deny insert, select, update, exec on dbo.CHITIETPHIEUNHAPPHUTUNG to r_seller
@@ -42,7 +42,7 @@ grant insert, update, exec on dbo.HOPDONGBAOHANH to r_seller
 
 
 -- Phân quyền cho role mataienmain
-grant select on DBMS_DOAN_QUANLYCUAHANGXE to r_maintenace
+GRANT select, exec on DBMS_DOAN_QUANLYCUAHANGXE to r_maintenace;
 
 deny select on dbo.PHIEUNHAP to r_maintenace
 deny select on dbo.CHITIETPHIEUNHAPXE to r_maintenace

@@ -26,12 +26,36 @@ namespace DBMS_CodeDoAn.DAO
         }
 
         private string strCon = @"Data Source=.;Initial Catalog=DBMS_DOAN_QUANLYCUAHANGXE;Integrated Security=True";
-        private DataProvider() { }
-
+        private DataProvider() 
+        {
+            LoginUser();
+        }
+        private void LoginUser()
+        {
+            string filePath = "log.txt";
+            // Kiểm tra xem tệp tin có tồn tại không
+            List<string> tk_mk = new List<string>();
+            if (File.Exists(filePath))
+            {
+                // Mở tệp tin để đọc
+                using (StreamReader reader = new StreamReader(filePath))
+                {
+                    // Đọc từng dòng và hiển thị ra màn hình
+                    while (!reader.EndOfStream)
+                    {
+                        string line = reader.ReadLine();
+                        Console.WriteLine(line);
+                        tk_mk.Add(line);
+                    }
+                }
+                strCon = @"Data Source=.;Initial Catalog=DBMS_DOAN_QUANLYCUAHANGXE;Persist Security Info=True;;" + "User ID=" + tk_mk[0] + "; Password=" + tk_mk[1] + ";";
+                
+            }
+        }
         public DataTable ExcuteQuery(string query, object[] parameter = null)
         {
             DataTable data = new DataTable();
-
+            LoginUser();
             using (SqlConnection sqlCon = new SqlConnection(strCon))
             {
                 sqlCon.Open();
@@ -68,7 +92,7 @@ namespace DBMS_CodeDoAn.DAO
         public int ExcuteNonQuery(string query, object[] parameters = null)
         {
             int data = 0;
-
+            LoginUser();
             using (SqlConnection sqlCon = new SqlConnection(strCon))
             {
                 sqlCon.Open();
@@ -100,7 +124,7 @@ namespace DBMS_CodeDoAn.DAO
         public object ExcuteScalar(string query, object[] parameters = null)
         {
             object data = 0;
-
+            LoginUser();
             using (SqlConnection sqlCon = new SqlConnection(strCon))
             {
                 sqlCon.Open();
