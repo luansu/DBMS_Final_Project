@@ -25,7 +25,7 @@ go
 	chucVu nvarchar(50),
 	tinhTrangLamViec bit default 1,
 	maChiNhanh nvarchar(20),
-	hinhAnh nvarchar(200)
+	hinhAnh nvarchar(300),
 	foreign key (maChiNhanh) references CHINHANH(maChiNhanh),
 	constraint contr_NhanVien_conflictCCCD unique (CCCD),
 	constraint contr_NhanVien_conflictSDT unique (soDienThoai)
@@ -36,7 +36,6 @@ go
 create table TAIKHOAN(
 	tenDangNhap nvarchar(20) primary key,	
 	matKhau nvarchar(50) not null,
-	chucVu nvarchar(50),
 	maNhanVien nvarchar(20),
 	foreign key (maNhanVien) references NHANVIEN(maNhanVien)
 	on delete cascade -- Nhân viên xóa thì tải khoản cũng sẽ xóa
@@ -77,7 +76,7 @@ create table LOXE(
 	chieuRong int check (chieuRong > 0), 
 	chieuCao int check (chieuCao > 0), 
 	banKinhQuayVong int check (banKinhQuayVong >= 0),
-	hinhAnh nvarchar(200)
+	hinhAnh nvarchar(300)
 )
 go
 
@@ -98,7 +97,7 @@ CREATE TABLE PHUTUNG(
 	xuatXu nvarchar(50), 
 	giaBan float check (giaBan > 0), 
 	chatLuong nvarchar(50),
-	hinhAnh nvarchar(200)
+	hinhAnh nvarchar(300)
 )
 go
 

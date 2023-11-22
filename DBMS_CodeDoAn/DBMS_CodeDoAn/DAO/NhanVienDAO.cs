@@ -25,19 +25,26 @@ namespace DBMS_CodeDoAn.DAO
         {
             List<NhanVien> listNhanVien = new List<NhanVien>();
 
-            string query = "select * from fn_LayDanhSachNhanVienTheoChiNhanh ("+ maChiNhanh + ")";
+            string query = "select * from fn_LayDanhSachNhanVienTheoChiNhanh ('" + maChiNhanh + "')";
 
             DataTable data = DataProvider.Instance.ExcuteQuery(query);
 
-            foreach (DataRow row in data.Rows) 
+            foreach (DataRow row in data.Rows)
             {
                 NhanVien nhanVien = new NhanVien(row);
                 listNhanVien.Add(nhanVien);
             }
-            
+
             return listNhanVien;
         }
-    
+
+        public List<string> DanhSachChucVu()
+        {
+            List<string> listChucVu = new List<string>();
+
+            return listChucVu;
+        }
+
         public List<NhanVien> DanhSachNhanVien()
         {
             List<NhanVien> listNhanVien = new List<NhanVien>();
@@ -55,7 +62,7 @@ namespace DBMS_CodeDoAn.DAO
             return listNhanVien;
         }
 
-        public bool ThemNhanVien(string maNhanVien, string hoTenNhanVien, string CCCD, string ngaySinh, string gioiTinh, string diaChi, string soDienThoai, string chucVu, int tinhTrangLamViec, string maChiNhanh, string hinhAnh)
+        public bool ThemNhanVien(string hoTenNhanVien, string CCCD, string ngaySinh, string gioiTinh, string diaChi, string soDienThoai, string chucVu, int tinhTrangLamViec, string maChiNhanh, string hinhAnh)
         {
             string query = string.Format("exec Insert_NhanVien @hoTenNhanVien , @CCCD , @ngaySinh , @gioiTinh , @diaChi , @soDienThoai , @chucVu , @tinhTrangLamViec , @maChiNhanh , @hinhAnh ");
             int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] {hoTenNhanVien, CCCD, ngaySinh.Substring(0, 10), gioiTinh, diaChi, soDienThoai, chucVu, tinhTrangLamViec, maChiNhanh, hinhAnh });

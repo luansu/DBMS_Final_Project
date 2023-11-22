@@ -312,7 +312,7 @@
             this.btnChooseFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnChooseFile.Name = "btnChooseFile";
             this.btnChooseFile.Padding = new System.Windows.Forms.Padding(38, 0, 0, 0);
-            this.btnChooseFile.Size = new System.Drawing.Size(276, 71);
+            this.btnChooseFile.Size = new System.Drawing.Size(304, 71);
             this.btnChooseFile.TabIndex = 34;
             this.btnChooseFile.Text = "         CHỌN ẢNH";
             this.btnChooseFile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -325,7 +325,7 @@
             this.picNhanVien.Location = new System.Drawing.Point(625, 46);
             this.picNhanVien.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.picNhanVien.Name = "picNhanVien";
-            this.picNhanVien.Size = new System.Drawing.Size(276, 292);
+            this.picNhanVien.Size = new System.Drawing.Size(304, 289);
             this.picNhanVien.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picNhanVien.TabIndex = 33;
             this.picNhanVien.TabStop = false;

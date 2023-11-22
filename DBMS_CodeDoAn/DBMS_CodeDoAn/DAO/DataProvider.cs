@@ -10,7 +10,7 @@ using System.Security.Cryptography.Pkcs;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DBMS_CodeDoAn.DTO;
+using DBMS_CodeDoAn.DTO; 
 
 namespace DBMS_CodeDoAn.DAO
 {
@@ -24,7 +24,7 @@ namespace DBMS_CodeDoAn.DAO
             private set => instance = value; 
         }
 
-        private string strCon = @"Data Source=.;Initial Catalog=DBMS_DOAN_QUANLYCUAHANGXE;Integrated Security=True";
+        private string strCon = string.Format(@"Data Source=.;Initial Catalog=DBMS_DOAN_QUANLYCUAHANGXE;User ID={0};Password={1}", fDangNhap.username, fDangNhap.password);
         private DataProvider() { }
 
         public DataTable ExcuteQuery(string query, object[] parameter = null)
@@ -125,34 +125,5 @@ namespace DBMS_CodeDoAn.DAO
             return data;
         }
 
-        public byte[] ConvertImageToByteArray(Image image)
-        {
-            try
-            {
-                if (image == null) { return null; }
-                using (MemoryStream stream = new MemoryStream())
-                {
-                    image.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
-                    return stream.ToArray();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return null;
-            }
-        }
-
-        public Image ConvertByteArrayToImage(byte[] byteArray)
-        {
-            if (byteArray == null)
-            {
-                return null;
-            }
-            using (MemoryStream stream = new MemoryStream(byteArray))
-            {
-                return Image.FromStream(stream);
-            }
-        }
     }
 }

@@ -71,6 +71,21 @@ namespace DBMS_CodeDoAn.DAO
             return listMaLoXe;
         }
 
+        public List<Xe> DanhSachXe()
+        {
+            List<Xe> listXe = new List<Xe>();   
+            string query = "select * from XE inner join LOXE on XE.maLoXe = LOXE.maLoXe";
+
+            DataTable data = DataProvider.Instance.ExcuteQuery(query);
+            foreach(DataRow row in data.Rows)
+            {
+                Xe xe = new Xe(row);
+                listXe.Add(xe);
+            }
+
+            return listXe;
+        }
+
         public List<Xe> DanhSachXeTheoLo(string maLoXe)
         {
             List<Xe> listXe = new List<Xe>();

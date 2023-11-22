@@ -13,6 +13,8 @@ namespace DBMS_CodeDoAn
 {
     public partial class fDangNhap : Form
     {
+        public static string username;
+        public static string password;
         public fDangNhap()
         {
             InitializeComponent();
@@ -34,9 +36,9 @@ namespace DBMS_CodeDoAn
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string tenDangNhap = txtAccount.Text;
-            string matKhau = txtPassword.Text;
-            if (KiemTraDangNhap(tenDangNhap, matKhau))
+            username = txtAccount.Text;
+            password = txtPassword.Text;
+            if (KiemTraDangNhap(username, password))
             {
                 this.Hide();
 

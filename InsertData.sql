@@ -13,55 +13,55 @@ go
 -- Thêm dữ liệu cho bảng NHÂN VIÊN
 INSERT INTO NHANVIEN (maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh, hinhAnh)
 VALUES ('NVHN001', N'Nguyễn Văn An', '123456289012', '1990-01-15', N'Nam', N'123 Đường Lê Lợi, Hà Nội', '0932345678', N'Quản lý', 'CNHN', ''),
-       ('NVHN002', N'Trần Thị Bình', '234565890123', '1992-03-20', N'Nữ', N'456 Đường Hà Trung, Hà Nội', '0982654321', N'Nhân viên kế toán', 'CNHN', ''),
-       ('NVHN003', N'Lê Văn Cường', '345612901234', '1995-05-10', N'Nam', N'789 Đường Lý Thường Kiệt, Hà Nội', '0911234567', N'Nhân viên IT', 'CNHN', ''),
-       ('NVHN004', N'Phạm Thị Dương', '456789322345', '1988-07-05', N'Nữ', N'101 Đường Trần Phú, Hà Nội', '0976543310', N'Nhân viên bán hàng', 'CNHN', ''),
-       ('NVHN005', N'Hoàng Văn Em', '567890144456', '1993-09-25', N'Nam', N'222 Đường Đống Đa, Hà Nội', '0932108876', N'Nhân viên kế toán', 'CNHN', ''),
-       ('NVHN006', N'Nguyễn Thị Dung', '678932234567', '1997-11-30', N'Nữ', N'333 Đường Nguyễn Du, Hà Nội', '0915432101', N'Nhân viên IT', 'CNHN', ''),
-       ('NVHN007', N'Trần Văn Giang', '789012343278', '1994-02-14', N'Nam', N'444 Đường Bà Triệu, Hà Nội', '0921498765', N'Nhân viên cơ khí', 'CNHN', ''),
+       ('NVHN002', N'Trần Thị Bình', '234565890123', '1992-03-20', N'Nữ', N'456 Đường Hà Trung, Hà Nội', '0982654321', N'Nhân viên thu ngân', 'CNHN', ''),
+       ('NVHN003', N'Lê Văn Cường', '345612901234', '1995-05-10', N'Nam', N'789 Đường Lý Thường Kiệt, Hà Nội', '0911234567', N'Nhân viên bảo dưỡng', 'CNHN', ''),
+       ('NVHN004', N'Phạm Thị Dương', '456789322345', '1988-07-05', N'Nữ', N'101 Đường Trần Phú, Hà Nội', '0976543310', N'Nhân viên thu ngân', 'CNHN', ''),
+       ('NVHN005', N'Hoàng Văn Em', '567890144456', '1993-09-25', N'Nam', N'222 Đường Đống Đa, Hà Nội', '0932108876', N'Nhân viên thu ngân', 'CNHN', ''),
+       ('NVHN006', N'Nguyễn Thị Dung', '678932234567', '1997-11-30', N'Nữ', N'333 Đường Nguyễn Du, Hà Nội', '0915432101', N'Nhân viên bảo dưỡng', 'CNHN', ''),
+       ('NVHN007', N'Trần Văn Giang', '789012343278', '1994-02-14', N'Nam', N'444 Đường Bà Triệu, Hà Nội', '0921498765', N'Nhân viên bảo dưỡng', 'CNHN', ''),
 
 	   ('NVHCM001', N'Lê Thị Hương', '123456712012', '1991-04-20', N'Nữ', N'123 Đường Lê Lai, Hồ Chí Minh', '09123325678', N'Quản lý', 'CNHCM', ''),
-       ('NVHCM002', N'Phạm Văn Hoàng', '234563490123', '1989-06-15', N'Nam', N'456 Đường Nam Kỳ Khởi Nghĩa, Hồ Chí Minh', '0987321321', N'Nhân viên kế toán', 'CNHCM', ''),
-       ('NVHCM003', N'Nguyễn Thị Khanh', '345678910234', '1990-08-10', N'Nữ', N'789 Đường Võ Văn Tần, Hồ Chí Minh', '0901233567', N'Nhân viên IT', 'CNHCM', ''),
-       ('NVHCM004', N'Nguyễn Minh Khánh', '456909012345', '1996-10-05', N'Nam', N'101 Đường Cách Mạng Tháng Tám, Hồ Chí Minh', '0976543210', N'Nhân viên bán hàng', 'CNHCM', ''),
-       ('NVHCM005', N'Lê Thị Linh', '567890893456', '1987-12-25', N'Nữ', N'222 Đường Lê Duẩn, Hồ Chí Minh', '0932109446', N'Nhân viên kế toán', 'CNHCM', ''),
-       ('NVHCM006', N'Hoàng Văn Minh', '678972234567', '1992-02-10', N'Nam', N'333 Đường Lý Thường Kiệt, Hồ Chí Minh', '0965452101', 'Nhân viên IT', 'CNHCM', ''),
-       ('NVHCM007', N'Trần Thị Ngân', '789012323278', '1993-05-14', N'Nữ', N'444 Đường Nguyễn Đình Chính, Hồ Chí Minh', '0921033765', N'Nhân viên bảo vệ', 'CNHCM', ''),
+       ('NVHCM002', N'Phạm Văn Hoàng', '234563490123', '1989-06-15', N'Nam', N'456 Đường Nam Kỳ Khởi Nghĩa, Hồ Chí Minh', '0987321321', N'Nhân viên thu ngân', 'CNHCM', ''),
+       ('NVHCM003', N'Nguyễn Thị Khanh', '345678910234', '1990-08-10', N'Nữ', N'789 Đường Võ Văn Tần, Hồ Chí Minh', '0901233567', N'Nhân viên thu ngân', 'CNHCM', ''),
+       ('NVHCM004', N'Nguyễn Minh Khánh', '456909012345', '1996-10-05', N'Nam', N'101 Đường Cách Mạng Tháng Tám, Hồ Chí Minh', '0976543210', N'Nhân viên thu ngân', 'CNHCM', ''),
+       ('NVHCM005', N'Lê Thị Linh', '567890893456', '1987-12-25', N'Nữ', N'222 Đường Lê Duẩn, Hồ Chí Minh', '0932109446', N'Nhân viên bảo dưỡng', 'CNHCM', ''),
+       ('NVHCM006', N'Hoàng Văn Minh', '678972234567', '1992-02-10', N'Nam', N'333 Đường Lý Thường Kiệt, Hồ Chí Minh', '0965452101', N'Nhân viên bảo dưỡng', 'CNHCM', ''),
+       ('NVHCM007', N'Trần Thị Ngân', '789012323278', '1993-05-14', N'Nữ', N'444 Đường Nguyễn Đình Chính, Hồ Chí Minh', '0921033765', N'Nhân viên bảo dưỡng', 'CNHCM', ''),
 
 	   ('NVCT001', N'Nguyễn Thành Nhân', '123451489012', '1991-03-20', N'Nam', N'123 Đường Hòa Bình, Cần Thơ', '0912343278', N'Quản lý', 'CNCT', ''),
-       ('NVCT002', N'Trần Thị Phương', '234567881123', '1989-05-15', N'Nữ', N'456 Đường Lê Lai, Cần Thơ', '0987654231', N'Nhân viên kế toán', 'CNCT', ''),
-       ('NVCT003', N'Lê Văn Quang', '345678011234', '1990-07-10', N'Nam', N'789 Đường Võ Văn Kiệt, Cần Thơ', '0901674567', N'Nhân viên IT', 'CNCT', ''),
-       ('NVCT004', N'Phạm Thị Quỳnh', '456229012345', '1996-09-05', N'Nữ', N'101 Đường 30/4, Cần Thơ', '0976501210', N'Nhân viên bán hàng', 'CNCT', ''),
-       ('NVCT005', N'Hoàng Văn Sáng', '569990123456', '1988-11-25', N'Nam', N'222 Đường Cách Mạng Tháng Tám, Cần Thơ', '0932108976', N'Nhân viên kế toán', 'CNCT', ''),
-       ('NVCT006', N'Nguyễn Thị Thu', '676601234567', '1992-01-10', N'Nữ', N'333 Đường Nguyễn Văn Linh, Cần Thơ', '0965434501', N'Nhân viên IT', 'CNCT', ''),
-       ('NVCT007', N'Trần Văn Nam', '789099345678', '1994-04-14', N'Nam', N'444 Đường 3/2, Cần Thơ', '0921198765', N'Nhân viên bảo vệ', 'CNCT', ''),
+       ('NVCT002', N'Trần Thị Phương', '234567881123', '1989-05-15', N'Nữ', N'456 Đường Lê Lai, Cần Thơ', '0987654231', N'Nhân viên thu ngân', 'CNCT', ''),
+       ('NVCT003', N'Lê Văn Quang', '345678011234', '1990-07-10', N'Nam', N'789 Đường Võ Văn Kiệt, Cần Thơ', '0901674567', N'Nhân viên thu ngân', 'CNCT', ''),
+       ('NVCT004', N'Phạm Thị Quỳnh', '456229012345', '1996-09-05', N'Nữ', N'101 Đường 30/4, Cần Thơ', '0976501210', N'Nhân viên thu ngân', 'CNCT', ''),
+       ('NVCT005', N'Hoàng Văn Sáng', '569990123456', '1988-11-25', N'Nam', N'222 Đường Cách Mạng Tháng Tám, Cần Thơ', '0932108976', N'Nhân viên bảo dưỡng', 'CNCT', ''),
+       ('NVCT006', N'Nguyễn Thị Thu', '676601234567', '1992-01-10', N'Nữ', N'333 Đường Nguyễn Văn Linh, Cần Thơ', '0965434501', N'Nhân viên bảo dưỡng', 'CNCT', ''),
+       ('NVCT007', N'Trần Văn Nam', '789099345678', '1994-04-14', N'Nam', N'444 Đường 3/2, Cần Thơ', '0921198765', N'Nhân viên bảo dưỡng', 'CNCT', ''),
 
 	   ('NVDN001', N'Trần Đinh Xu', '123453089012', '1991-02-15', N'Nam', N'123 Đường Bạch Đằng, Đà Nẵng', '0916845678', N'Quản lý', 'CNDN', ''),
-       ('NVDN002', N'Nguyễn Thị Yến', '234590810123', '1989-04-20', N'Nữ', N'456 Đường Lê Duẩn, Đà Nẵng', '0982954321', N'Nhân viên kế toán', 'CNDN', ''),
-       ('NVDN003', N'Phạm Văn Đồng', '345636901234', '1990-06-10', N'Nam', N'789 Đường 2/9, Đà Nẵng', '0901294567', N'Nhân viên IT', 'CNDN', ''),
-       ('NVDN004', N'Trần Thị Uyên', '576789012345', '1996-08-05', N'Nữ', N'101 Đường Hùng Vương, Đà Nẵng', '0901543210', N'Nhân viên bán hàng', 'CNDN', ''),
-       ('NVDN005', N'Lê Thị Lan', '567899123456', '1988-10-25', N'Nữ', N'222 Đường Phan Đăng Lưu, Đà Nẵng', '0932148876', N'Nhân viên kế toán', 'CNDN', ''),
-       ('NVDN006', N'Hoàng Văn Mạnh', '638901234567', '1992-12-10', N'Nam', N'333 Đường Hồ Nghinh, Đà Nẵng', '0969132101', N'Nhân viên IT', 'CNDN', ''),
-       ('NVDN007', N'Nguyễn Băng Hà', '789012345678', '1994-03-14', N'Nam', N'444 Đường 3/2, Đà Nẵng', '0921092065', N'Nhân viên bảo vệ', 'CNDN', ''),
+       ('NVDN002', N'Nguyễn Thị Yến', '234590810123', '1989-04-20', N'Nữ', N'456 Đường Lê Duẩn, Đà Nẵng', '0982954321', N'Nhân viên thu ngân', 'CNDN', ''),
+       ('NVDN003', N'Phạm Văn Đồng', '345636901234', '1990-06-10', N'Nam', N'789 Đường 2/9, Đà Nẵng', '0901294567', N'Nhân viên thu ngân', 'CNDN', ''),
+       ('NVDN004', N'Trần Thị Uyên', '576789012345', '1996-08-05', N'Nữ', N'101 Đường Hùng Vương, Đà Nẵng', '0901543210', N'Nhân viên thu ngân', 'CNDN', ''),
+       ('NVDN005', N'Lê Thị Lan', '567899123456', '1988-10-25', N'Nữ', N'222 Đường Phan Đăng Lưu, Đà Nẵng', '0932148876', N'Nhân viên bảo dưỡng', 'CNDN', ''),
+       ('NVDN006', N'Hoàng Văn Mạnh', '638901234567', '1992-12-10', N'Nam', N'333 Đường Hồ Nghinh, Đà Nẵng', '0969132101', N'Nhân viên bảo dưỡng', 'CNDN', ''),
+       ('NVDN007', N'Nguyễn Băng Hà', '789012345678', '1994-03-14', N'Nam', N'444 Đường 3/2, Đà Nẵng', '0921092065', N'Nhân viên bảo dưỡng', 'CNDN', ''),
 
 	   ('NVHUE001', N'Lê Văn Hưng', '123456789012', '1991-05-20', N'Nam', N'123 Đường Nguyễn Huệ, Huế', '0332345678', N'Quản lý', 'CNHUE', ''),
-       ('NVHUE002', N'Trần Thị Kim Thoa', '234567890123', '1989-07-15', N'Nữ', N'456 Đường 2/9, Huế', '0987654321', N'Nhân viên kế toán', 'CNHUE', ''),
-       ('NVHUE003', N'Nguyễn Văn Luyện', '345678901234', '1990-09-10', N'Nam', N'789 Đường Điện Biên Phủ, Huế', '0976234567', N'Nhân viên IT', 'CNHUE', ''),
-       ('NVHUE004', N'Văn Thị Ngọc', '456789012345', '1996-01-22', N'Nữ', N'675 Đường Nguyễn Tất Thành, Huế', '0912346729', N'Nhân viên bán hàng', 'CNHUE', ''),
-	   ('NVHUE005', N'Hoàng Văn Thụ', '567890123456', '1988-01-25', N'Nam', N'222 Đường Trường Chinh, Huế', '0932109776', N'Nhân viên kế toán', 'CNHUE', ''),
-       ('NVHUE006', N'Lê Thị Oanh', '678901234567', '1992-03-10', N'Nữ', N'333 Đường Nguyễn Tất Thành, Huế', '0966632101', N'Nhân viên IT', 'CNHUE', ''),
-       ('NVHUE007', N'Nguyễn Văn Phúc', '789021345678', '1994-06-14', N'Nam', N'444 Đường Đống Đa, Huế', '0921098265', N'Nhân viên bảo vệ', 'CNHUE', '');
+       ('NVHUE002', N'Trần Thị Kim Thoa', '234567890123', '1989-07-15', N'Nữ', N'456 Đường 2/9, Huế', '0987654321', N'Nhân viên thu ngân', 'CNHUE', ''),
+       ('NVHUE003', N'Nguyễn Văn Luyện', '345678901234', '1990-09-10', N'Nam', N'789 Đường Điện Biên Phủ, Huế', '0976234567', N'Nhân viên thu ngân', 'CNHUE', ''),
+       ('NVHUE004', N'Văn Thị Ngọc', '456789012345', '1996-01-22', N'Nữ', N'675 Đường Nguyễn Tất Thành, Huế', '0912346729', N'Nhân viên thu ngân', 'CNHUE', ''),
+	   ('NVHUE005', N'Hoàng Văn Thụ', '567890123456', '1988-01-25', N'Nam', N'222 Đường Trường Chinh, Huế', '0932109776', N'Nhân viên bảo dưỡng', 'CNHUE', ''),
+       ('NVHUE006', N'Lê Thị Oanh', '678901234567', '1992-03-10', N'Nữ', N'333 Đường Nguyễn Tất Thành, Huế', '0966632101', N'Nhân viên bảo dưỡng', 'CNHUE', ''),
+       ('NVHUE007', N'Nguyễn Văn Phúc', '789021345678', '1994-06-14', N'Nam', N'444 Đường Đống Đa, Huế', '0921098265', N'Nhân viên bảo dưỡng', 'CNHUE', '');
 go
 
 -- Thêm dữ liệu cho bảng TÀI KHOẢN
-INSERT INTO TAIKHOAN (tenDangNhap, matKhau, chucVu, maNhanVien)
-VALUES ('1', '1', N'Quản lý', 'NVHN001'),
-	   ('2', '1', N'Nhân viên', 'NVHN002'),
-	   ('3', '1', N'Nhân viên', 'NVHN003'),
-	   ('4', '1', N'Bán hàng', 'NVHN004'),
-	   ('5', '1', N'Quản lý', 'NVHN005'),
-	   ('6', '1', N'Quản lý', 'NVHN006'),
-	   ('7', '1', N'Thợ cơ khí', 'NVHN007');
+INSERT INTO TAIKHOAN (tenDangNhap, matKhau,maNhanVien)
+VALUES ('1', '1', 'NVHN001'),
+	   ('2', '1', 'NVHN002'),
+	   ('3', '1', 'NVHN003'),
+	   ('4', '1', 'NVHN004'),
+	   ('5', '1', 'NVHN005'),
+	   ('6', '1', 'NVHN006'),
+	   ('7', '1', 'NVHN007');
 go
 -- Thêm dữ liệu cho bảng NHÀ CUNG CẤP
 INSERT INTO NHACUNGCAP (maNhaCungCap, tenNhaCungCap, diaChi, soDienThoai)
@@ -116,11 +116,11 @@ VALUES ('LOXE001_XE001', 'LOXE001'),
 go
 
 INSERT INTO PHUTUNG (maPhuTung, loaiPhuTung, tenPhuTung, thuongHieu, xuatXu, giaBan, chatLuong, hinhAnh)
-VALUES ('PT001', N'Lốp xe', N'Lốp Michelin', 'Michelin', N'Pháp', 800, N'Cao cấp', 'C:\Users\WIN 10\Downloads\DoanThanhNien.jpg'),
-       ('PT002', N'Bình xăng', N'Bình xăng Yamaha', 'Yamaha', N'Nhật Bản', 50, N'Tiêu chuẩn', 'C:\Users\WIN 10\Downloads\DoanThanhNien.jpg'),
-       ('PT003', N'Dầu nhớt', N'Dầu nhớt Motul', 'Motul', N'Pháp', 150, N'Cao cấp', 'C:\Users\WIN 10\Downloads\DoanThanhNien.jpg'),
-       ('PT004', N'Đèn pha', N'Đèn pha Philips', 'Philips', N'Hà Lan', 120, N'Tiêu chuẩn', 'C:\Users\WIN 10\Downloads\DoanThanhNien.jpg'),
-       ('PT005', N'Bánh xe', N'Bánh xe Vision', 'Vision', N'Nhật Bản', 100, N'Tiêu chuẩn', 'C:\Users\WIN 10\Downloads\DoanThanhNien.jpg'),
+VALUES ('PT001', N'Lốp xe', N'Lốp Michelin', 'Michelin', N'Pháp', 800, N'Cao cấp', ''),
+       ('PT002', N'Bình xăng', N'Bình xăng Yamaha', 'Yamaha', N'Nhật Bản', 50, N'Tiêu chuẩn', ''),
+       ('PT003', N'Dầu nhớt', N'Dầu nhớt Motul', 'Motul', N'Pháp', 150, N'Cao cấp', ''),
+       ('PT004', N'Đèn pha', N'Đèn pha Philips', 'Philips', N'Hà Lan', 120, N'Tiêu chuẩn', ''),
+       ('PT005', N'Bánh xe', N'Bánh xe Vision', 'Vision', N'Nhật Bản', 100, N'Tiêu chuẩn', ''),
        ('PT006', N'Hộp số', N'Hộp số ZF', 'ZF', N'Đức', 300, N'Cao cấp', ''),
        ('PT007', N'Bơm xăng', N'Bơm xăng Bosch', 'Bosch', N'Đức', 80, N'Tiêu chuẩn', ''),
        ('PT008', N'Bình điện', N'Bình điện Exide', 'Exide', N'Mỹ', 70, N'Tiêu chuẩn', ''),

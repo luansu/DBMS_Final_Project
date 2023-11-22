@@ -139,6 +139,7 @@
             // 
             this.btnExit.BackColor = System.Drawing.SystemColors.Control;
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnExit.FlatAppearance.BorderSize = 0;
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit.Font = new System.Drawing.Font("Cooper Black", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -183,7 +184,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(475, 37);
             this.txtPassword.TabIndex = 1;
-            this.txtPassword.Text = "1";
+            this.txtPassword.Text = "0793988509";
             this.txtPassword.UseSystemPasswordChar = true;
             // 
             // picPassword
@@ -213,7 +214,7 @@
             this.txtAccount.Name = "txtAccount";
             this.txtAccount.Size = new System.Drawing.Size(475, 37);
             this.txtAccount.TabIndex = 1;
-            this.txtAccount.Text = "1";
+            this.txtAccount.Text = "NVHN008";
             // 
             // pictureBox2
             // 

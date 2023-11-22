@@ -21,5 +21,10 @@ namespace DBMS_CodeDoAn
         {
 
         }
+
+        private void ctmsMain_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
     }
 }
