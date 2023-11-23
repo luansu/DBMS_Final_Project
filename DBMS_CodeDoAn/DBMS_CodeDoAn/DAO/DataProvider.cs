@@ -10,7 +10,12 @@ using System.Security.Cryptography.Pkcs;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+<<<<<<< HEAD
 using DBMS_CodeDoAn.DTO; 
+=======
+using DBMS_CodeDoAn.DTO;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+>>>>>>> 37a5fa297a2918d7f0e654ee4018b8c10a17efd3
 
 namespace DBMS_CodeDoAn.DAO
 {
@@ -24,13 +29,43 @@ namespace DBMS_CodeDoAn.DAO
             private set => instance = value; 
         }
 
+<<<<<<< HEAD
         private string strCon = string.Format(@"Data Source=.;Initial Catalog=DBMS_DOAN_QUANLYCUAHANGXE;User ID={0};Password={1}", fDangNhap.username, fDangNhap.password);
         private DataProvider() { }
 
+=======
+        private string strCon = @"Data Source=.;Initial Catalog=DBMS_DOAN_QUANLYCUAHANGXE;Integrated Security=True";
+        private DataProvider() 
+        {
+            LoginUser();
+        }
+        private void LoginUser()
+        {
+            string filePath = "log.txt";
+            // Kiểm tra xem tệp tin có tồn tại không
+            List<string> tk_mk = new List<string>();
+            if (File.Exists(filePath))
+            {
+                // Mở tệp tin để đọc
+                using (StreamReader reader = new StreamReader(filePath))
+                {
+                    // Đọc từng dòng và hiển thị ra màn hình
+                    while (!reader.EndOfStream)
+                    {
+                        string line = reader.ReadLine();
+                        Console.WriteLine(line);
+                        tk_mk.Add(line);
+                    }
+                }
+                strCon = @"Data Source=.;Initial Catalog=DBMS_DOAN_QUANLYCUAHANGXE;Persist Security Info=True;;" + "User ID=" + tk_mk[0] + "; Password=" + tk_mk[1] + ";";
+                
+            }
+        }
+>>>>>>> 37a5fa297a2918d7f0e654ee4018b8c10a17efd3
         public DataTable ExcuteQuery(string query, object[] parameter = null)
         {
             DataTable data = new DataTable();
-
+            LoginUser();
             using (SqlConnection sqlCon = new SqlConnection(strCon))
             {
                 sqlCon.Open();
@@ -67,7 +102,7 @@ namespace DBMS_CodeDoAn.DAO
         public int ExcuteNonQuery(string query, object[] parameters = null)
         {
             int data = 0;
-
+            LoginUser();
             using (SqlConnection sqlCon = new SqlConnection(strCon))
             {
                 sqlCon.Open();
@@ -99,7 +134,7 @@ namespace DBMS_CodeDoAn.DAO
         public object ExcuteScalar(string query, object[] parameters = null)
         {
             object data = 0;
-
+            LoginUser();
             using (SqlConnection sqlCon = new SqlConnection(strCon))
             {
                 sqlCon.Open();
@@ -125,5 +160,30 @@ namespace DBMS_CodeDoAn.DAO
             return data;
         }
 
+<<<<<<< HEAD
+=======
+        public byte[] converImgToByte(System.Windows.Forms.TextBox txtPathImage)
+        {
+            FileStream fs;
+            fs = new FileStream(txtPathImage.Text, FileMode.Open, FileAccess.Read);
+            byte[] picbyte = new byte[fs.Length];
+            fs.Read(picbyte, 0, Convert.ToInt32(fs.Length));
+            fs.Close();
+            return picbyte;
+        }
+
+        // Method Convert Byte arr to Image
+        public Image ByteToImg(string byteString)
+        {
+            if (byteString == "")
+                 return null;
+            byte[] imgBytes = Convert.FromBase64String(byteString);
+            MemoryStream ms = new MemoryStream(imgBytes, 0, imgBytes.Length);
+            ms.Write(imgBytes, 0, imgBytes.Length);
+            Image image = Image.FromStream(ms, true);
+            return image;
+        }
+
+>>>>>>> 37a5fa297a2918d7f0e654ee4018b8c10a17efd3
     }
 }

@@ -54,6 +54,7 @@ VALUES ('NVHN001', N'Nguyễn Văn An', '123456289012', '1990-01-15', N'Nam', N'
 go
 
 -- Thêm dữ liệu cho bảng TÀI KHOẢN
+<<<<<<< HEAD
 INSERT INTO TAIKHOAN (tenDangNhap, matKhau,maNhanVien)
 VALUES ('1', '1', 'NVHN001'),
 	   ('2', '1', 'NVHN002'),
@@ -62,6 +63,16 @@ VALUES ('1', '1', 'NVHN001'),
 	   ('5', '1', 'NVHN005'),
 	   ('6', '1', 'NVHN006'),
 	   ('7', '1', 'NVHN007');
+=======
+INSERT INTO TAIKHOAN (tenDangNhap, matKhau, chucVu, maNhanVien)
+VALUES ('u1', '1', N'Quản lý', 'NVHN001'),
+	   ('u2', '1', N'Nhân viên bán hàng', 'NVHN002'),
+	   ('3', '1', N'Nhân viên bảo dưỡng', 'NVHN003'),
+	   ('4', '1', N'Nhân viên kho', 'NVHN004'),
+	   ('5', '1', N'Quản lý', 'NVHN005'),
+	   ('6', '1', N'Nhân viên kho', 'NVHN006'),
+	   ('7', '1', N'Nhân viên kho', 'NVHN007');
+>>>>>>> 37a5fa297a2918d7f0e654ee4018b8c10a17efd3
 go
 -- Thêm dữ liệu cho bảng NHÀ CUNG CẤP
 INSERT INTO NHACUNGCAP (maNhaCungCap, tenNhaCungCap, diaChi, soDienThoai)

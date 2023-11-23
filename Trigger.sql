@@ -145,3 +145,83 @@ BEGIN
 	insert into NHANVIEN(maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh, hinhAnh) 
 	Values(@maNhanVien, @hoTenNhanVien , @CCCD , @ngaySinh, @gioiTinh, @diaChi , @soDienThoai, @chucVu, @maChiNhanh, @hinhAnh)
 END
+<<<<<<< HEAD
+=======
+--------------------------------------------------------------------------------
+-- Tạo TRIGGER khi thêm nhân viên thì tài khoản tự động thêm
+-- Set Tên đăng nhập mặc định là mã nhân viên
+go
+CREATE OR ALTER TRIGGER trg_ThemTaiKhoan
+ON NHANVIEN
+AFTER INSERT
+AS
+BEGIN
+	print 111
+    DECLARE @taiKhoan NVARCHAR(20), @chucVu NVARCHAR(50)
+    
+    SELECT @taiKhoan = maNhanVien, @chucVu = chucVu FROM inserted
+    
+    INSERT INTO TAIKHOAN VALUES (@taiKhoan, '1', @chucVu, @taiKhoan)
+    
+    EXEC('CREATE LOGIN ' + @taiKhoan + ' WITH PASSWORD = ''1''')
+    EXEC('CREATE USER ' + @taiKhoan + ' FOR LOGIN ' + @taiKhoan)
+    
+    IF @chucVu = N'Quản lý'
+    BEGIN
+        EXEC('USE DBMS_DOAN_QUANLYCUAHANGXE;
+              EXEC sp_addrolemember r_admin, ' + @taiKhoan)
+    END
+	ELSE IF @chucVu like N'%bán%'
+	BEGIN 
+		EXEC('USE DBMS_DOAN_QUANLYCUAHANGXE;
+              EXEC sp_addrolemember r_seller, ' + @taiKhoan)
+	END
+	ELSE IF @chucVu like N'%bảo%'
+	BEGIN 
+		EXEC('USE DBMS_DOAN_QUANLYCUAHANGXE;
+              EXEC sp_addrolemember r_maintenace, ' + @taiKhoan)
+	END 
+END
+go
+
+-- Test
+--begin tran
+--	INSERT INTO CHINHANH (maChiNhanh, tenChiNhanh, diaChi)
+--	VALUES ('CN001', N'Chi nhánh A', N'123 Đường A, Quận 1, TP.HCM')
+--	INSERT INTO NHANVIEN (maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh)
+--	VALUES ('NV001', N'Nguyễn Văn A', '123456789012', '1990-05-15', N'Nam', N'123 Đường X, Quận Y, TP.HCM', '0123456789', N'Quản lý', 'CN001')
+--	select * from TaiKhoan
+--rollback
+--go
+
+-- Tạo trigger Khi sửa mã nhân viên thì tài khoản cũng sẽ cập nhật theo
+--create or alter trigger trg_CapNhatTaiKhoan
+--on NHANVIEN
+--for update
+--as
+--begin
+--	declare @taiKhoanCu nvarchar(20), @taiKhoanMoi nvarchar(20)
+--	set @taiKhoanMoi = (select maNhanVien from inserted)
+--	set @taiKhoanCu = (select maNhanVien from deleted)
+--	Update TAIKHOAN
+--	set tenDangNhap = @taiKhoanMoi, maNhanVien = @taiKhoanMoi
+--	where tenDangNhap = @taiKhoanCu
+--end
+--go
+-- Test
+--begin tran
+--	INSERT INTO CHINHANH (maChiNhanh, tenChiNhanh, diaChi)
+--	VALUES ('CN001', N'Chi nhánh A', N'123 Đường A, Quận 1, TP.HCM')
+--	INSERT INTO NHANVIEN (maNhanVien, hoTenNhanVien, CCCD, ngaySinh, gioiTinh, diaChi, soDienThoai, chucVu, maChiNhanh)
+--	VALUES ('NV001', N'Nguyễn Văn A', '123456789012', '1990-05-15', N'Nam', N'123 Đường X, Quận Y, TP.HCM', '0123456789', N'Quản lý', 'CN001')
+
+--	select * from TaiKhoan
+
+--	update NHANVIEN
+--	set maNhanVien = 'NV002'
+--	where maNhanVien = 'NV001'
+
+--	select * from TAIKHOAN
+--rollback
+--go
+>>>>>>> 37a5fa297a2918d7f0e654ee4018b8c10a17efd3

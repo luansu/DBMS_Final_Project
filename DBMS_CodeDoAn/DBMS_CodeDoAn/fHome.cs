@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DBMS_CodeDoAn.Forms;
+using System.Security.Cryptography.Pkcs;
 
 namespace DBMS_CodeDoAn
 {
@@ -24,7 +26,11 @@ namespace DBMS_CodeDoAn
 
         private void fHome_Load(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             LoadListXe();
+=======
+            LoadListXe(); 
+>>>>>>> 37a5fa297a2918d7f0e654ee4018b8c10a17efd3
         }
 
         private void quảnLýXeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -255,7 +261,13 @@ namespace DBMS_CodeDoAn
             this.Close();
         }
 
+<<<<<<< HEAD
         #endregion
+=======
+        #endregion 
+
+        
+>>>>>>> 37a5fa297a2918d7f0e654ee4018b8c10a17efd3
 
         #region Methos
 
@@ -265,12 +277,20 @@ namespace DBMS_CodeDoAn
 
             foreach (Xe xe in listXe)
             {
+<<<<<<< HEAD
 
                 string path = xe.HinhAnh.Replace(@"\", @"\\");
                 Button btn = new Button()
                 {
                     Width = 200,
                     Height = 200,
+=======
+                
+                string path = xe.HinhAnh.Replace(@"\", @"\\");
+                Button btn = new Button()
+                {
+                    Width = 200, Height = 200,
+>>>>>>> 37a5fa297a2918d7f0e654ee4018b8c10a17efd3
                 };
                 if (xe.HinhAnh != "")
                 {
@@ -284,14 +304,23 @@ namespace DBMS_CodeDoAn
                     btn.Text = xe.TenXe + Environment.NewLine + xe.GiaBan;
                 }
                 flpXe.Controls.Add(btn);
+<<<<<<< HEAD
 
+=======
+                
+>>>>>>> 37a5fa297a2918d7f0e654ee4018b8c10a17efd3
             }
         }
 
 
+<<<<<<< HEAD
 
         #endregion
 
         
+=======
+        #endregion
+
+>>>>>>> 37a5fa297a2918d7f0e654ee4018b8c10a17efd3
     }
 }

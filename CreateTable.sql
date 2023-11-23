@@ -14,7 +14,7 @@ go
 
 -- Tạo bảng nhân viên 
 -- => Trigger kiểm tra NHÂN VIÊN: CCCD là số, >=18 tuổi
-	create table NHANVIEN( 
+create table NHANVIEN( 
 	maNhanVien nvarchar(20) primary key,
 	hoTenNhanVien nvarchar(50) not null,
 	CCCD nvarchar(20) constraint contr_NhanVien_checkLenCCCD check (len(CCCD) = 12),

@@ -451,6 +451,13 @@ go
 create or alter proc List_NhanVien 
 as
 	select * from NHANVIEN
+<<<<<<< HEAD
+=======
+
+--exec List_NhanVien
+
+
+>>>>>>> 37a5fa297a2918d7f0e654ee4018b8c10a17efd3
 go
 
 --exec List_NhanVien
@@ -485,9 +492,12 @@ begin
 
 end
 --
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 37a5fa297a2918d7f0e654ee4018b8c10a17efd3
 go
 create or alter proc Update_NhanVien @maNhanVien nvarchar(20), @hoTenNhanVien nvarchar(50), @CCCD nvarchar(20), @ngaySinh date, @gioiTinh nvarchar(5), @diaChi nvarchar(255), @soDienThoai nvarchar(20), @chucVu nvarchar(50), @tinhTrangLamViec bit, @maChiNhanh nvarchar(20), @hinhAnh nvarchar(300)
 as
@@ -503,7 +513,21 @@ as
 
 --exec Delete_NhanVien @maNhanVien
 
+-- Thiet lap tai khoan khi them nhan vien
 
+<<<<<<< HEAD
+=======
+create or alter proc sp_XoaNhanVien @maNhanVien nvarchar(20)
+as 
+begin
+	EXEC('USE DBMS_DOAN_QUANLYCUAHANGXE;
+              EXEC sp_dropuser ' + @maNhanVien)
+	EXEC('USE DBMS_DOAN_QUANLYCUAHANGXE;
+              EXEC sp_droplogin ' + @maNhanVien)
+	delete nhanvien where maNhanVien = @maNhanVien
+	delete TAIKHOAN WHERE maNhanVien = @maNhanVien
+end
+>>>>>>> 37a5fa297a2918d7f0e654ee4018b8c10a17efd3
 
 --go
 --create or alter proc TimKiemNhanVien @maNhanVien nvarchar(20), @hoTenNhanVien nvarchar(50), @CCCD nvarchar(20), @ngaySinh date, @gioiTinh nvarchar(5), @diaChi nvarchar(255), @soDienThoai nvarchar(20), @chucVu nvarchar(50), @tinhTrangLamViec bit, @maChiNhanh nvarchar(20), @hinhAnh nvarchar(300)
